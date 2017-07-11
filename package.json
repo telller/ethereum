@@ -38,5 +38,13 @@
     "url-loader": "^0.5.8",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "react-redux": "^5.0.5",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "save": "^2.3.1"
   }
 }
