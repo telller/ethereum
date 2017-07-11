@@ -1,4 +1,7 @@
-import { Router, Route, hashHistory } from 'react-router'
+import {Router, Route, browserHistory} from 'react-router'
+import {syncHistoryWithStore} from 'react-router-redux'
+import {Provider} from 'react-redux'
+import store from './store'
 import Graph from './components/graph/graph.jsx'
 import Sell from './components/sell/sell.jsx'
 import Buy from './components/buy/buy.jsx'
@@ -8,12 +11,15 @@ import 'antd/dist/antd.css'
 import React from 'react'
 import './main.styl'
 
+const history = syncHistoryWithStore(browserHistory, store)
 ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path='/' component={Graph} />
-    <Route path='/faq' component={Faq} />
-    <Route path='/buy' component={Buy} />
-    <Route path='/sell' component={Sell} />
-  </Router>,
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path='/' component={Graph} />
+      <Route path='/faq' component={Faq} />
+      <Route path='/buy' component={Buy} />
+      <Route path='/sell' component={Sell} />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 )
