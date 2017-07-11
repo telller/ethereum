@@ -40,6 +40,13 @@ module.exports = {
         }))
       },
       {
+        test: /\.css$/,
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader']
+        }))
+      },
+      {
         test: /\.(img|png|svg)$/,
         use: 'url-loader'
       }

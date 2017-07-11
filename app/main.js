@@ -4,6 +4,7 @@ import Sell from './components/sell/sell.jsx'
 import Buy from './components/buy/buy.jsx'
 import Faq from './components/faq/faq.jsx'
 import ReactDOM from 'react-dom'
+import 'antd/dist/antd.css'
 import React from 'react'
 import './main.styl'
 
