@@ -1,0 +1,58 @@
+#graphTable
+  position relative
+  padding-top 130px
+  z-index 1
+
+  .formSearch
+    height 100px
+    padding-top 30px
+    text-align center
+    background-color #f3f3f3
+
+    .ant-form-item-label > label
+      font-size 20px
+
+    .ant-input-prefix
+      font-size 16px
+      font-weight bold
+      left 13px
+
+    input
+      font-size 16px
+      border-radius 20px
+      width 30em
+    
+    .ant-input:not(:first-child)
+      padding-left 35px
+  
+  .tableDomains table
+      border-collapse collapse
+
+    .ant-table-body .ant-table-thead > tr > th
+        position relative
+        font-size 14px
+        background-color #dcdcdc
+        border 1px solid #ccc
+        text-align center
+        font-weight bold
+
+      .ant-table-column-sorter
+        position absolute
+        margin-top 5px
+        right 5px
+        i
+          font-size 13px
+
+    tbody tr > td
+      font-size 14px
+      border-bottom none
+      border-right 1px solid #ccc
+      background-color white
+      text-align center
+
+      &:last-child
+        border-right none
+    
+    .ant-table-pagination
+      margin 10px
+      float left
