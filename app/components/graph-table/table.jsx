@@ -121,7 +121,7 @@ class GraphTable extends Component {
   render () {
     return (
       <Row id="graphTable">
-        <Col span={22}>
+        <Col className='body'>
           <Form layout="inline" className="formSearch">
             <Form.Item label="Filter Data">
               <Input prefix={<Icon type="search" />} placeholder="Search" onChange={(e) => this.searchName(e)} />
