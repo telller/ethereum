@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Icon, Input, Table } from 'antd';
+import { Row, Col, Form, Icon, Input, Table, Radio } from 'antd';
 import './table.styl';
 
 const data = [
-  {name: 'lalala', block: 12232, price: 0.5, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12332, price: 0.7, address: '0x123lqowemqwo4e012i'},
+  {name: 'qlalala', block: 12232, price: 0.5, address: '0x123lqowemqwo4e012i'},
+  {name: 'dlalala', block: 12332, price: 0.7, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
@@ -86,23 +86,45 @@ class GraphTable extends Component {
     this.state = {
       data: data,
       pagination: {
-        pageSize: 20
+        pageSize: 20,
+        showQuickJumper: true,
+        locale: {
+          items_per_page: "/ page",
+          jump_to: "#",
+          next_3: "Next 3 Pages",
+          next_5: "Next 5 Pages",
+          next_page: "Next Page",
+          page:"",
+          prev_3: "Previous 3 Pages",
+          prev_5: "Previous 5 Pages",
+          prev_page: "Previous Page"          
+        }
       },
-      //loading: false
+      swSearch: true
     }
   }
-  
-  handleChange(pagination, filters, sorter) {
-    console.log('params', pagination, filters, sorter);
+
+  changeSizePage(e){
+    this.setState({
+      pagination: {pageSize: e.target.value}
+    });
+  }
+
+  searchName(e){
+    this.setState({
+      data: data.filter(item => item.name.indexOf(e.target.value) != -1 ? true : false ),
+      swSearch: data.filter(item => item.name.indexOf(e.target.value) != -1 ? true : false ).length > 0 ? true : false
+    });
+    console.log(this.state.swSearch);
   }
 
   render () {
     return (
-      <Row id="graphTable" type="flex" justify="space-around" align="middle">
-        <Col span={18}>
+      <Row id="graphTable">
+        <Col span={22}>
           <Form layout="inline" className="formSearch">
             <Form.Item label="Filter Data">
-              <Input prefix={<Icon type="search" />} placeholder="Search" />
+              <Input prefix={<Icon type="search" />} placeholder="Search" onChange={(e) => this.searchName(e)} />
             </Form.Item>
           </Form>
           <Table
@@ -113,10 +135,16 @@ class GraphTable extends Component {
             dataSource={this.state.data}
             pagination={this.state.pagination}
             //loading={this.state.loading}
-            onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
           />
+          <div className="table-footer">
+            <p className={this.state.swSearch ? "table-footer-search" : null}>Not found!</p>
+              <Radio.Group className={ this.state.swSearch ? "btn-page-size" : "btn-page-size-none" } defaultValue={this.state.pagination.pageSize} onChange={ (e) => this.changeSizePage(e) }>
+              <Radio.Button value={20}>20</Radio.Button>
+              <Radio.Button value={50}>50</Radio.Button>
+              <Radio.Button value={100}>100</Radio.Button>
+            </Radio.Group>
+          </div>
         </Col>
-          
       </Row>
     )
   }
