@@ -7,7 +7,7 @@
   "author": "",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --module-bind 'css=style!css'",
-    "build": "webpack"
+    "build": "webpack -p"
   },
   "devDependencies": {
     "antd": "^2.12.0",
