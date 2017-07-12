@@ -36,26 +36,26 @@ class Menu extends Component {
       <div id='menu'>
         <Link onClick={() => this.hendleStatusFaq()}>
           <div className={this.props.menu.faqStatus ? 'menu-item-active' : 'menu-item'}>
-            <img src={this.props.menu.faqStatus ? './dist/media/plus-active.png' : './dist/media/plus.png'} />
+            <img src={this.props.menu.faqStatus ? './dist/media/faq-active.png' : './dist/media/faq.png'} />
             <div className='text-center'>faq</div>
           </div>
         </Link>
         <Link onClick={() => this.hendleStatusGraph()} >
           <div className={this.props.menu.graphStatus ? 'menu-item-active' : 'menu-item'}>
-            <img src={this.props.menu.graphStatus ? './dist/media/grafs.png' : './dist/media/grafs-off.png'} />
-            <div className='text'>graph</div>
+            <img src={this.props.menu.graphStatus ? './dist/media/home-active.png' : './dist/media/home.png'} />
+            <div className='text'>home</div>
           </div>
         </Link>
         <Link onClick={() => this.hendleStatusBuy()} >
           <div className={this.props.menu.buyStatus ? 'menu-item-active' : 'menu-item'}>
-            <img src={this.props.menu.buyStatus ? './dist/media/plus-active.png' : './dist/media/plus.png'} />
+            <img src={this.props.menu.buyStatus ? './dist/media/buy-active.png' : './dist/media/buy.png'} />
             <div className='text-center'>buy</div>
           </div>
         </Link>
         <Link onClick={() => this.hendleStatusSell()} activeClassName='active' >
           <div className={this.props.menu.sellStatus ? 'menu-item-active' : 'menu-item'}>
-            <img src={this.props.menu.sellStatus ? './dist/media/plus-active.png' : './dist/media/plus.png'} />
-            <div className='text-center'>sell</div>
+            <img src={this.props.menu.sellStatus ? './dist/media/sell-active.png' : './dist/media/sell.png'} />
+            <div className='text-sell'>sell</div>
           </div>
         </Link>
       </div>
