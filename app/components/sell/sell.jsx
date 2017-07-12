@@ -1,6 +1,7 @@
 import Header from '../header/header.jsx'
 import React, { Component } from 'react'
 import Menu from '../menu/menu.jsx'
+import SellBody from '../sell-body/sell-body.jsx'
 import './sell.styl'
 
 class Sell extends Component {
@@ -9,7 +10,7 @@ class Sell extends Component {
       <div id='buy'>
         <Header />
         <Menu />
-        SELL
+        <SellBody />
       </div>
     )
   }
