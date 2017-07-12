@@ -35,7 +35,7 @@ class Menu extends Component {
     return (
       <div id='menu'>
         <Link onClick={() => this.hendleStatusFaq()}>
-          <div className={this.props.menu.faqStatus ? 'menu-item-active' : 'menu-item'}>
+          <div className={"faq " + (this.props.menu.faqStatus ? 'menu-item-active' : 'menu-item')}>
             <img src={this.props.menu.faqStatus ? './dist/media/faq-active.png' : './dist/media/faq.png'} />
             <div className='text-center'>faq</div>
           </div>
