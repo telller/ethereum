@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd';
+import { Row, Col } from 'antd'
 import './faq-body.styl'
 
 class FaqBody extends Component {
