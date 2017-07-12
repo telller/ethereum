@@ -29,7 +29,7 @@ class BuyBody extends Component {
                   In this example, you would send at least .05 ETH to 0x123lqowemqwo4e012i.
                 </li>
                 <li>
-                  Verify the transaction went through and that the name belongs to you on <a>Etherscan</a>.
+                  Verify the transaction went through and that the name belongs to you on <a href="#" target='_blank'>Etherscan</a>.
                   <img src='./dist/media/buy-photo2.png' />
                 </li>
                 <li>
