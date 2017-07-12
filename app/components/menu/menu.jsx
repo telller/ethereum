@@ -34,14 +34,8 @@ class Menu extends Component {
   render () {
     return (
       <div id='menu'>
-        <Link onClick={() => this.hendleStatusFaq()}>
-          <div className={"faq " + (this.props.menu.faqStatus ? 'menu-item-active' : 'menu-item')}>
-            <img src={this.props.menu.faqStatus ? './dist/media/faq-active.png' : './dist/media/faq.png'} />
-            <div className='text-center'>faq</div>
-          </div>
-        </Link>
         <Link onClick={() => this.hendleStatusGraph()} >
-          <div className={this.props.menu.graphStatus ? 'menu-item-active' : 'menu-item'}>
+          <div className={'faq ' + (this.props.menu.graphStatus ? 'menu-item-active' : 'menu-item')}>
             <img src={this.props.menu.graphStatus ? './dist/media/home-active.png' : './dist/media/home.png'} />
             <div className='text'>home</div>
           </div>
@@ -56,6 +50,12 @@ class Menu extends Component {
           <div className={this.props.menu.sellStatus ? 'menu-item-active' : 'menu-item'}>
             <img src={this.props.menu.sellStatus ? './dist/media/sell-active.png' : './dist/media/sell.png'} />
             <div className='text-sell'>sell</div>
+          </div>
+        </Link>
+        <Link onClick={() => this.hendleStatusFaq()}>
+          <div className={this.props.menu.faqStatus ? 'menu-item-active' : 'menu-item'}>
+            <img src={this.props.menu.faqStatus ? './dist/media/faq-active.png' : './dist/media/faq.png'} />
+            <div className='text-center'>faq</div>
           </div>
         </Link>
       </div>
