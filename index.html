@@ -5,10 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ethereum</title>
     <link href="./dist/bundle.css" rel="stylesheet"/>
-     <link rel="shortcut icon" href="./dist/media/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./dist/media/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script type="text/javascript">
+      window.onload = function() {
+        var elements = document.getElementsByClassName('spinner');
+         for (var i=0; i<elements.length; i++)  {
+           elements[i].className = elements[i].className.replace('spinner', 'spinner-none')
+         }
+         var elements = document.getElementsByClassName('page-preloader');
+          for (var i=0; i<elements.length; i++)  {
+            elements[i].className = elements[i].className.replace('page-preloader', 'page-preloader-none')
+          }
+      }
+    </script>
+    <style media="screen">
+      .page-preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        z-index: 50;
+      }
+      .page-preloader-none{
+        display: none;
+      }
+      .spinner {
+        width: 250px;
+        height: 250px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -125px;
+        margin-top: -125px;
+        background: url('./dist/media/spinner.gif') no-repeat 100% 100%;
+        z-index: 50
+      }
+      .spinner-none{
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <div class="page-preloader"><span class="spinner"></span></div>
     <div id='root'></div>
     <script src="./dist/bundle.js"></script>
   </body>
