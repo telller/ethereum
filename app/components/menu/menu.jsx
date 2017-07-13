@@ -15,6 +15,20 @@ class Menu extends Component {
       sell: 'sell'
     }
   }
+  componentDidMount () {
+    if (this.props.router.locationBeforeTransitions.pathname === '/') {
+      this.hendleStatusGraph()
+    }
+    if (this.props.router.locationBeforeTransitions.pathname === '/buy') {
+      () => this.hendleStatusBuy()
+    }
+    if (this.props.router.locationBeforeTransitions.pathname === '/sell') {
+      this.hendleStatusSell()
+    }
+    if (this.props.router.locationBeforeTransitions.pathname === '/faq') {
+      this.hendleStatusFaq()
+    }
+  }
   hendleStatusFaq () {
     this.props.onHandleMenuFaq()
     browserHistory.push('/faq')
@@ -64,7 +78,7 @@ class Menu extends Component {
 }
 const mapStateToProps = state => {
   return {
-    router: state.router,
+    router: state.routing,
     blog: state.blog,
     menu: state.menu
   }
@@ -101,7 +115,8 @@ Menu.propTypes = {
   onHandleMenuGraph: PropTypes.func,
   onHandleMenuBuy: PropTypes.func,
   onHandleMenuSell: PropTypes.func,
-  menu: PropTypes.object
+  menu: PropTypes.object,
+  router: PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu)
