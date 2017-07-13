@@ -20,7 +20,7 @@ class Menu extends Component {
       this.hendleStatusGraph()
     }
     if (this.props.router.locationBeforeTransitions.pathname === '/buy') {
-      () => this.hendleStatusBuy()
+      this.hendleStatusBuy()
     }
     if (this.props.router.locationBeforeTransitions.pathname === '/sell') {
       this.hendleStatusSell()
