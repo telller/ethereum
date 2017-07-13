@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd';
+import { Row, Col } from 'antd'
 import { Link, browserHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './sell-body.styl'
 
 class SellBody extends Component {
-  constructor(props) {
-    super(props);
-
+  constructor (props) {
+    super(props)
   }
 
   hendleStatusFaq () {

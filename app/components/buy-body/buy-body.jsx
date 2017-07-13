@@ -29,8 +29,9 @@ class BuyBody extends Component {
                   In this example, you would send at least .05 ETH to 0x123lqowemqwo4e012i.
                 </li>
                 <li>
-                  Verify the transaction went through and that the name belongs to you on <a href='#' target='_blank'>Etherscan</a>.
+                  Verify the transaction went through and that the name belongs to you on <a href='https://www.myetherwallet.com/#ens' target='_blank'>MyEtherWallet</a>.
                   <img src='./dist/media/buy-photo2.png' />
+                  <img src='./dist/media/buy-photo3.png' />
                 </li>
                 <li>
                    Congratulations! Your friends can now easily send you ETH! And if at some point you don't like your name anymore, you can always resell it on here or wait 1 year and claim the at least .01 ETH locked in its deed by releasing the name. Congratulations! Your friends can now easily send you ETH! And if at some point you don't like your name anymore, you can always resell it on here or wait
