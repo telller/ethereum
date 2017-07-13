@@ -1,6 +1,33 @@
 #sell-body
   @media only screen and (min-width: 0)
     position relative
+    margin-top 140px
+    z-index 1
+    .body
+      margin 0 auto
+      max-width 800px
+      .title
+        height 75px
+        background-color #f3f3f3
+        padding-top 25px
+        p
+          text-align center
+          font-weight bold
+          font-size 20px
+          color #737373
+
+      .info
+        background-color white
+        color #555
+        padding 35px 50px
+        ol
+          list-style decimal inside
+          li
+            .word-wrap
+              word-break: break-all
+            padding 10px 0
+  @media only screen and (min-width: 364px)
+    position relative
     margin-top 180px
     z-index 1
     .body
@@ -23,6 +50,8 @@
         ol
           list-style decimal inside
           li
+            .word-wrap
+              word-break: break-all
             padding 10px 0
   @media only screen and (min-width: 48em)
     position relative
@@ -37,6 +66,7 @@
         background-color #f3f3f3
         padding-top 25px
         p
+          word-wrap: break-word;
           text-align center
           font-weight bold
           font-size 20px
