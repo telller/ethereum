@@ -1,264 +1,53 @@
-@media only screen and (min-width: 0) {
-  #menu{
-    position fixed
+#menu
+  position fixed
+  background-color: #232a40
+  z-index 10
+  a
+    text-decoration none
+  .menu-item
+    font-size 20px
+    text-align center
+    .text
+      text-transform: uppercase
+      font-size: 12px
+      font-weight: 600
+      color: #747c99
+      font-family: 'Roboto', sans-serif
+    img
+      width: 35px
+  .menu-item-active
+    background-color #8a92b2
+    .text
+      color: white
+    img
+      width: 35px
+@media only screen and (min-width: 0)
+  #menu
+    display: flex
     top 70px
     height: 70px
-    background-color: #232a40;
-    display: flex;
     width: 100%
-    z-index 10
-    .faq.menu-item-active{
-      
-    }
-    a{
-      text-decoration none
-      &:active
-        //color darkslategray
-    }
-    .menu-item{
+    .menu-item
+      padding-top: 8px
       height 100%
       width: 70px
-      font-size 20px
-      padding-top: 10px;
-      padding-left: 17px;
-      .text{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        color: #747c99;
-        font-family: 'Roboto', sans-serif;
-      }
-      .text-center{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        padding-left: 6px;
-        font-family: 'Roboto', sans-serif;
-        color: #747c99;
-      }
-      .text-sell{
-        text-transform: uppercase;
-        font-size: 12px;
-        padding-left: 1px;
-        font-weight: 600;
-        font-family: 'Roboto', sans-serif;
-        color: #747c99;
-      }
-      img{
-        width: 35px;
-      }
-    }
-    .menu-item-active{
-      background-color gainsboro
-      height: 70px
-      width 70px
-      font-size 20px
-      padding-top: 10px
-      padding-left: 17px
-
-      .text{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-
-        color: darkslategray;
-        font-family: 'Roboto', sans-serif;
-      }
-      .text-center{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        padding-left: 6px;
-        font-family: 'Roboto', sans-serif;
-        color: darkslategray;
-      }
-      .text-sell{
-        text-transform: uppercase;
-        padding-left: 1px;
-        font-size: 12px;
-        font-weight: 600;
-        font-family: 'Roboto', sans-serif;
-        color: darkslategray;
-      }
-      img{
-        width: 35px;
-      }
-    }
-  }
-}
-@media only screen and (min-width: 364px) {
-  #menu{
-    position fixed
+@media only screen and (min-width: 364px)
+  #menu
+    display: flex
     top 90px
     height: 90px
-    background-color: #232a40;
-    display: flex;
     width: 100%
-    z-index 10
-    .faq.menu-item-active{
-      box-shadow: inset 3px 4px 5px 0px rgba(176,176,176,0.76);
-    }
-    a{
-      text-decoration none
-      &:active
-        //color darkslategray
-    }
-    .menu-item{
+    .menu-item
+      padding-top: 15px
       height 100%
       width: 90px
-      font-size 20px
-      padding-top: 15px;
-      padding-left: 25px;
-      .text{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        color: #747c99;
-        font-family: 'Roboto', sans-serif;
-      }
-      .text-center{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        padding-left: 6px;
-        font-family: 'Roboto', sans-serif;
-        color: #747c99;
-      }
-      .text-sell{
-        text-transform: uppercase;
-        font-size: 12px;
-        padding-left: 1px;
-        font-weight: 600;
-        font-family: 'Roboto', sans-serif;
-        color: #747c99;
-      }
-      img{
-        width: 35px;
-      }
-    }
-    .menu-item-active{
-      background-color gainsboro
-      height: 100%
-      width 90px
-      font-size 20px
-      padding-top: 15px
-      padding-left: 25px
-
-      .text{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-
-        color: darkslategray;
-        font-family: 'Roboto', sans-serif;
-      }
-      .text-center{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        padding-left: 6px;
-        font-family: 'Roboto', sans-serif;
-        color: darkslategray;
-      }
-      .text-sell{
-        text-transform: uppercase;
-        padding-left: 1px;
-        font-size: 12px;
-        font-weight: 600;
-        font-family: 'Roboto', sans-serif;
-        color: darkslategray;
-      }
-      img{
-        width: 35px;
-      }
-    }
-  }
-}
-@media only screen and (min-width: 48em) {
-  #menu{
-    position fixed
+@media only screen and (min-width: 48em)
+  #menu
+    display inline-block
     top 90px
     width 90px
-    background-color: #232a40;
     height 100%
-    z-index 10
-    display: inline-block;
-    .faq.menu-item-active{
-      box-shadow: inset 3px 4px 5px 0px rgba(176,176,176,0.76);
-    }
-    a{
-      text-decoration none
-      &:active
-        //color darkslategray
-    }
-    .menu-item{
-      width 100%
-      height 90px
-      font-size 20px
-      padding-top: 15px;
-      padding-left: 25px;
-      .text{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        color: #747c99;
-        font-family: 'Roboto', sans-serif;
-      }
-      .text-center{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        padding-left: 6px;
-        font-family: 'Roboto', sans-serif;
-        color: #747c99;
-      }
-      .text-sell{
-        text-transform: uppercase;
-        font-size: 12px;
-        padding-left: 1px;
-        font-weight: 600;
-        font-family: 'Roboto', sans-serif;
-        color: #747c99;
-      }
-      img{
-        width: 35px;
-      }
-    }
-    .menu-item-active{
-      background-color gainsboro
-      width 100%
-      height 90px
-      font-size 20px
+    .menu-item
       padding-top: 15px
-      padding-left: 25px
-
-      .text{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-
-        color: darkslategray;
-        font-family: 'Roboto', sans-serif;
-      }
-      .text-center{
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 600;
-        padding-left: 6px;
-        font-family: 'Roboto', sans-serif;
-        color: darkslategray;
-      }
-      .text-sell{
-        text-transform: uppercase;
-        padding-left: 1px;
-        font-size: 12px;
-        font-weight: 600;
-        font-family: 'Roboto', sans-serif;
-        color: darkslategray;
-      }
-      img{
-        width: 35px;
-      }
-    }
-  }
-}
+      width 100%
+      height 90px
