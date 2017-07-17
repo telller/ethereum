@@ -1,7 +1,7 @@
 import Header from '../header/header.jsx'
 import React, { Component } from 'react'
 import Menu from '../menu/menu.jsx'
-import FaqBody from '../faq-body/faq-body.jsx'
+import FaqBody from '../body-main-components/faq-body.jsx'
 
 class Faq extends Component {
   render () {

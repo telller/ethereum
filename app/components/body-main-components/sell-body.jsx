@@ -3,13 +3,9 @@ import { Row, Col } from 'antd'
 import { Link, browserHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import './sell-body.styl'
+import './style-body.styl'
 
 class SellBody extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   hendleStatusFaq () {
     browserHistory.push('/faq')
     this.props.onHandleMenuFaq()
@@ -56,11 +52,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 SellBody.propTypes = {
-  onHandleMenuFaq: PropTypes.func,
-  onHandleMenuGraph: PropTypes.func,
-  onHandleMenuBuy: PropTypes.func,
-  onHandleMenuSell: PropTypes.func,
-  menu: PropTypes.object
+  onHandleMenuFaq: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SellBody)

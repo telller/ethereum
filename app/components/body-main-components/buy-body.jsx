@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import './buy-body.styl'
+import './style-body.styl'
 
 class BuyBody extends Component {
   constructor () {

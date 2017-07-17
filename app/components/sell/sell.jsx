@@ -1,8 +1,7 @@
 import Header from '../header/header.jsx'
 import React, { Component } from 'react'
 import Menu from '../menu/menu.jsx'
-import SellBody from '../sell-body/sell-body.jsx'
-import './sell.styl'
+import SellBody from '../body-main-components/sell-body.jsx'
 
 class Sell extends Component {
   render () {

@@ -1,6 +1,6 @@
 import Header from '../header/header.jsx'
 import React, { Component } from 'react'
-import BuyBody from '../buy-body/buy-body.jsx'
+import BuyBody from '../body-main-components/buy-body.jsx'
 import Menu from '../menu/menu.jsx'
 
 class Buy extends Component {
