@@ -151,7 +151,7 @@ class GraphTable extends Component {
             dataSource={this.state.data}
             pagination={this.state.pagination}
           />
-          <div className='table-footer'>
+          <div className={'table-footer ' + (this.state.swSearch ? null : 'not-found')}>
             <p className={this.state.swSearch ? 'table-footer-search' : null}>Not found!</p>
             <Radio.Group className={this.state.swSearch ? 'btn-page-size' : 'btn-page-size-none'} defaultValue={this.state.pagination.pageSize} onChange={e => this.changeSizePage(e)}>
               <Radio.Button value={20}>20</Radio.Button>
