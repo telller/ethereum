@@ -57,7 +57,13 @@ const columns = [
   {
     title: '.eht Name',
     dataIndex: 'name',
-    sorter: (a, b) => a.name.length - b.name.length,
+    sorter: (a, b) => {
+      if (a.name < b.name) {
+        return -1
+      } else if (a.name > b.name) {
+        return 1
+      } else return 0
+    },
     width: '20%'
   },
   {
@@ -70,6 +76,7 @@ const columns = [
     title: 'Price (ETH)',
     dataIndex: 'price',
     sorter: (a, b) => a.price - b.price,
+    defaultSortOrder: 'descend',
     render: text => {
       let classColor = 'defaultCell '
       if (text >= 5000) {classColor += 'bgPrice5000'}
@@ -83,7 +90,13 @@ const columns = [
   {
     title: 'Purchase Address',
     dataIndex: 'address',
-    sorter: (a, b) => a.address.length - b.address.length,
+    sorter: (a, b) => {
+      if (a.address < b.address) {
+        return -1
+      } else if (a.address > b.address) {
+        return 1
+      } else return 0
+    },
     width: '50%'
   }
 ]
@@ -128,8 +141,8 @@ class GraphTable extends Component {
 
   searchName (e) {
     this.setState({
-      data: data.filter(item => item.name.indexOf(e.target.value) != -1),
-      swSearch: data.filter(item => item.name.indexOf(e.target.value) != -1).length > 0
+      data: data.filter(item => item.name.indexOf(e.target.value.toLowerCase()) !== -1),
+      swSearch: data.filter(item => item.name.indexOf(e.target.value.toLowerCase()) !== -1).length > 0
     })
   }
 
