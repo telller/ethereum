@@ -5,6 +5,10 @@ import './table.styl'
 const data = [
   {name: 'marlena', block: 4013908, price: 0.5, address: '0xf1d184c1a3032f7586261bea6ee5c2b18ac247fc'},
   {name: 'dlalala', block: 12332, price: 0.7, address: '0x123lqowemqwo4e012i'},
+  {name: 'lalala', block: 12632, price: 6000, address: '0x123lqowemqwo4e012i'},
+  {name: 'lalala', block: 12632, price: 1000, address: '0x123lqowemqwo4e012i'},
+  {name: 'lalala', block: 12632, price: 111, address: '0x123lqowemqwo4e012i'},
+  {name: 'lalala', block: 12632, price: 12, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
@@ -13,11 +17,7 @@ const data = [
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
+  {name: 'lalala', block: 12632, price: 100, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
   {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
@@ -70,6 +70,14 @@ const columns = [
     title: 'Price (ETH)',
     dataIndex: 'price',
     sorter: (a, b) => a.price - b.price,
+    render: text => {
+      let classColor = 'defaultCell '
+      if (text >= 5000) {classColor += 'bgPrice5000'}
+      else if (text >= 1000) {classColor += 'bgPrice1000'}
+      else if (text >= 100) {classColor += 'bgPrice100'}
+      else if (text >= 10) {classColor += 'bgPrice10'}
+      return <span className={classColor}>{text}</span>
+    },
     width: '15%'
   },
   {
@@ -81,7 +89,7 @@ const columns = [
 ]
 
 class GraphTable extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       data: data,
@@ -101,6 +109,14 @@ class GraphTable extends Component {
         }
       },
       swSearch: true
+      // rowSelection: {
+      //   onChange: (selectedRowKeys, selectedRows) => {
+      //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
+      //   },
+      //   getCheckboxProps: record => ({
+      //     disabled: record.name === 'Disabled User'   // Column configuration not to be checked
+      //   })
+      // }
     }
   }
 
@@ -112,8 +128,8 @@ class GraphTable extends Component {
 
   searchName (e) {
     this.setState({
-      data: data.filter(item => item.name.indexOf(e.target.value) != -1 ? true : false ),
-      swSearch: data.filter(item => item.name.indexOf(e.target.value) != -1 ? true : false ).length > 0 ? true : false
+      data: data.filter(item => item.name.indexOf(e.target.value) != -1),
+      swSearch: data.filter(item => item.name.indexOf(e.target.value) != -1).length > 0
     })
   }
 
@@ -126,6 +142,7 @@ class GraphTable extends Component {
               <Input prefix={<Icon type='search' />} placeholder='Search' onChange={e => this.searchName(e)} />
             </Form.Item>
           </Form>
+          {/* checbox in table: rowSelection={this.state.rowSelection}  */}
           <Table
             size='small'
             className='tableDomains'
