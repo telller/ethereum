@@ -1,13 +1,12 @@
 #menu
-  float right
-  z-index 10
+  z-index -5
   a
     display inline-block
     text-decoration none
   .menu-item
     font-size 16px
+    cursor pointer
     .dot
-      display inline-block
       background-color #405064
       height 5px
       width 5px
@@ -17,16 +16,32 @@
       text-transform uppercase
       font-weight: 600
       color #405064
-      font-family: 'Roboto', sans-serif
+      font-family: 'Roboto', sans-serif 
       .anticon
         padding-right 5px
-// @media only screen and (min-width: 0)
-//   #menu
-//     .menu-item
-//       height 100%
-@media only screen and (min-width: 364px)
+@media only screen and (min-width: 0)
   #menu
+  // continue menu on mobile
+    .folding-menu
+      left 50%
+      margin-left -40px
+    .menu-item
+      text-align center
+      display block
+      height 100%
+      .dot
+        display none
+@media only screen and (min-width: 550px)
+  #menu
+    float right
     margin-top 32px
+    .folding-menu
+      display none
+    .menu-item
+      display inline-block
+      .dot
+        display inline-block
+
 
 @media only screen and (min-width: 48em)
   #menu

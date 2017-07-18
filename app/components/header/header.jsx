@@ -1,5 +1,5 @@
 import React from 'react'
-import Menu from '../menu/menu.jsx'
+import MainMenu from '../menu/menu.jsx'
 import './header.styl'
 import { Row, Col } from 'antd'
 
@@ -23,7 +23,7 @@ class Header extends React.Component {
             </Col>
           </div>
           <Col className='menu'>
-            <Menu />
+            <MainMenu />
           </Col>
         </Row>
       </div>

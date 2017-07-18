@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
-import {Icon, Modal, Button} from 'antd'
-import FaqBody from '../body-main-components/faq-body.jsx'
+import { Icon, Modal, Button } from 'antd'
+import Faq from '../faq/faq.jsx'
 import './menu.styl'
 
-class Menu extends Component {
+class MainMenu extends Component {
   constructor () {
     super()
     this.state = {
@@ -34,11 +33,21 @@ class Menu extends Component {
   render () {
     return (
       <div id='menu'>
-        <Link onClick={() => this.clickSell()}>
-          <div className='menu-item'>
+        <Button className='folding-menu'>Menu<Icon type='menu-unfold' /></Button>
+        <div className='all-menu-items'>
+          <div className='menu-item' onClick={() => this.clickSell()}>
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
-        </Link>
+
+          <div className='menu-item' onClick={() => this.clickFAQ()}>
+            <div className='text'><Icon type='question-circle' />faq<span className='dot' /></div>
+          </div>
+
+          <div className='menu-item' onClick={() => this.clickContact()}>
+            <div className='text'><Icon type='mail' />Contact Us</div>
+          </div>
+        </div>
+
         <Modal
           title='Sell Names'
           width={600}
@@ -50,12 +59,6 @@ class Menu extends Component {
         >
           Sell Names
         </Modal>
-
-        <Link onClick={() => this.clickFAQ()}>
-          <div className='menu-item'>
-            <div className='text'><Icon type='question-circle' />faq<span className='dot' /></div>
-          </div>
-        </Link>
         <Modal
           title='FAQ'
           width={600}
@@ -65,14 +68,8 @@ class Menu extends Component {
             <Button key='Ok' type='primary' size='large' onClick={() => this.clickFAQ()}>Ok</Button>
           ]}
         >
-          <FaqBody />
+          <Faq />
         </Modal>
-
-        <Link onClick={() => this.clickContact()}>
-          <div className='menu-item'>
-            <div className='text'><Icon type='mail' />Contact Us</div>
-          </div>
-        </Link>
         <Modal
           title='Contact Us'
           width={600}
@@ -89,4 +86,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu
+export default MainMenu
