@@ -1,53 +1,33 @@
 #menu
-  position fixed
-  background-color: #232a40
+  float right
   z-index 10
   a
+    display inline-block
     text-decoration none
   .menu-item
-    font-size 20px
-    text-align center
+    font-size 16px
+    .dot
+      display inline-block
+      background-color #405064
+      height 5px
+      width 5px
+      border-radius 50%
+      margin 0 10px 3px 10px
     .text
-      text-transform: uppercase
-      font-size: 12px
+      text-transform uppercase
       font-weight: 600
-      color: #747c99
+      color #405064
       font-family: 'Roboto', sans-serif
-    img
-      width: 35px
-  .menu-item-active
-    background-color #8a92b2
-    .text
-      color: white
-    img
-      width: 35px
-@media only screen and (min-width: 0)
-  #menu
-    display: flex
-    top 70px
-    height: 70px
-    width: 100%
-    .menu-item
-      padding-top: 8px
-      height 100%
-      width: 70px
+      .anticon
+        padding-right 5px
+// @media only screen and (min-width: 0)
+//   #menu
+//     .menu-item
+//       height 100%
 @media only screen and (min-width: 364px)
   #menu
-    display: flex
-    top 90px
-    height: 90px
-    width: 100%
-    .menu-item
-      padding-top: 15px
-      height 100%
-      width: 90px
+    margin-top 32px
+
 @media only screen and (min-width: 48em)
   #menu
-    display inline-block
-    top 90px
-    width 90px
-    height 100%
-    .menu-item
-      padding-top: 15px
-      width 100%
-      height 90px
+    margin-top 32px

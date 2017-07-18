@@ -1,21 +1,24 @@
 #header
   position fixed
-  top 0
+  background-color #8a92b2
   width 100%
-  background-color #f3f3f3
+  height 90px
   z-index 5
+  box-shadow: 0px 3px 20px 0px rgba(83,92,127,1);
   .header-logo
-    background-color #161c30
+    position relative
+    background-color #535c7f
   .title
-    text-align center
+    text-transform uppercase
     font-family 'Roboto', sans-serif
-    color #232a40
-    font-weight lighter
-    font-size 24px
+    font-size 18px
+    font-weight bold
+  .menu
+    padding-right 15px
 
 @media only screen and (min-width: 0)
   #header
-    height 70px
+    
     .header-logo
       width: 70px;
       height: 70px;
@@ -23,15 +26,49 @@
       padding-top 10px
     .title
       padding-top 18px
-      margin-left 20px
+      padding-left 20px
 
 @media only screen and (min-width: 364px)
   #header
+    top 0
     height 90px
-    .header-logo
-      width 90px
+    .menu
+      background-color #ececec
+      margin-top 0
       height 90px
-      padding-left 15px
-      padding-top 15px
-    .title
-      padding-top 26px
+    .title-logo
+      position fixed
+      top 0
+      .header-logo
+        width 80px
+        height 90px
+        padding-left 20px
+        padding-top 15px
+      .title
+        display block
+        background-color #535c7f
+        color white
+        height 90px
+        width 120px
+        padding-left 0
+        padding-top 17px
+@media only screen and (min-width: 48em)
+  #header
+    top 0
+    height 90px
+    .menu
+      background-color #ececec
+      margin-top 0
+      height 90px
+    .title-logo
+      .header-logo
+        width 90px
+        height 90px
+        padding-left 25px
+        padding-top 15px
+      .title
+        width 200px
+        background-color transparent
+        color #405064
+        padding-left 15px
+        padding-top 30px

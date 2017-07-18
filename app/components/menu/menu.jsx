@@ -1,121 +1,92 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Link, browserHistory } from 'react-router'
-import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import {Icon, Modal, Button} from 'antd'
+import FaqBody from '../body-main-components/faq-body.jsx'
 import './menu.styl'
 
 class Menu extends Component {
   constructor () {
     super()
     this.state = {
-      faq: 'faq',
-      grafs: 'grafs',
-      buy: 'buy',
-      sell: 'sell'
+      visibleSell: false,
+      visibleFaq: false,
+      visibleContact: false
     }
   }
-  componentDidMount () {
-    if (this.props.router.locationBeforeTransitions.pathname === '/') {
-      this.hendleStatusGraph()
-    }
-    if (this.props.router.locationBeforeTransitions.pathname === '/buy') {
-      this.hendleStatusBuy()
-    }
-    if (this.props.router.locationBeforeTransitions.pathname === '/sell') {
-      this.hendleStatusSell()
-    }
-    if (this.props.router.locationBeforeTransitions.pathname === '/faq') {
-      this.hendleStatusFaq()
-    }
+  clickSell () {
+    this.setState({
+      visibleSell: !this.state.visibleSell
+    })
   }
-  hendleStatusFaq () {
-    this.props.onHandleMenuFaq()
-    browserHistory.push('/faq')
+
+  clickFAQ () {
+    this.setState({
+      visibleFaq: !this.state.visibleFaq
+    })
   }
-  hendleStatusGraph () {
-    this.props.onHandleMenuGraph()
-    browserHistory.push('/')
+
+  clickContact () {
+    this.setState({
+      visibleContact: !this.state.visibleContact
+    })
   }
-  hendleStatusSell () {
-    this.props.onHandleMenuSell()
-    browserHistory.push('/sell')
-  }
-  hendleStatusBuy () {
-    this.props.onHandleMenuBuy()
-    browserHistory.push('/buy')
-  }
+
   render () {
     return (
       <div id='menu'>
-        <Link onClick={() => this.hendleStatusGraph()} >
-          <div className={'menu-item ' + (this.props.menu.graphStatus ? 'menu-item-active' : null)}>
-            <img src={this.props.menu.graphStatus ? './dist/media/home-active.png' : './dist/media/home.png'} />
-            <div className='text'>home</div>
+        <Link onClick={() => this.clickSell()}>
+          <div className='menu-item'>
+            <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
         </Link>
-        <Link onClick={() => this.hendleStatusBuy()} >
-          <div className={'menu-item ' + (this.props.menu.buyStatus ? 'menu-item-active' : null)}>
-            <img src={this.props.menu.buyStatus ? './dist/media/buy-active.png' : './dist/media/buy.png'} />
-            <div className='text'>buy</div>
+        <Modal
+          title='Sell Names'
+          width={600}
+          onCancel={() => this.clickSell()}
+          visible={this.state.visibleSell}
+          footer={[
+            <Button key='Ok' type='primary' size='large' onClick={() => this.clickSell()}>Ok</Button>
+          ]}
+        >
+          Sell Names
+        </Modal>
+
+        <Link onClick={() => this.clickFAQ()}>
+          <div className='menu-item'>
+            <div className='text'><Icon type='question-circle' />faq<span className='dot' /></div>
           </div>
         </Link>
-        <Link onClick={() => this.hendleStatusSell()} activeClassName='active' >
-          <div className={'menu-item ' + (this.props.menu.sellStatus ? 'menu-item-active' : null)}>
-            <img src={this.props.menu.sellStatus ? './dist/media/sell-active.png' : './dist/media/sell.png'} />
-            <div className='text'>sell</div>
+        <Modal
+          title='FAQ'
+          width={600}
+          onCancel={() => this.clickFAQ()}
+          visible={this.state.visibleFaq}
+          footer={[
+            <Button key='Ok' type='primary' size='large' onClick={() => this.clickFAQ()}>Ok</Button>
+          ]}
+        >
+          <FaqBody />
+        </Modal>
+
+        <Link onClick={() => this.clickContact()}>
+          <div className='menu-item'>
+            <div className='text'><Icon type='mail' />Contact Us</div>
           </div>
         </Link>
-        <Link onClick={() => this.hendleStatusFaq()}>
-          <div className={'menu-item ' + (this.props.menu.faqStatus ? 'menu-item-active' : null)}>
-            <img src={this.props.menu.faqStatus ? './dist/media/faq-active.png' : './dist/media/faq.png'} />
-            <div className='text'>faq</div>
-          </div>
-        </Link>
+        <Modal
+          title='Contact Us'
+          width={600}
+          onCancel={() => this.clickContact()}
+          visible={this.state.visibleContact}
+          footer={[
+            <Button key='Ok' type='primary' size='large' onClick={() => this.clickContact()}>Ok</Button>
+          ]}
+        >
+          Contact Us
+        </Modal>
       </div>
     )
   }
 }
-const mapStateToProps = state => {
-  return {
-    router: state.routing,
-    blog: state.blog,
-    menu: state.menu
-  }
-}
-const mapDispatchToProps = dispatch => ({
-  onHandleMenuFaq: () => {
-    dispatch({
-      type: 'HANDLE_MENU_FAQ',
-      payload: ''
-    })
-  },
-  onHandleMenuGraph: () => {
-    dispatch({
-      type: 'HANDLE_MENU_GRAPH',
-      payload: ''
-    })
-  },
-  onHandleMenuBuy: () => {
-    dispatch({
-      type: 'HANDLE_MENU_BUY',
-      payload: ''
-    })
-  },
-  onHandleMenuSell: () => {
-    dispatch({
-      type: 'HANDLE_MENU_SELL',
-      payload: ''
-    })
-  }
-})
 
-Menu.propTypes = {
-  onHandleMenuFaq: PropTypes.func,
-  onHandleMenuGraph: PropTypes.func,
-  onHandleMenuBuy: PropTypes.func,
-  onHandleMenuSell: PropTypes.func,
-  menu: PropTypes.object,
-  router: PropTypes.object
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu)
+export default Menu

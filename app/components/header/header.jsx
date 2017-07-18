@@ -1,4 +1,5 @@
 import React from 'react'
+import Menu from '../menu/menu.jsx'
 import './header.styl'
 import { Row, Col } from 'antd'
 
@@ -12,14 +13,17 @@ class Header extends React.Component {
   render () {
     return (
       <div id='header'>
-        <Row >
-          <Col span={2} >
-            <div className='header-logo'>
+        <Row>
+          <div className='title-logo'>
+            <Col span={2} className='header-logo'>
               <img src='./dist/media/logo.png' />
-            </div>
-          </Col>
-          <Col span={22} >
-            <h1 className='title'>Ethereum names</h1>
+            </Col>
+            <Col span={6} >
+              <h1 className='title'>Ethereum names</h1>
+            </Col>
+          </div>
+          <Col className='menu'>
+            <Menu />
           </Col>
         </Row>
       </div>

@@ -1,6 +1,5 @@
 import Header from '../header/header.jsx'
 import React, { Component } from 'react'
-import Menu from '../menu/menu.jsx'
 import GraphTable from '../graph-table/table.jsx'
 
 class Graph extends Component {
@@ -8,7 +7,6 @@ class Graph extends Component {
     return (
       <div id='graph'>
         <Header />
-        <Menu />
         <GraphTable />
       </div>
     )

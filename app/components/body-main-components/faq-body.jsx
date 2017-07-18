@@ -8,9 +8,6 @@ class FaqBody extends Component {
       <div id='faq-body'>
         <Row>
           <Col className='body'>
-            <div className='title'>
-              <p>FAQ</p>
-            </div>
             <div className='info'>
               <ol>
                 <li><strong>How do I know this isn't a scam?</strong> The source code of the ENS Seller Factory can be verified on <a href='#' target='_blank'>Etherscan</a> and paranoid users can use its <a href='#' target='_blank'>Read Contract</a> function to verify that the given Purchase Address is valid.</li>
