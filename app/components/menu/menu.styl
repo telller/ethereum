@@ -21,11 +21,20 @@
         padding-right 5px
 @media only screen and (min-width: 0)
   #menu
-  // continue menu on mobile
+    box-shadow inset 2px 2px 20px 0px rgba(83,92,127,1), 0px 2px 20px 0px rgba(83,92,127,1)
     .folding-menu
-      left 50%
-      margin-left -40px
+      padding 10px
+      cursor pointer
+      text-align center
+      font-weight: 600;
+      color: #405064;
+      font-size 20px
+      .anticon
+        padding-left 5px
+    .menu-unfold
+      display none
     .menu-item
+      padding-bottom 10px
       text-align center
       display block
       height 100%
@@ -33,6 +42,7 @@
         display none
 @media only screen and (min-width: 550px)
   #menu
+    box-shadow none
     float right
     margin-top 32px
     .folding-menu
@@ -41,8 +51,8 @@
       display inline-block
       .dot
         display inline-block
-
-
+    .menu-unfold
+      display block
 @media only screen and (min-width: 48em)
   #menu
     margin-top 32px

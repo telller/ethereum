@@ -9,7 +9,8 @@ class MainMenu extends Component {
     this.state = {
       visibleSell: false,
       visibleFaq: false,
-      visibleContact: false
+      visibleContact: false,
+      menuFold: false
     }
   }
   clickSell () {
@@ -30,21 +31,27 @@ class MainMenu extends Component {
     })
   }
 
+  clickMenu () {
+    this.setState({
+      menuFold: !this.state.menuFold
+    })
+  }
+
   render () {
     return (
       <div id='menu'>
-        <Button className='folding-menu'>Menu<Icon type='menu-unfold' /></Button>
-        <div className='all-menu-items'>
+        <div className='folding-menu' onClick={() => this.clickMenu()}>Menu<Icon type={this.state.menuFold ? 'menu-unfold' : 'menu-fold'} /></div>
+        <div className={'all-menu-items ' + (this.state.menuFold ? null : 'menu-unfold')}>
           <div className='menu-item' onClick={() => this.clickSell()}>
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
 
-          <div className='menu-item' onClick={() => this.clickFAQ()}>
-            <div className='text'><Icon type='question-circle' />faq<span className='dot' /></div>
+          <div className='menu-item' onClick={() => this.clickContact()}>
+            <div className='text'><Icon type='mail' />Contact Us<span className='dot' /></div>
           </div>
 
-          <div className='menu-item' onClick={() => this.clickContact()}>
-            <div className='text'><Icon type='mail' />Contact Us</div>
+          <div className='menu-item' onClick={() => this.clickFAQ()}>
+            <div className='text'><Icon type='question-circle' />faq</div>
           </div>
         </div>
 
