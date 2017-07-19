@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Row, Col, Form, Icon, Input, Table, Radio } from 'antd'
+import { Row, Col, Form, Icon, Input, Table, Radio, Modal, Button } from 'antd'
+import Buy from '../buy/buy.jsx'
 import './table.styl'
 
 const data = [
@@ -53,54 +54,6 @@ const data = [
   {name: 'lalala', block: 12732, price: 0.9, address: '0x123lqowemqwo4e012i'}
 ]
 
-const columns = [
-  {
-    title: '.eht Name',
-    dataIndex: 'name',
-    sorter: (a, b) => {
-      if (a.name < b.name) {
-        return -1
-      } else if (a.name > b.name) {
-        return 1
-      } else return 0
-    },
-    width: '20%'
-  },
-  {
-    title: 'Block Created',
-    dataIndex: 'block',
-    sorter: (a, b) => a.block - b.block,
-    width: '15%'
-  },
-  {
-    title: 'Price (ETH)',
-    dataIndex: 'price',
-    sorter: (a, b) => a.price - b.price,
-    defaultSortOrder: 'descend',
-    render: text => {
-      let classColor = 'defaultCell '
-      if (text >= 5000) {classColor += 'bgPrice5000'}
-      else if (text >= 1000) {classColor += 'bgPrice1000'}
-      else if (text >= 100) {classColor += 'bgPrice100'}
-      else if (text >= 10) {classColor += 'bgPrice10'}
-      return <span className={classColor}>{text}</span>
-    },
-    width: '15%'
-  },
-  {
-    title: 'Purchase Address',
-    dataIndex: 'address',
-    sorter: (a, b) => {
-      if (a.address < b.address) {
-        return -1
-      } else if (a.address > b.address) {
-        return 1
-      } else return 0
-    },
-    width: '50%'
-  }
-]
-
 class GraphTable extends Component {
   constructor (props) {
     super(props)
@@ -121,7 +74,9 @@ class GraphTable extends Component {
           prev_page: 'Previous Page'
         }
       },
-      swSearch: true
+      swSearch: true,
+      clickBuy: false,
+      selectBuy: null
       // rowSelection: {
       //   onChange: (selectedRowKeys, selectedRows) => {
       //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
@@ -146,10 +101,100 @@ class GraphTable extends Component {
     })
   }
 
+  clickBuy () {
+    this.setState({
+      clickBuy: !this.state.clickBuy
+    })
+  }
+
   render () {
+    const columns = [
+      {
+        title: 'Buy',
+        dataIndex: 'buy',
+        width: '5%',
+        onCellClick: record => {
+          this.setState({
+            selectBuy: record,
+            clickBuy: !this.state.clickBuy
+          })
+        },
+        render: () => {
+          return (<div className='buy'>
+            <Icon type='shopping-cart' />
+          </div>
+          )
+        }
+      },
+      {
+        title: '.eht Name',
+        dataIndex: 'name',
+        sorter: (a, b) => {
+          if (a.name < b.name) {
+            return -1
+          } else if (a.name > b.name) {
+            return 1
+          } else return 0
+        },
+        width: '20%'
+      },
+      {
+        title: 'Block Created',
+        dataIndex: 'block',
+        sorter: (a, b) => a.block - b.block,
+        width: '10%'
+      },
+      {
+        title: 'Price (ETH)',
+        dataIndex: 'price',
+        sorter: (a, b) => a.price - b.price,
+        defaultSortOrder: 'descend',
+        render: text => {
+          let classColor = 'defaultCell '
+          if (text >= 5000) {classColor += 'bgPrice5000'}
+          else if (text >= 1000) {classColor += 'bgPrice1000'}
+          else if (text >= 100) {classColor += 'bgPrice100'}
+          else if (text >= 10) {classColor += 'bgPrice10'}
+          return <span className={classColor}>{text}</span>
+        },
+        width: '15%'
+      },
+      {
+        title: 'Purchase Address',
+        dataIndex: 'address',
+        sorter: (a, b) => {
+          if (a.address < b.address) {
+            return -1
+          } else if (a.address > b.address) {
+            return 1
+          } else return 0
+        },
+        width: '50%'
+      }
+    ]
     return (
       <Row id='graphTable'>
         <Col className='body'>
+          <Modal
+            className='buy-modal'
+            width={400}
+            onCancel={() => this.clickBuy()}
+            visible={this.state.clickBuy}
+            title={
+              <div>
+                <span className='buy-title'>Buy ENS:</span>
+                <span className='total-price'>
+                  {this.state.selectBuy && this.state.selectBuy.price}
+                  <span className='eth'>eth</span>
+                </span>
+              </div>
+            }
+            footer={
+              <div onClick={() => this.clickBuy()}><Icon type='shopping-cart' /> | Buy</div>
+            }
+          >
+            <Buy data={this.state.selectBuy} />
+          </Modal>
           <Form layout='inline' className='formSearch'>
             <Form.Item label='Filter Data'>
               <Input prefix={<Icon type='search' />} placeholder='Search' onChange={e => this.searchName(e)} />
