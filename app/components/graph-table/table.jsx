@@ -76,15 +76,24 @@ class GraphTable extends Component {
       },
       swSearch: true,
       clickBuy: false,
-      selectBuy: null
-      // rowSelection: {
-      //   onChange: (selectedRowKeys, selectedRows) => {
-      //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-      //   },
-      //   getCheckboxProps: record => ({
-      //     disabled: record.name === 'Disabled User'   // Column configuration not to be checked
-      //   })
-      // }
+      selectBuy: null,
+      rowSelection: {
+        onChange: (selectedRowKeys, selectedRows) => {
+          console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
+          this.setState({
+            selectBuy: selectedRows
+          })
+        },
+        onSelect: (record, selected, selectedRows) => {
+          console.log(record, selected)
+        },
+        onSelectAll: (selected, selectedRows, changeRows) => {
+          console.log(selected, selectedRows, changeRows)
+        },
+        getCheckboxProps: record => ({
+          disabled: record.name === 'Disabled User'   // Column configuration not to be checked
+        })
+      }
     }
   }
 
@@ -96,8 +105,8 @@ class GraphTable extends Component {
 
   searchName (e) {
     this.setState({
-      data: data.filter(item => item.name.indexOf(e.target.value.toLowerCase()) !== -1),
-      swSearch: data.filter(item => item.name.indexOf(e.target.value.toLowerCase()) !== -1).length > 0
+      data: data.filter(item => item.name.search(e.target.value.toLowerCase()) !== -1),
+      swSearch: data.filter(item => item.name.search(e.target.value.toLowerCase()) !== -1).length > 0
     })
   }
 
@@ -206,6 +215,7 @@ class GraphTable extends Component {
             className='tableDomains'
             columns={columns}
             rowKey={record => record.registered}
+            rowSelection={this.state.rowSelection}
             dataSource={this.state.data}
             pagination={this.state.pagination}
           />

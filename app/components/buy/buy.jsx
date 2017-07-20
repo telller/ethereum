@@ -3,22 +3,26 @@ import {Input, Icon} from 'antd'
 import './buy.styl'
 
 class Buy extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
-
   render () {
     return (
       <div id='buy'>
         <table className='table-domains'>
           <tbody>
-            <tr>
-              <td className='name-title'>.eth NAME:</td>
-              <td>{this.props.data.name}</td>
-              <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>
-            </tr>
+            {
+              this.props.data && (
+                <tr>
+                  <td className='name-title'>.eth NAME:</td>
+                  <td>{this.props.data.name}</td>
+                  <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>
+                </tr>
+              ) || this.props.data.map((item, index) => (
+                <tr key={index}>
+                  <td className='name-title'>.eth NAME:</td>
+                  <td>{item.name}</td>
+                  <td className='price'>{item.price}<span className='eth'>eth</span></td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
         <div className='contact-form'>
