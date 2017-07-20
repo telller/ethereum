@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Icon, Modal, Button } from 'antd'
 import Faq from '../faq/faq.jsx'
+import Sell from '../sell/sell.jsx'
 import './menu.styl'
 
 class MainMenu extends Component {
@@ -56,15 +57,27 @@ class MainMenu extends Component {
         </div>
 
         <Modal
-          title='Sell Names'
-          width={600}
+          title='Sell Names:'
+          className='sell-modal'
+          width={400}
           onCancel={() => this.clickSell()}
           visible={this.state.visibleSell}
+          footer={
+            <div onClick={() => this.clickSell()}><Icon type='shopping-cart' /> | Sell</div>
+          }
+        >
+          <Sell visible={this.state.visibleSell} />
+        </Modal>
+        <Modal
+          title='Contact Us'
+          width={400}
+          onCancel={() => this.clickContact()}
+          visible={this.state.visibleContact}
           footer={[
-            <Button key='Ok' type='primary' size='large' onClick={() => this.clickSell()}>Ok</Button>
+            <Button key='Ok' type='primary' size='large' onClick={() => this.clickContact()}>Ok</Button>
           ]}
         >
-          Sell Names
+          Contact Us
         </Modal>
         <Modal
           title='FAQ'
@@ -76,17 +89,6 @@ class MainMenu extends Component {
           ]}
         >
           <Faq />
-        </Modal>
-        <Modal
-          title='Contact Us'
-          width={600}
-          onCancel={() => this.clickContact()}
-          visible={this.state.visibleContact}
-          footer={[
-            <Button key='Ok' type='primary' size='large' onClick={() => this.clickContact()}>Ok</Button>
-          ]}
-        >
-          Contact Us
         </Modal>
       </div>
     )

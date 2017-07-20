@@ -1,3 +1,32 @@
+.ant-modal-mask
+  background-color: rgba(83, 92, 127, 0.8) !important
+.ant-modal-header
+  padding 15px
+  .ant-modal-title
+    text-transform uppercase
+    font-size 18px
+    color #444
+.sell-modal
+  .ant-modal-body
+    padding 0
+    background-color #ededed
+  .ant-modal-footer
+    padding 15px
+    cursor pointer
+    font-size 18px
+    text-align center
+    color white
+    background-color #535c7f
+    text-transform uppercase
+  .ant-modal-close
+    background-color #535c7f
+    color white
+    &:hover
+      color white
+    .ant-modal-close-x
+      width 35px
+      height 35px
+      line-height 35px
 #menu
   z-index -5
   a
@@ -20,6 +49,10 @@
       .anticon
         padding-right 5px
 @media only screen and (min-width: 0)
+  .sell-modal
+    .ant-modal-close
+      right 0px
+      top -35px
   #menu
     box-shadow inset 2px 2px 20px 0px rgba(83,92,127,1), 0px 2px 20px 0px rgba(83,92,127,1)
     .folding-menu
@@ -54,5 +87,9 @@
     .menu-unfold
       display block
 @media only screen and (min-width: 48em)
+  .sell-modal
+    .ant-modal-close
+      right -35px
+      top -35px
   #menu
     margin-top 32px

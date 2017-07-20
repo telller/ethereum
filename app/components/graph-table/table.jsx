@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Form, Icon, Input, Table, Radio, Modal, Button } from 'antd'
+import { Row, Col, Form, Icon, Input, Table, Radio, Modal } from 'antd'
 import Buy from '../buy/buy.jsx'
 import './table.styl'
 

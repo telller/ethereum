@@ -12,7 +12,6 @@ class Buy extends Component {
   render () {
     return (
       <div id='buy'>
-        {/* <p>.eth NAME: {this.props.data.name} <span className='price'>{this.props.data.price} <span className='eth'>ETH</span></span></p> */}
         <table className='table-domains'>
           <tbody>
             <tr>
