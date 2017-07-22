@@ -22,7 +22,7 @@ class Header extends React.Component {
               <h1 className='title'>Ethereum names</h1>
             </Col>
           </div>
-          <Col className='menu'>
+          <Col className='main-menu'>
             <MainMenu />
           </Col>
         </Row>

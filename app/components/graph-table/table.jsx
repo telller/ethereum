@@ -76,24 +76,7 @@ class GraphTable extends Component {
       },
       swSearch: true,
       clickBuy: false,
-      selectBuy: null,
-      rowSelection: {
-        onChange: (selectedRowKeys, selectedRows) => {
-          console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows)
-          this.setState({
-            selectBuy: selectedRows
-          })
-        },
-        onSelect: (record, selected, selectedRows) => {
-          console.log(record, selected)
-        },
-        onSelectAll: (selected, selectedRows, changeRows) => {
-          console.log(selected, selectedRows, changeRows)
-        },
-        getCheckboxProps: record => ({
-          disabled: record.name === 'Disabled User'   // Column configuration not to be checked
-        })
-      }
+      selectBuy: null
     }
   }
 
@@ -189,15 +172,7 @@ class GraphTable extends Component {
             width={400}
             onCancel={() => this.clickBuy()}
             visible={this.state.clickBuy}
-            title={
-              <div>
-                <span className='buy-title'>Buy ENS:</span>
-                <span className='total-price'>
-                  {this.state.selectBuy && this.state.selectBuy.price}
-                  <span className='eth'>eth</span>
-                </span>
-              </div>
-            }
+            title='Buy ENS:'
             footer={
               <div onClick={() => this.clickBuy()}><Icon type='shopping-cart' /> | Buy</div>
             }
@@ -209,13 +184,11 @@ class GraphTable extends Component {
               <Input prefix={<Icon type='search' />} placeholder='Search' onChange={e => this.searchName(e)} />
             </Form.Item>
           </Form>
-          {/* checbox in table: rowSelection={this.state.rowSelection}  */}
           <Table
             size='small'
             className='tableDomains'
             columns={columns}
             rowKey={record => record.registered}
-            rowSelection={this.state.rowSelection}
             dataSource={this.state.data}
             pagination={this.state.pagination}
           />
