@@ -4,14 +4,14 @@
     display inline-block
     text-decoration none
   .menu-item
-    font-size 16px
+    font-size 14px
     cursor pointer
     .dot
       background-color #405064
       height 5px
       width 5px
       border-radius 50%
-      margin 0 10px 3px 10px
+      margin 0 3px 3px 7px
     .text
       text-transform uppercase
       font-weight: 600
@@ -22,34 +22,36 @@
 @media only screen and (min-width: 0)
   #menu
     box-shadow inset 2px 2px 20px 0px rgba(83,92,127,1), 0px 2px 20px 0px rgba(83,92,127,1)
-    .folding-menu
-      padding 10px
-      cursor pointer
-      text-align center
-      font-weight bold
-      color #405064
-      font-size 20px
-      .anticon
-        padding-left 5px
+    .menu-fold
+      position absolute
+      top 20px
+      right 15px
+
+      img
+        cursor pointer
+        height 20px
     .menu-unfold
       display none
-    .menu-item
-      padding-bottom 10px
-      text-align center
-      display block
-      height 100%
-      .dot
-        display none
+    .all-menu-items
+      padding 5px 0
+      .menu-item
+        padding 3px
+        text-align center
+        display block
+        height 100%
+        .dot
+          display none
 @media only screen and (min-width: 550px)
   #menu
     box-shadow none
     float right
-    .folding-menu
+    .menu-fold
       display none
-    .menu-item
-      display inline-block
-      .dot
+    .all-menu-items
+      .menu-item
         display inline-block
+        .dot
+          display inline-block
     .menu-unfold
       display block
 // @media only screen and (min-width: 48em)

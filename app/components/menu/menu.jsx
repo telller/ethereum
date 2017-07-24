@@ -41,7 +41,9 @@ class MainMenu extends Component {
   render () {
     return (
       <div id='menu'>
-        <div className='folding-menu' onClick={() => this.clickMenu()}>Menu<Icon type={this.state.menuFold ? 'menu-unfold' : 'menu-fold'} /></div>
+        <div className='menu-fold' onClick={() => this.clickMenu()}>
+          <img src={'../../../dist/media/' + (this.state.menuFold ? 'menu-icon-close.png' : 'menu-icon.png')} alt='Menu' />
+        </div>
         <div className={'all-menu-items ' + (this.state.menuFold ? null : 'menu-unfold')}>
           <div className='menu-item' onClick={() => this.clickSell()}>
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
