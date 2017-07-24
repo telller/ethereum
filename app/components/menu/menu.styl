@@ -4,7 +4,6 @@
     display inline-block
     text-decoration none
   .menu-item
-    font-size 14px
     cursor pointer
     .dot
       background-color #405064
@@ -21,12 +20,11 @@
         padding-right 5px
 @media only screen and (min-width: 0)
   #menu
-    box-shadow inset 2px 2px 20px 0px rgba(83,92,127,1), 0px 2px 20px 0px rgba(83,92,127,1)
+    box-shadow inset 2px 2px 20px 0px rgba(83,92,127,0.5), 0px 2px 20px 0px rgba(83,92,127,0.8)
     .menu-fold
       position absolute
       top 20px
       right 15px
-
       img
         cursor pointer
         height 20px
@@ -35,6 +33,7 @@
     .all-menu-items
       padding 5px 0
       .menu-item
+        font-size 14px
         padding 3px
         text-align center
         display block
@@ -49,6 +48,7 @@
       display none
     .all-menu-items
       .menu-item
+        font-size 16px
         display inline-block
         .dot
           display inline-block

@@ -9,19 +9,11 @@ class Buy extends Component {
         <table className='table-domains'>
           <tbody>
             {
-              this.props.data && (
-                <tr>
-                  <td className='name-title'>.eth NAME:</td>
-                  <td>{this.props.data.name}</td>
-                  <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>
-                </tr>
-              ) || this.props.data.map((item, index) => (
-                <tr key={index}>
-                  <td className='name-title'>.eth NAME:</td>
-                  <td>{item.name}</td>
-                  <td className='price'>{item.price}<span className='eth'>eth</span></td>
-                </tr>
-              ))
+              <tr>
+                <td className='name-title'>.eth NAME:</td>
+                <td>{this.props.data.name} <span className='block'>(block: {this.props.data.block})</span></td>
+                <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>
+              </tr>
             }
           </tbody>
         </table>

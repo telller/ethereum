@@ -6,26 +6,23 @@
     max-width 800px
   .formSearch
     text-align center
-    background-color #535c7f
+    background-color #f3f3f3
     .ant-form-item
       margin 0 15px
     .ant-form-item-label > label
       font-size 20px
-      color white
+      color #505050
     .ant-input-prefix
       font-size 16px
       font-weight bold
-      color #9b9fb2
+      color #ccc
       left 13px
     input
-      background-color #717894
-      color white
-      border 0
+      color #505050
       font-size 16px
       border-radius 20px
-      &::placeholder
-        color #9b9fb2
       &:focus, &:hover
+        border-color #d9d9d9
         outline none
         box-shadow none
     .ant-input:not(:first-child)
@@ -34,6 +31,7 @@
     .ant-table
       border-radius 0
       table
+        background-color white
         border-collapse collapse
         border-radius 0
       thead > tr > th
@@ -162,6 +160,16 @@
       input
         width 100%
     .tableDomains
+      .ant-table
+        table
+          thead > tr > th:nth-child(3) .ant-table-column-sorter
+            top 20px
+            right 0
+          tbody tr > td
+            &:last-child
+              padding-top 3px
+              padding-left 5px
+              text-align left
       .ant-pagination
         text-align center
         float none
@@ -178,6 +186,8 @@
         border none
     .table-footer
       height 80px
+    .not-found
+      height 50px
 @media only screen and (min-width: 550px)
   #graphTable
     .formSearch
@@ -227,5 +237,3 @@
         outline none
         box-shadow none
         border none
-    .table-footer
-      height 50px

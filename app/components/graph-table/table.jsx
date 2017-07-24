@@ -104,7 +104,7 @@ class GraphTable extends Component {
       {
         title: 'Buy',
         dataIndex: 'buy',
-        width: '5%',
+        width: '13%',
         onCellClick: record => {
           this.setState({
             selectBuy: record,
@@ -128,19 +128,18 @@ class GraphTable extends Component {
             return 1
           } else return 0
         },
-        width: '20%'
+        width: '27%'
       },
-      {
-        title: 'Block Created',
-        dataIndex: 'block',
-        sorter: (a, b) => a.block - b.block,
-        width: '10%'
-      },
+      // {
+      //   title: 'Block Created',
+      //   dataIndex: 'block',
+      //   sorter: (a, b) => a.block - b.block,
+      //   width: '10%'
+      // },
       {
         title: 'Price (ETH)',
         dataIndex: 'price',
         sorter: (a, b) => a.price - b.price,
-        defaultSortOrder: 'descend',
         render: text => {
           let classColor = 'defaultCell '
           if (text >= 5000) {classColor += 'bgPrice5000'}
