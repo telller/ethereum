@@ -128,14 +128,8 @@ class GraphTable extends Component {
             return 1
           } else return 0
         },
-        width: '27%'
+        width: '30%'
       },
-      // {
-      //   title: 'Block Created',
-      //   dataIndex: 'block',
-      //   sorter: (a, b) => a.block - b.block,
-      //   width: '10%'
-      // },
       {
         title: 'Price (ETH)',
         dataIndex: 'price',
@@ -148,7 +142,7 @@ class GraphTable extends Component {
           else if (text >= 10) {classColor += 'bgPrice10'}
           return <span className={classColor}>{text}</span>
         },
-        width: '15%'
+        width: '20%'
       },
       {
         title: 'Purchase Address',
