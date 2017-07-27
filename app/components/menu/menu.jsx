@@ -54,7 +54,7 @@ class MainMenu extends Component {
           </div>
 
           <div className='menu-item' onClick={() => this.clickFAQ()}>
-            <div className='text'><Icon type='question-circle' />faq</div>
+            <div className='text'><Icon type='question-circle-o' />faq</div>
           </div>
         </div>
 

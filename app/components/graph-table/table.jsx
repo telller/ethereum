@@ -1,64 +1,14 @@
 import React, { Component } from 'react'
-import { Row, Col, Form, Icon, Input, Table, Radio, Modal } from 'antd'
+import { Row, Col, Icon, Table, Radio, Modal } from 'antd'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import Buy from '../buy/buy.jsx'
 import './table.styl'
-
-const data = [
-  {name: 'marlena', block: 4013908, price: 0.5, address: '0xf1d184c1a3032f7586261bea6ee5c2b18ac247fc'},
-  {name: 'dlalala', block: 12332, price: 0.7, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 6000, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 1000, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 111, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 12, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 100, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12632, price: 0.1, address: '0x123lqowemqwo4e012i'},
-  {name: 'lalala', block: 12732, price: 0.9, address: '0x123lqowemqwo4e012i'}
-]
 
 class GraphTable extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      data: data,
       pagination: {
         pageSize: 20,
         showQuickJumper: true,
@@ -74,7 +24,6 @@ class GraphTable extends Component {
           prev_page: 'Previous Page'
         }
       },
-      swSearch: true,
       clickBuy: false,
       selectBuy: null
     }
@@ -93,6 +42,7 @@ class GraphTable extends Component {
   }
 
   render () {
+    const checkFind = this.props.data.filter(item => item.name.search(this.props.findDomain) !== -1).length > 0
     const columns = [
       {
         title: 'Buy',
@@ -170,12 +120,12 @@ class GraphTable extends Component {
             className='tableDomains'
             columns={columns}
             rowKey={record => record.registered}
-            dataSource={this.state.data}
+            dataSource={this.props.data.sort((a, b) => b.price - a.price)}
             pagination={this.state.pagination}
           />
-          <div className={'table-footer ' + (this.state.swSearch ? null : 'not-found')}>
-            <p className={this.state.swSearch ? 'table-footer-search' : null}>Not found!</p>
-            <Radio.Group className={this.state.swSearch ? 'btn-page-size' : 'btn-page-size-none'} defaultValue={this.state.pagination.pageSize} onChange={e => this.changeSizePage(e)}>
+          <div className={'table-footer ' + (checkFind ? '' : 'not-found')}>
+            <p className={checkFind ? 'table-footer-search' : null}>Not found!</p>
+            <Radio.Group className={checkFind ? 'btn-page-size' : 'btn-page-size-none'} defaultValue={this.state.pagination.pageSize} onChange={e => this.changeSizePage(e)}>
               <Radio.Button value={20}>20</Radio.Button>
               <Radio.Button value={50}>50</Radio.Button>
               <Radio.Button value={100}>100</Radio.Button>
@@ -186,4 +136,26 @@ class GraphTable extends Component {
     )
   }
 }
-export default GraphTable
+
+GraphTable.propTypes = {
+  data: PropTypes.array,
+  findDomain: PropTypes.string
+}
+
+const mapStateToProps = state => {
+  return {
+    data: state.data.filter(item => item.name.search(state.findDomain) !== -1),
+    findDomain: state.findDomain
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+
+}
+
+const component = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GraphTable)
+
+export default component
