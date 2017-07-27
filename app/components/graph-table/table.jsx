@@ -86,13 +86,6 @@ class GraphTable extends Component {
     })
   }
 
-  searchName (e) {
-    this.setState({
-      data: data.filter(item => item.name.search(e.target.value.toLowerCase()) !== -1),
-      swSearch: data.filter(item => item.name.search(e.target.value.toLowerCase()) !== -1).length > 0
-    })
-  }
-
   clickBuy () {
     this.setState({
       clickBuy: !this.state.clickBuy
@@ -172,11 +165,6 @@ class GraphTable extends Component {
           >
             <Buy data={this.state.selectBuy} />
           </Modal>
-          <Form layout='inline' className='formSearch'>
-            <Form.Item label='Filter Data'>
-              <Input prefix={<Icon type='search' />} placeholder='Search' onChange={e => this.searchName(e)} />
-            </Form.Item>
-          </Form>
           <Table
             size='small'
             className='tableDomains'

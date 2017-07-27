@@ -1,5 +1,6 @@
 import React from 'react'
 import MainMenu from '../menu/menu.jsx'
+import Search from '../search/search.jsx'
 import './header.styl'
 import { Row, Col } from 'antd'
 
@@ -25,6 +26,9 @@ class Header extends React.Component {
           <Col className='main-menu'>
             <MainMenu />
           </Col>
+          <div className='search-domains'>
+            <Search />
+          </div>
         </Row>
       </div>
     )

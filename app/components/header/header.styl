@@ -7,6 +7,11 @@
   height 60px
   z-index 5
   box-shadow 0px 2px 20px 0px rgba(83,92,127,0.8)
+  .search-domains
+    position absolute
+    text-align center
+    input
+      width 100%
   .title-logo
     height 60px
     .header-logo
@@ -24,6 +29,10 @@
 
 @media only screen and (min-width: 0)
   #header
+    .search-domains
+      top 0px
+      right 35px
+      left 160px
     .main-menu
       background-color #ececec
       height 100%
@@ -41,24 +50,31 @@
         padding-top 5px
 
 @media only screen and (min-width: 550px)
-  #header    
+  #header
+    background-color #535c7f
     .main-menu
-      padding-top 11px
-      padding-right 15px
-      background-color #ececec
-      margin-top 0
-      height 60px
+      margin-top 60px
+    .search-domains
+      left 220px
     .title-logo
       position fixed
       width auto
       top 0
       .title
-        display block
-        background-color #535c7f
         color white
-        width 120px
+        width 200px
+        padding-top 18px
 @media only screen and (min-width: 48em)
   #header
+    .search-domains
+      right 350px
+      left 250px
+    .main-menu
+      padding-top 11px
+      padding-right 0
+      background-color #ececec
+      margin-top 0
+      height 60px
     .title-logo
       background-color transparent
       .title
