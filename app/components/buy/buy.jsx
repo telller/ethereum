@@ -11,7 +11,7 @@ class Buy extends Component {
             {
               <tr>
                 <td className='name-title'>.eth NAME:</td>
-                <td>{this.props.data.name} <span className='block'>(block: {this.props.data.block})</span></td>
+                <td>{this.props.data.name}</td>
                 <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>
               </tr>
             }

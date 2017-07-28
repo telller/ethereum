@@ -86,18 +86,6 @@ class GraphTable extends Component {
           return <span className={classColor}>{text}</span>
         },
         width: '20%'
-      },
-      {
-        title: 'Purchase Address',
-        dataIndex: 'address',
-        sorter: (a, b) => {
-          if (a.address < b.address) {
-            return -1
-          } else if (a.address > b.address) {
-            return 1
-          } else return 0
-        },
-        width: '50%'
       }
     ]
     return (
