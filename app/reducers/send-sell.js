@@ -4,9 +4,9 @@ let initialDataStore = {
   error: false
 }
 
-const sendBuyReduser = (state = initialDataStore, action) => {
+const sendSellReduser = (state = initialDataStore, action) => {
   switch (action.type) {
-  case 'SEND_BUY_DOMAIN':
+  case 'SEND_SELL_DOMAIN':
     return Object.assign(
       {},
       state,
@@ -14,7 +14,7 @@ const sendBuyReduser = (state = initialDataStore, action) => {
         domain: action.payload
       }
     )
-  case 'SEND_BUY_PRICE':
+  case 'SEND_SELL_PRICE':
     return Object.assign(
       {},
       state,
@@ -22,7 +22,7 @@ const sendBuyReduser = (state = initialDataStore, action) => {
         price: action.payload
       }
     )
-  case 'SEND_BUY_ERROR':
+  case 'SEND_SELL_ERROR':
     return Object.assign(
       {},
       state,
@@ -34,4 +34,4 @@ const sendBuyReduser = (state = initialDataStore, action) => {
   return state
 }
 
-export default sendBuyReduser
+export default sendSellReduser

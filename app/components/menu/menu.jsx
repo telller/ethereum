@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Icon, Modal, Button } from 'antd'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import Faq from '../faq/faq.jsx'
 import Sell from '../sell/sell.jsx'
 import './menu.styl'
@@ -15,6 +17,11 @@ class MainMenu extends Component {
     }
   }
   clickSell () {
+    let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
+    let xhr = new XHR()
+    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA/formResponse?ifq&entry.1842149868=' + this.props.contactInfo.name + '&entry.1596816766=' + this.props.contactInfo.mail + '&entry.873897670=' + this.props.contactInfo.comment + '&entry.1585848839=' + this.props.dataSell.domain + '&entry.255403866=' + this.props.dataSell.price + '&submit=Submit', true)
+    xhr.send()
+
     this.setState({
       visibleSell: !this.state.visibleSell
     })
@@ -45,7 +52,7 @@ class MainMenu extends Component {
           <img src={'../../../dist/media/' + (this.state.menuFold ? 'menu-icon-close.png' : 'menu-icon.png')} alt='Menu' />
         </div>
         <div className={'all-menu-items ' + (this.state.menuFold ? null : 'menu-unfold')}>
-          <div className='menu-item' onClick={() => this.clickSell()}>
+          <div className='menu-item' onClick={() => { this.setState({ visibleSell: true }) }}>
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
 
@@ -62,7 +69,7 @@ class MainMenu extends Component {
           title='Sell Names:'
           className='sell-modal'
           width={400}
-          onCancel={() => this.clickSell()}
+          onCancel={() => { this.setState({ visibleSell: false }) }}
           visible={this.state.visibleSell}
           footer={
             <div onClick={() => this.clickSell()}><Icon type='shopping-cart' /> | Sell</div>
@@ -97,4 +104,25 @@ class MainMenu extends Component {
   }
 }
 
-export default MainMenu
+MainMenu.propTypes = {
+  dataSell: PropTypes.object,
+  contactInfo: PropTypes.object
+}
+
+const mapStateToProps = state => {
+  return {
+    dataSell: state.sendSell,
+    contactInfo: state.contactInfo
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+
+}
+
+const component = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MainMenu)
+
+export default component

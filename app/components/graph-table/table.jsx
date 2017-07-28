@@ -36,10 +36,9 @@ class GraphTable extends Component {
   }
 
   clickBuy () {
-    const la = 'la'
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + this.props.dataSend.name + '&entry.1387721178=' + this.props.dataSend.mail + '&entry.1522767390=' + this.props.dataSend.comment + '&entry.1493658382=' + this.props.dataSend.domain + '&entry.1168806703=' + this.props.dataSend.price + '&submit=Submit', true)
+    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + this.props.contactInfo.name + '&entry.1387721178=' + this.props.contactInfo.mail + '&entry.1522767390=' + this.props.contactInfo.comment + '&entry.1493658382=' + this.props.dataSend.domain + '&entry.1168806703=' + this.props.dataSend.price + '&submit=Submit', true)
     xhr.send()
 
     this.setState({
@@ -134,14 +133,16 @@ class GraphTable extends Component {
 GraphTable.propTypes = {
   data: PropTypes.array,
   dataSend: PropTypes.object,
-  findDomain: PropTypes.string
+  findDomain: PropTypes.string,
+  contactInfo: PropTypes.object
 }
 
 const mapStateToProps = state => {
   return {
     data: state.data.filter(item => item.name.search(state.findDomain) !== -1),
     findDomain: state.findDomain,
-    dataSend: state.sendBuy
+    dataSend: state.sendBuy,
+    contactInfo: state.contactInfo
   }
 }
 

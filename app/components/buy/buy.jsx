@@ -15,29 +15,29 @@ class Buy extends Component {
   }
   
   changeName (e) {
-    this.props.dataBuy(e.target.value, 'SEND_BUY_NAME')
+    this.props.send(e.target.value, 'CONTACT_NAME')
     this.setState({
       valueName: e.target.value
     })
   }
 
   changeMail (e) {
-    this.props.dataBuy(e.target.value, 'SEND_BUY_MAIL')
+    this.props.send(e.target.value, 'CONTACT_MAIL')
     this.setState({
       valueMail: e.target.value
     })
   }
 
   changeComment (e) {
-    this.props.dataBuy(e.target.value, 'SEND_BUY_COMMENT')
+    this.props.send(e.target.value, 'CONTACT_COMMENT')
     this.setState({
       valueComment: e.target.value
     })
   }
 
   componentWillMount () {
-    this.props.dataBuy(this.props.data.name, 'SEND_BUY_DOMAIN')
-    this.props.dataBuy(this.props.data.price, 'SEND_BUY_PRICE')
+    this.props.send(this.props.data.name, 'SEND_BUY_DOMAIN')
+    this.props.send(this.props.data.price, 'SEND_BUY_PRICE')
   }
 
   componentWillReceiveProps (visible) {
@@ -81,17 +81,22 @@ class Buy extends Component {
 }
 
 Buy.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  dataSend: PropTypes.object,
+  contactInfo: PropTypes.object,
+  send: PropTypes.func,
+  visible: PropTypes.bool
 }
 
 const mapStateToProps = state => {
   return {
-    dataSend: state.sendBuy
+    dataSend: state.sendBuy,
+    contactInfo: state.contactInfo
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  dataBuy: (data, type) => {
+  send: (data, type) => {
     dispatch({
       type,
       payload: data
