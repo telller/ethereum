@@ -1,4 +1,4 @@
-let data = [
+let initialDataStore = [
   {name: 'marilena', price: 0.5, address: '0xf1d184c1a3032f7586261bea6ee5c2b18ac247fc'},
   {name: 'accountreceivable', price: 0.7, address: '0x123lqowemqwo4e012i'},
   {name: 'erikamustermann', price: 0.4, address: '0x123lqowemqwo4e012i'},
@@ -101,10 +101,9 @@ let data = [
   {name: 'Lisbeth', price: 0.9, address: '0x123lqowemqwo4e012i'}
 ]
 
-let initialDataStore = []
-data.map((item, index) => {
-  initialDataStore.push({key: index, name: item.name.toLowerCase(), price: item.price.toFixed(1)})
-})
+initialDataStore = initialDataStore.map((item, index) => (
+  {key: index, name: item.name.toLowerCase(), price: item.price.toFixed(1)}
+)).sort((a, b) => b.price - a.price)
 
 const dataReducer = (state = initialDataStore, action) => {
   switch (action.type) {
