@@ -27,6 +27,7 @@ class GraphTable extends Component {
       clickBuy: false,
       selectBuy: null
     }
+    this.clickBuy = this.clickBuy.bind(this)
   }
 
   changeSizePage (e) {
@@ -40,10 +41,12 @@ class GraphTable extends Component {
     let xhr = new XHR()
     xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + this.props.contactInfo.name + '&entry.1387721178=' + this.props.contactInfo.mail + '&entry.1522767390=' + this.props.contactInfo.comment + '&entry.1493658382=' + this.props.dataSend.domain + '&entry.1168806703=' + this.props.dataSend.price + '&submit=Submit', true)
     xhr.send()
-
-    this.setState({
-      clickBuy: !this.state.clickBuy
+    Modal.success({
+      title: 'Success',
+      content: 'Our team will follow-up within next 24 hours',
+      okText: 'OK'
     })
+    this.setState({ isBuyModalVisible: !this.state.isBuyModalVisible })
   }
 
   render () {
@@ -53,29 +56,22 @@ class GraphTable extends Component {
         title: 'Buy',
         dataIndex: 'buy',
         width: '13%',
-        onCellClick: record => {
+        selectBuy: selectBuy => {
           this.setState({
-            selectBuy: record,
-            clickBuy: !this.state.clickBuy
+            selectBuy,
+            isBuyModalVisible: !this.state.isBuyModalVisible
           })
         },
-        render: () => {
-          return (<div className='buy'>
+        render: () => (
+          <div className='buy'>
             <Icon type='shopping-cart' />
           </div>
           )
-        }
       },
       {
         title: '.eht Name',
         dataIndex: 'name',
-        sorter: (a, b) => {
-          if (a.name < b.name) {
-            return -1
-          } else if (a.name > b.name) {
-            return 1
-          } else return 0
-        },
+        sorter: (a, b) => a.name < b.name ? -1 : a.name > b.name,
         width: '30%'
       },
       {
@@ -84,35 +80,43 @@ class GraphTable extends Component {
         sorter: (a, b) => a.price - b.price,
         render: text => {
           let classColor = 'defaultCell '
-          if (text >= 5000) {classColor += 'bgPrice5000'}
-          else if (text >= 1000) {classColor += 'bgPrice1000'}
-          else if (text >= 100) {classColor += 'bgPrice100'}
-          else if (text >= 10) {classColor += 'bgPrice10'}
+          if (text >= 5000) {
+            classColor += 'bgPrice5000'
+          } else if (text >= 1000) {
+            classColor += 'bgPrice1000'
+          } else if (text >= 100) {
+            classColor += 'bgPrice100'
+          } else if (text >= 10) {
+            classColor += 'bgPrice10'
+          }
           return <span className={classColor}>{text}</span>
         },
         width: '20%'
       }
     ]
+    // TODO: Replace clickBuy to isBuyModalVisible. setState({clickBuy})
     return (
       <Row id='graphTable'>
         <Col className='body'>
-          <Modal
-            className='buy-modal'
-            width={400}
-            onCancel={() => { this.setState({clickBuy: false}) }}
-            visible={this.state.clickBuy}
-            title='Buy ENS:'
-            footer={
-              <div onClick={() => this.clickBuy()}><Icon type='shopping-cart' /> | Buy</div>
-            }
-          >
-            <Buy data={this.state.selectBuy} visible={this.state.clickBuy} />
-          </Modal>
+          {this.state.isBuyModalVisible &&
+            <Modal
+              className='buy-modal'
+              width={400}
+              visible
+              onCancel={() => { this.setState({isBuyModalVisible: false}) }}
+              title='Buy ENS:'
+              footer={
+                <div onClick={this.isBuyModalVisible}><Icon type='shopping-cart' /> | Buy</div>
+              }
+            >
+              <Buy data={this.state.selectBuy} visible={this.state.isBuyModalVisible} />
+            </Modal>
+          }
           <Table
             size='small'
             className='tableDomains'
             columns={columns}
-            rowKey={record => record.registered}
+            rowKey='name'
             dataSource={this.props.data}
             pagination={this.state.pagination}
           />
@@ -137,22 +141,13 @@ GraphTable.propTypes = {
   contactInfo: PropTypes.object
 }
 
-const mapStateToProps = state => {
-  return {
-    data: state.data.filter(item => item.name.search(state.findDomain) !== -1),
-    findDomain: state.findDomain,
-    dataSend: state.sendBuy,
-    contactInfo: state.contactInfo
-  }
-}
+const mapStateToProps = state => ({
+  data: state.data.filter(item => item.name.search(state.findDomain) !== -1),
+  findDomain: state.findDomain,
+  dataSend: state.sendBuy,
+  contactInfo: state.contactInfo
+})
 
-const mapDispatchToProps = dispatch => {
-
-}
-
-const component = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GraphTable)
+const component = connect(mapStateToProps, ({}))(GraphTable)
 
 export default component

@@ -21,6 +21,11 @@ class MainMenu extends Component {
     let xhr = new XHR()
     xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA/formResponse?ifq&entry.1842149868=' + this.props.contactInfo.name + '&entry.1596816766=' + this.props.contactInfo.mail + '&entry.873897670=' + this.props.contactInfo.comment + '&entry.1585848839=' + this.props.dataSell.domain + '&entry.255403866=' + this.props.dataSell.price + '&submit=Submit', true)
     xhr.send()
+    Modal.success({
+      title: 'Success',
+      content: 'Our team will follow-up within next 24 hours',
+      okText: 'OK'
+    })
 
     this.setState({
       visibleSell: !this.state.visibleSell
@@ -109,20 +114,11 @@ MainMenu.propTypes = {
   contactInfo: PropTypes.object
 }
 
-const mapStateToProps = state => {
-  return {
-    dataSell: state.sendSell,
-    contactInfo: state.contactInfo
-  }
-}
+const mapStateToProps = state => ({
+  dataSell: state.sendSell,
+  contactInfo: state.contactInfo
+})
 
-const mapDispatchToProps = dispatch => {
-
-}
-
-const component = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainMenu)
+const component = connect(mapStateToProps, () => ({}))(MainMenu)
 
 export default component

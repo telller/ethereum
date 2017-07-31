@@ -1,12 +1,12 @@
+import { Input, InputNumber, Icon, Row, Col } from 'antd'
 import React, { Component } from 'react'
-import {Input, InputNumber, Icon, Row, Col, Button} from 'antd'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import './sell.styl'
 
 class Sell extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       countSellDomain: 1,
       valueName: '',
@@ -17,9 +17,7 @@ class Sell extends Component {
   }
 
   clickSellAdd () {
-    this.setState({
-      countSellDomain: this.state.countSellDomain + 1
-    })
+    this.setState({countSellDomain: this.state.countSellDomain + 1})
   }
 
   changeName (e) {
@@ -57,7 +55,7 @@ class Sell extends Component {
     })
   }
 
-  componentWillReceiveProps (visible) {
+  componentWillReceiveProps () {
     if (this.props.visible) {
       return
     }
@@ -96,7 +94,7 @@ class Sell extends Component {
             </Col>
           </Row>
           {/* ))
-          //} 
+          // }
           <Row className='btn-add'>
             <Button shape='circle' icon='plus' onClick={() => this.clickSellAdd()} />
           </Row> */}
@@ -104,7 +102,7 @@ class Sell extends Component {
             placeholder='Comment'
             autosize={{ minRows: 4, maxRows: 6 }}
             value={this.state.valueComment}
-            onChange={e => this.changeComment(e)}
+            onChange={this.changeComment}
           />
         </div>
       </div>
@@ -113,31 +111,24 @@ class Sell extends Component {
 }
 
 Sell.propTypes = {
-  dataSend: PropTypes.object,
-  contactInfo: PropTypes.object,
   send: PropTypes.func,
   visible: PropTypes.bool
 }
 
-const mapStateToProps = state => {
-  return {
-    dataSend: state.sendSell,
-    contactInfo: state.contactInfo
-  }
-}
+const mapStateToProps = state => ({
+  dataSend: state.sendSell,
+  contactInfo: state.contactInfo
+})
 
 const mapDispatchToProps = dispatch => ({
-  send: (data, type) => {
+  send: (payload, type) => {
     dispatch({
       type,
-      payload: data
+      payload
     })
   }
 })
 
-const component = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Sell)
+const component = connect(mapStateToProps, mapDispatchToProps)(Sell)
 
 export default component
