@@ -24,10 +24,10 @@ class GraphTable extends Component {
           prev_page: 'Previous Page'
         }
       },
-      clickBuy: false,
+      isBuyModalVisible: false,
       selectBuy: null
     }
-    this.clickBuy = this.clickBuy.bind(this)
+    this.isBuyModalVisible = this.isBuyModalVisible.bind(this)
   }
 
   changeSizePage (e) {
@@ -36,7 +36,7 @@ class GraphTable extends Component {
     })
   }
 
-  clickBuy () {
+  isBuyModalVisible () {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
     xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + this.props.contactInfo.name + '&entry.1387721178=' + this.props.contactInfo.mail + '&entry.1522767390=' + this.props.contactInfo.comment + '&entry.1493658382=' + this.props.dataSend.domain + '&entry.1168806703=' + this.props.dataSend.price + '&submit=Submit', true)
@@ -56,9 +56,9 @@ class GraphTable extends Component {
         title: 'Buy',
         dataIndex: 'buy',
         width: '13%',
-        selectBuy: selectBuy => {
+        onCellClick: record => {
           this.setState({
-            selectBuy,
+            selectBuy: record,
             isBuyModalVisible: !this.state.isBuyModalVisible
           })
         },
