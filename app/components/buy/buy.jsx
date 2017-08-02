@@ -13,7 +13,7 @@ class Buy extends Component {
       valueComment: ''
     }
   }
-  
+
   changeName (e) {
     this.props.send(e.target.value, 'CONTACT_NAME')
     this.setState({

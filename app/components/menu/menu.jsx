@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Faq from '../faq/faq.jsx'
 import Sell from '../sell/sell.jsx'
+import Contact from '../contact/contact.jsx'
 import './menu.styl'
 
 class MainMenu extends Component {
@@ -39,6 +40,11 @@ class MainMenu extends Component {
   }
 
   clickContact () {
+    Modal.success({
+      title: 'Success',
+      content: 'Our team will follow-up within next 24 hours',
+      okText: 'OK'
+    })
     this.setState({
       visibleContact: !this.state.visibleContact
     })
@@ -61,7 +67,7 @@ class MainMenu extends Component {
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
 
-          <div className='menu-item' onClick={() => this.clickContact()}>
+          <div className='menu-item' onClick={() => { this.setState({ visibleContact: true }) }}>
             <div className='text'><Icon type='mail' />Contact Us<span className='dot' /></div>
           </div>
 
@@ -85,13 +91,14 @@ class MainMenu extends Component {
         <Modal
           title='Contact Us'
           width={400}
-          onCancel={() => this.clickContact()}
+          className='contact-modal'
+          onCancel={() => { this.setState({ visibleContact: false }) }}
           visible={this.state.visibleContact}
-          footer={[
-            <Button key='Ok' type='primary' size='large' onClick={() => this.clickContact()}>Ok</Button>
-          ]}
+          footer={
+            <div onClick={() => this.clickContact()}><Icon type='message' /> | Send</div>
+          }
         >
-          Contact Us
+          <Contact />
         </Modal>
         <Modal
           title='FAQ'

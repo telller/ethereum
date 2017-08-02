@@ -53,22 +53,6 @@ class GraphTable extends Component {
     const checkFind = this.props.data.filter(item => item.name.search(this.props.findDomain) !== -1).length > 0
     const columns = [
       {
-        title: 'Buy',
-        dataIndex: 'buy',
-        width: '13%',
-        onCellClick: record => {
-          this.setState({
-            selectBuy: record,
-            isBuyModalVisible: !this.state.isBuyModalVisible
-          })
-        },
-        render: () => (
-          <div className='buy'>
-            <Icon type='shopping-cart' />
-          </div>
-          )
-      },
-      {
         title: '.eht Name',
         dataIndex: 'name',
         sorter: (a, b) => a.name < b.name ? -1 : a.name > b.name,
@@ -92,6 +76,22 @@ class GraphTable extends Component {
           return <span className={classColor}>{text}</span>
         },
         width: '20%'
+      },
+      {
+        title: 'Buy',
+        dataIndex: 'buy',
+        width: '8%',
+        onCellClick: record => {
+          this.setState({
+            selectBuy: record,
+            isBuyModalVisible: !this.state.isBuyModalVisible
+          })
+        },
+        render: () => (
+          <div className='buy'>
+            <Icon type='shopping-cart' />
+          </div>
+        )
       }
     ]
     // TODO: Replace clickBuy to isBuyModalVisible. setState({clickBuy})
