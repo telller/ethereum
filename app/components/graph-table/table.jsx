@@ -6,8 +6,8 @@ import Buy from '../buy/buy.jsx'
 import './table.styl'
 
 class GraphTable extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       pagination: {
         pageSize: 20,
@@ -46,7 +46,7 @@ class GraphTable extends Component {
       content: 'Our team will follow-up within next 24 hours',
       okText: 'OK'
     })
-    this.setState({ isBuyModalVisible: !this.state.isBuyModalVisible })
+    this.setState({ isBuyModalVisible: false })
   }
 
   render () {
@@ -62,7 +62,10 @@ class GraphTable extends Component {
         title: 'Price (ETH)',
         dataIndex: 'price',
         sorter: (a, b) => a.price - b.price,
-        render: text => {
+        render: (text, selectBuy) => {
+          if (text === '0.0') {
+            return <a onClick={() => { this.setState({ isBuyModalVisible: true, selectBuy }) }}>Make offer</a>
+          }
           let classColor = 'defaultCell '
           if (text >= 5000) {
             classColor += 'bgPrice5000'
@@ -81,10 +84,10 @@ class GraphTable extends Component {
         title: 'Buy',
         dataIndex: 'buy',
         width: '8%',
-        onCellClick: record => {
+        onCellClick: selectBuy => {
           this.setState({
-            selectBuy: record,
-            isBuyModalVisible: !this.state.isBuyModalVisible
+            isBuyModalVisible: true,
+            selectBuy
           })
         },
         render: () => (
@@ -109,7 +112,7 @@ class GraphTable extends Component {
                 <div onClick={this.isBuyModalVisible}><Icon type='shopping-cart' /> | Buy</div>
               }
             >
-              <Buy data={this.state.selectBuy} visible={this.state.isBuyModalVisible} />
+              <Buy data={this.state.selectBuy} />
             </Modal>
           }
           <Table

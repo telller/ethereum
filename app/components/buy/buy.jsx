@@ -1,73 +1,64 @@
 import React, { Component } from 'react'
-import {Input, Icon} from 'antd'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import {Input, Icon} from 'antd'
 import './buy.styl'
 
 class Buy extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      isMakeOffer: props.data.price === '0.0',
+      valueMakeoffer: '',
+      valueComment: '',
       valueName: '',
-      valueMail: '',
-      valueComment: ''
+      valueMail: ''
     }
   }
-
+  componentWillMount () {
+    this.props.send(this.props.data.name, 'SEND_BUY_DOMAIN')
+    this.props.send(this.props.data.price, 'SEND_BUY_PRICE')
+  }
+  changeMakeoffer (e) {
+    this.props.send(e.target.value, 'CONTACT_MAKEOFFER')
+    this.setState({
+      valueMakeoffer: e.target.value
+    })
+  }
   changeName (e) {
     this.props.send(e.target.value, 'CONTACT_NAME')
     this.setState({
       valueName: e.target.value
     })
   }
-
   changeMail (e) {
     this.props.send(e.target.value, 'CONTACT_MAIL')
     this.setState({
       valueMail: e.target.value
     })
   }
-
   changeComment (e) {
     this.props.send(e.target.value, 'CONTACT_COMMENT')
     this.setState({
       valueComment: e.target.value
     })
   }
-
-  componentWillMount () {
-    this.props.send(this.props.data.name, 'SEND_BUY_DOMAIN')
-    this.props.send(this.props.data.price, 'SEND_BUY_PRICE')
-  }
-
-  componentWillReceiveProps (visible) {
-    if (this.props.visible) {
-      return
-    }
-    this.setState({
-      valueName: '',
-      valueMail: '',
-      valueComment: ''
-    })
-  }
-
   render () {
     return (
       <div id='buy'>
         <table className='table-domains'>
           <tbody>
-            {
-              <tr>
-                <td className='name-title'>.eth NAME:</td>
-                <td>{this.props.data.name}</td>
-                <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>
-              </tr>
-            }
+            <tr>
+              <td className='name-title'>.eth NAME:</td>
+              <td>{this.props.data.name}</td>
+              {this.state.isMakeOffer || <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>}
+            </tr>
           </tbody>
         </table>
         <div className='contact-form'>
-          <Input placeholder='Name' prefix={<Icon type='user' />} value={this.state.valueName} onChange={e => this.changeName(e)} />
-          <Input placeholder='Email' type='email' prefix={<Icon type='mail' />} value={this.state.valueMail} onChange={e => this.changeMail(e)} />
+          { this.state.isMakeOffer && <Input placeholder='Make offer' prefix={<Icon type='wallet' />} value={this.state.valueMakeoffer} onChange={this.changeMakeoffer} />}
+          <Input placeholder='Name' prefix={<Icon type='user' />} value={this.state.valueName} onChange={this.changeName} />
+          <Input placeholder='Email' type='email' prefix={<Icon type='mail' />} value={this.state.valueMail} onChange={this.changeMail} />
           <Input.TextArea
             placeholder='Comment'
             autosize={{ minRows: 4, maxRows: 6 }}
@@ -82,26 +73,16 @@ class Buy extends Component {
 
 Buy.propTypes = {
   data: PropTypes.object,
-  dataSend: PropTypes.object,
-  contactInfo: PropTypes.object,
-  send: PropTypes.func,
-  visible: PropTypes.bool
+  send: PropTypes.func
 }
 
-const mapStateToProps = state => {
-  return {
-    dataSend: state.sendBuy,
-    contactInfo: state.contactInfo
-  }
-}
+const mapStateToProps = state => ({
+  contactInfo: state.contactInfo,
+  dataSend: state.sendBuy
+})
 
 const mapDispatchToProps = dispatch => ({
-  send: (data, type) => {
-    dispatch({
-      type,
-      payload: data
-    })
-  }
+  send: (payload, type) => { dispatch({ type, payload }) }
 })
 
 const component = connect(

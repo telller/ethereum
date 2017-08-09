@@ -1,7 +1,7 @@
 let initialDataStore = [
-  {name: 'marilena', price: 0.5, address: '0xf1d184c1a3032f7586261bea6ee5c2b18ac247fc'},
-  {name: 'accountreceivable', price: 0.7, address: '0x123lqowemqwo4e012i'},
-  {name: 'erikamustermann', price: 0.4, address: '0x123lqowemqwo4e012i'},
+  {name: 'marilena', price: 0, address: '0xf1d184c1a3032f7586261bea6ee5c2b18ac247fc'},
+  {name: 'accountreceivable', price: 0, address: '0x123lqowemqwo4e012i'},
+  {name: 'erikamustermann', price: 0, address: '0x123lqowemqwo4e012i'},
   {name: 'mannheim', price: 0.5, address: '0x123lqowemqwo4e012i'},
   {name: 'loanpayback', price: 0.7, address: '0x123lqowemqwo4e012i'},
   {name: 'moremoremore', price: 0.1, address: '0x123lqowemqwo4e012i'},
