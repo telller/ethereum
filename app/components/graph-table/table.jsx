@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import { Row, Col, Icon, Table, Radio, Modal } from 'antd'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Buy from '../buy/buy.jsx'
@@ -63,7 +63,7 @@ class GraphTable extends Component {
         dataIndex: 'price',
         sorter: (a, b) => a.price - b.price,
         render: (text, selectBuy) => {
-          if (text === '0.0') {
+          if (selectBuy.isMakeOffer) {
             return <a onClick={() => { this.setState({ isBuyModalVisible: true, selectBuy }) }}>Make offer</a>
           }
           let classColor = 'defaultCell '

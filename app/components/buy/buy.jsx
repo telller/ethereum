@@ -8,12 +8,16 @@ class Buy extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isMakeOffer: props.data.price === '0.0',
+      isMakeOffer: props.data.isMakeOffer,
       valueMakeoffer: '',
       valueComment: '',
       valueName: '',
       valueMail: ''
     }
+    this.changeMakeoffer = this.changeMakeoffer.bind(this)
+    this.changeComment = this.changeComment.bind(this)
+    this.changeMail = this.changeMail.bind(this)
+    this.changeName = this.changeName.bind(this)
   }
   componentWillMount () {
     this.props.send(this.props.data.name, 'SEND_BUY_DOMAIN')
