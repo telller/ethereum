@@ -25,9 +25,9 @@ class GraphTable extends Component {
         }
       },
       isBuyModalVisible: false,
-      selectBuy: null
+      selected: null
     }
-    this.isBuyModalVisible = this.isBuyModalVisible.bind(this)
+    this.buy = this.buy.bind(this)
   }
 
   changeSizePage (e) {
@@ -36,10 +36,10 @@ class GraphTable extends Component {
     })
   }
 
-  isBuyModalVisible () {
+  buy (values) {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + this.props.contactInfo.name + '&entry.1387721178=' + this.props.contactInfo.mail + '&entry.1522767390=' + this.props.contactInfo.comment + '&entry.1493658382=' + this.props.dataSend.domain + '&entry.1168806703=' + this.props.dataSend.price + '&submit=Submit', true)
+    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + values.name + '&entry.1387721178=' + values.email + '&entry.1522767390=' + values.comment + '&entry.1493658382=' + values.domain + '&entry.1168806703=' + values.price + '&submit=Submit', true)
     xhr.send()
     Modal.success({
       title: 'Success',
@@ -62,9 +62,9 @@ class GraphTable extends Component {
         title: 'Price (ETH)',
         dataIndex: 'price',
         sorter: (a, b) => a.price - b.price,
-        render: (text, selectBuy) => {
-          if (selectBuy.isMakeOffer) {
-            return <a onClick={() => { this.setState({ isBuyModalVisible: true, selectBuy }) }}>Make offer</a>
+        render: (text, selected) => {
+          if (selected.isMakeOffer) {
+            return <a onClick={() => { this.setState({ isBuyModalVisible: true, selected }) }}>Make offer</a>
           }
           let classColor = 'defaultCell '
           if (text >= 5000) {
@@ -84,10 +84,10 @@ class GraphTable extends Component {
         title: 'Buy',
         dataIndex: 'buy',
         width: '8%',
-        onCellClick: selectBuy => {
+        onCellClick: selected => {
           this.setState({
             isBuyModalVisible: true,
-            selectBuy
+            selected
           })
         },
         render: () => (
@@ -97,24 +97,13 @@ class GraphTable extends Component {
         )
       }
     ]
-    // TODO: Replace clickBuy to isBuyModalVisible. setState({clickBuy})
+
     return (
       <Row id='graphTable'>
         <Col className='body'>
-          {this.state.isBuyModalVisible &&
-            <Modal
-              className='buy-modal'
-              width={400}
-              visible
-              onCancel={() => { this.setState({isBuyModalVisible: false}) }}
-              title='Buy ENS:'
-              footer={
-                <div onClick={this.isBuyModalVisible}><Icon type='shopping-cart' /> | Buy</div>
-              }
-            >
-              <Buy data={this.state.selectBuy} />
-            </Modal>
-          }
+          {this.state.isBuyModalVisible && (
+            <Buy onOk={this.buy} onCancel={() => this.setState({isBuyModalVisible: false})} data={this.state.selected} />
+          )}
           <Table
             size='small'
             className='tableDomains'
@@ -138,10 +127,8 @@ class GraphTable extends Component {
 }
 
 GraphTable.propTypes = {
-  data: PropTypes.array,
-  dataSend: PropTypes.object,
   findDomain: PropTypes.string,
-  contactInfo: PropTypes.object
+  data: PropTypes.array
 }
 
 const mapStateToProps = state => ({

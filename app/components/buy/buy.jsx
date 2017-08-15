@@ -1,97 +1,93 @@
+import { Form, Icon, Input, Modal } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {Input, Icon} from 'antd'
 import './buy.styl'
+const FormItem = Form.Item
 
 class Buy extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isMakeOffer: props.data.isMakeOffer,
-      valueMakeoffer: '',
-      valueComment: '',
-      valueName: '',
-      valueMail: ''
+      isMakeOffer: props.data.isMakeOffer
     }
-    this.changeMakeoffer = this.changeMakeoffer.bind(this)
-    this.changeComment = this.changeComment.bind(this)
-    this.changeMail = this.changeMail.bind(this)
-    this.changeName = this.changeName.bind(this)
+    this.onOk = this.onOk.bind(this)
   }
-  componentWillMount () {
-    this.props.send(this.props.data.name, 'SEND_BUY_DOMAIN')
-    this.props.send(this.props.data.price, 'SEND_BUY_PRICE')
-  }
-  changeMakeoffer (e) {
-    this.props.send(e.target.value, 'CONTACT_MAKEOFFER')
-    this.setState({
-      valueMakeoffer: e.target.value
-    })
-  }
-  changeName (e) {
-    this.props.send(e.target.value, 'CONTACT_NAME')
-    this.setState({
-      valueName: e.target.value
-    })
-  }
-  changeMail (e) {
-    this.props.send(e.target.value, 'CONTACT_MAIL')
-    this.setState({
-      valueMail: e.target.value
-    })
-  }
-  changeComment (e) {
-    this.props.send(e.target.value, 'CONTACT_COMMENT')
-    this.setState({
-      valueComment: e.target.value
+  onOk () {
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        values.price = values.price || this.props.data.price
+        values.domain = this.props.data.name
+        this.props.onOk(values)
+      }
     })
   }
   render () {
     return (
-      <div id='buy'>
-        <table className='table-domains'>
-          <tbody>
-            <tr>
-              <td className='name-title'>.eth NAME:</td>
-              <td>{this.props.data.name}</td>
-              {this.state.isMakeOffer || <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>}
-            </tr>
-          </tbody>
-        </table>
-        <div className='contact-form'>
-          { this.state.isMakeOffer && <Input placeholder='Make offer' prefix={<Icon type='wallet' />} value={this.state.valueMakeoffer} onChange={this.changeMakeoffer} />}
-          <Input placeholder='Name' prefix={<Icon type='user' />} value={this.state.valueName} onChange={this.changeName} />
-          <Input placeholder='Email' type='email' prefix={<Icon type='mail' />} value={this.state.valueMail} onChange={this.changeMail} />
-          <Input.TextArea
-            placeholder='Comment'
-            autosize={{ minRows: 4, maxRows: 6 }}
-            value={this.state.valueComment}
-            onChange={e => this.changeComment(e)}
-          />
+      <Modal
+        className='buy-modal'
+        width={400}
+        visible
+        title='Buy ENS:'
+        onCancel={this.props.onCancel}
+        footer={
+          <div onClick={this.onOk}><Icon type='shopping-cart' /> | Buy</div>
+        }
+      >
+        <div id='buy'>
+          <table className='table-domains'>
+            <tbody>
+              <tr>
+                <td className='name-title'>.eth NAME:</td>
+                <td>{this.props.data.name}</td>
+                {this.state.isMakeOffer || <td className='price'>{this.props.data.price}<span className='eth'>eth</span></td>}
+              </tr>
+            </tbody>
+          </table>
+          <div className='contact-form'>
+            <Form>
+              {this.state.isMakeOffer && <FormItem>
+                {this.props.form.getFieldDecorator('price', {
+                  rules: [{ required: true, message: 'Please input your price!' }]
+                })(<Input placeholder='Price' prefix={<Icon type='wallet' />} />)}
+              </FormItem>}
+              <FormItem>
+                {this.props.form.getFieldDecorator('name', {
+                  rules: [{ required: true, message: 'Please input your name!' }]
+                })(<Input placeholder='Name' prefix={<Icon type='user' />} />)}
+              </FormItem>
+            </Form>
+            <Form>
+              <FormItem>
+                {this.props.form.getFieldDecorator('email', {
+                  rules: [{ required: true, message: 'Please input your email!' }]
+                })(<Input placeholder='Email' type='email' prefix={<Icon type='mail' />} />)}
+              </FormItem>
+            </Form>
+            <Form>
+              <FormItem>
+                {this.props.form.getFieldDecorator('comment')(
+                  <Input.TextArea placeholder='Comment' autosize={{ minRows: 4, maxRows: 6 }} />
+                )}
+              </FormItem>
+            </Form>
+          </div>
         </div>
-      </div>
+      </Modal>
     )
   }
 }
-
 Buy.propTypes = {
+  form: React.PropTypes.object,
+  onCancel: PropTypes.func,
   data: PropTypes.object,
-  send: PropTypes.func
+  onOk: PropTypes.func
 }
-
 const mapStateToProps = state => ({
   contactInfo: state.contactInfo,
   dataSend: state.sendBuy
 })
-
 const mapDispatchToProps = dispatch => ({
   send: (payload, type) => { dispatch({ type, payload }) }
 })
-
-const component = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Buy)
-
-export default component
+export default Form.create()(connect(mapStateToProps, mapDispatchToProps)(Buy))
