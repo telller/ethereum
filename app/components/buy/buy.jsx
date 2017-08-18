@@ -1,4 +1,4 @@
-import { Form, Icon, Input, Modal } from 'antd'
+import { Form, Icon, Input, InputNumber, Modal } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -49,7 +49,7 @@ class Buy extends Component {
               {this.state.isMakeOffer && <FormItem>
                 {this.props.form.getFieldDecorator('price', {
                   rules: [{ required: true, message: 'Please input your price!' }]
-                })(<Input placeholder='Price' prefix={<Icon type='wallet' />} />)}
+                })(<InputNumber placeholder='Price' prefix={<Icon type='wallet' />} min={0.01} step={0.01} />)}
               </FormItem>}
               <FormItem>
                 {this.props.form.getFieldDecorator('name', {
@@ -60,8 +60,11 @@ class Buy extends Component {
             <Form>
               <FormItem>
                 {this.props.form.getFieldDecorator('email', {
-                  rules: [{ required: true, message: 'Please input your email!' }]
-                })(<Input placeholder='Email' type='email' prefix={<Icon type='mail' />} />)}
+                  rules: [
+                    { type: 'email', message: 'The input is not valid E-mail!' },
+                    { required: true, message: 'Please input your E-mail!' }
+                  ]
+                })(<Input placeholder='E-mail' type='email' prefix={<Icon type='mail' />} />)}
               </FormItem>
             </Form>
             <Form>

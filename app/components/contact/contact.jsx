@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import './contact.styl'
-const FormItem = Form.Item
 
 class Contact extends Component {
   constructor () {
@@ -32,25 +31,26 @@ class Contact extends Component {
         <div id='contact'>
           <div className='form'>
             <Form>
-              <FormItem>
+              <Form.Item>
                 {this.props.form.getFieldDecorator('name', {
                   rules: [{ required: true, message: 'Please input your name!' }]
                 })(<Input placeholder='Name' prefix={<Icon type='user' />} />)}
-              </FormItem>
-            </Form>
-            <Form>
-              <FormItem>
+              </Form.Item>
+
+              <Form.Item>
                 {this.props.form.getFieldDecorator('email', {
-                  rules: [{ required: true, message: 'Please input your email!' }]
-                })(<Input placeholder='Email' type='email' prefix={<Icon type='mail' />} />)}
-              </FormItem>
-            </Form>
-            <Form>
-              <FormItem>
+                  rules: [
+                    { type: 'email', message: 'The input is not valid E-mail!' },
+                    { required: true, message: 'Please input your E-mail!' }
+                  ]
+                })(<Input placeholder='E-mail' type='email' prefix={<Icon type='mail' />} />)}
+              </Form.Item>
+
+              <Form.Item>
                 {this.props.form.getFieldDecorator('comment')(
                   <Input.TextArea placeholder='Comment' autosize={{ minRows: 4, maxRows: 6 }} />
                   )}
-              </FormItem>
+              </Form.Item>
             </Form>
           </div>
         </div>

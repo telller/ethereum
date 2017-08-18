@@ -11,17 +11,25 @@ class MainMenu extends Component {
   constructor () {
     super()
     this.state = {
-      isContactVisible: false,
-      visibleSell: false,
-      visibleFaq: false,
-      menuFold: false
+      isContactModalVisible: false,
+      isSellModalVisible: false,
+      isFAQModalVisible: false,
+      isFoldingMenu: false
     }
     this.contact = this.contact.bind(this)
+    this.sell = this.sell.bind(this)
   }
-  clickSell () {
+  sell (values) {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA/formResponse?ifq&entry.1842149868=' + this.props.contactInfo.name + '&entry.1596816766=' + this.props.contactInfo.mail + '&entry.873897670=' + this.props.contactInfo.comment + '&entry.1585848839=' + this.props.dataSell.domain + '&entry.255403866=' + this.props.dataSell.price + '&submit=Submit', true)
+    const data = 'https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA/formResponse?ifq&entry.1842149868=' +
+      encodeURIComponent(values.name) +
+      '&entry.1596816766=' + encodeURIComponent(values.email) +
+      '&entry.873897670=' + encodeURIComponent(values.comment) +
+      '&entry.1585848839=' + encodeURIComponent(values.domain) +
+      '&entry.255403866=' + encodeURIComponent(values.price) +
+      '&submit=Submit'
+    xhr.open('GET', data, true)
     xhr.send()
     Modal.success({
       title: 'Success',
@@ -30,13 +38,13 @@ class MainMenu extends Component {
     })
 
     this.setState({
-      visibleSell: !this.state.visibleSell
+      isSellModalVisible: !this.state.isSellModalVisible
     })
   }
 
-  clickFAQ () {
+  faq () {
     this.setState({
-      visibleFaq: !this.state.visibleFaq
+      isFAQModalVisible: !this.state.isFAQModalVisible
     })
   }
 
@@ -48,58 +56,48 @@ class MainMenu extends Component {
       okText: 'OK'
     })
     this.setState({
-      isContactVisible: !this.state.isContactVisible
+      isContactModalVisible: !this.state.isContactModalVisible
     })
   }
 
-  clickMenu () {
+  menu () {
     this.setState({
-      menuFold: !this.state.menuFold
+      isFoldingMenu: !this.state.isFoldingMenu
     })
   }
 
   render () {
     return (
       <div id='menu'>
-        <div className='menu-fold' onClick={() => this.clickMenu()}>
-          <img src={'../../../dist/media/' + (this.state.menuFold ? 'menu-icon-close.png' : 'menu-icon.png')} alt='Menu' />
+        <div className='menu-fold' onClick={() => this.menu()}>
+          <img src={'../../../dist/media/' + (this.state.isFoldingMenu ? 'menu-icon-close.png' : 'menu-icon.png')} alt='Menu' />
         </div>
-        <div className={'all-menu-items ' + (this.state.menuFold ? null : 'menu-unfold')}>
-          <div className='menu-item' onClick={() => { this.setState({ visibleSell: true }) }}>
+        <div className={'all-menu-items ' + (this.state.isFoldingMenu ? null : 'menu-unfold')}>
+          <div className='menu-item' onClick={() => { this.setState({ isSellModalVisible: true }) }}>
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
-          <div className='menu-item' onClick={() => { this.setState({ isContactVisible: true }) }}>
+          <div className='menu-item' onClick={() => { this.setState({ isContactModalVisible: true }) }}>
             <div className='text'><Icon type='mail' />Contact Us<span className='dot' /></div>
           </div>
-          <div className='menu-item' onClick={() => this.clickFAQ()}>
+          <div className='menu-item' onClick={() => this.faq()}>
             <div className='text'><Icon type='question-circle-o' />faq</div>
           </div>
         </div>
-
-        <Modal
-          title='Sell Names:'
-          className='sell-modal'
-          width={400}
-          onCancel={() => { this.setState({ visibleSell: false }) }}
-          visible={this.state.visibleSell}
-          footer={
-            <div onClick={() => this.clickSell()}><Icon type='shopping-cart' /> | Sell</div>
-          }
-        >
-          <Sell visible={this.state.visibleSell} />
-        </Modal>
         {
-          this.state.isContactVisible && (
-            <Contact onOk={this.contact} onCancel={() => this.setState({isContactVisible: false})} />
+          this.state.isSellModalVisible && (
+            <Sell onOk={this.sell} onCancel={() => this.setState({isSellModalVisible: false})} />
+          ) ||
+          this.state.isContactModalVisible && (
+            <Contact onOk={this.contact} onCancel={() => this.setState({isContactModalVisible: false})} />
           )
         }
         <Modal
           title='FAQ'
           width={600}
-          onCancel={() => this.clickFAQ()}
-          visible={this.state.visibleFaq}
+          onCancel={() => this.faq()}
+          visible={this.state.isFAQModalVisible}
           footer={[
-            <Button key='Ok' type='primary' size='large' onClick={() => this.clickFAQ()}>Ok</Button>
+            <Button key='Ok' type='primary' size='large' onClick={() => this.faq()}>Ok</Button>
           ]}
         >
           <Faq />
