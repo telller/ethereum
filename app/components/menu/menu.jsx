@@ -11,11 +11,12 @@ class MainMenu extends Component {
   constructor () {
     super()
     this.state = {
+      isContactVisible: false,
       visibleSell: false,
       visibleFaq: false,
-      visibleContact: false,
       menuFold: false
     }
+    this.contact = this.contact.bind(this)
   }
   clickSell () {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
@@ -39,14 +40,15 @@ class MainMenu extends Component {
     })
   }
 
-  clickContact () {
+  contact () {
+  // TODO: Check save data in excel
     Modal.success({
       title: 'Success',
       content: 'Our team will follow-up within next 24 hours',
       okText: 'OK'
     })
     this.setState({
-      visibleContact: !this.state.visibleContact
+      isContactVisible: !this.state.isContactVisible
     })
   }
 
@@ -66,11 +68,9 @@ class MainMenu extends Component {
           <div className='menu-item' onClick={() => { this.setState({ visibleSell: true }) }}>
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
-
-          <div className='menu-item' onClick={() => { this.setState({ visibleContact: true }) }}>
+          <div className='menu-item' onClick={() => { this.setState({ isContactVisible: true }) }}>
             <div className='text'><Icon type='mail' />Contact Us<span className='dot' /></div>
           </div>
-
           <div className='menu-item' onClick={() => this.clickFAQ()}>
             <div className='text'><Icon type='question-circle-o' />faq</div>
           </div>
@@ -88,18 +88,11 @@ class MainMenu extends Component {
         >
           <Sell visible={this.state.visibleSell} />
         </Modal>
-        <Modal
-          title='Contact Us'
-          width={400}
-          className='contact-modal'
-          onCancel={() => { this.setState({ visibleContact: false }) }}
-          visible={this.state.visibleContact}
-          footer={
-            <div onClick={() => this.clickContact()}><Icon type='message' /> | Send</div>
-          }
-        >
-          <Contact />
-        </Modal>
+        {
+          this.state.isContactVisible && (
+            <Contact onOk={this.contact} onCancel={() => this.setState({isContactVisible: false})} />
+          )
+        }
         <Modal
           title='FAQ'
           width={600}
