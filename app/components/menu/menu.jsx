@@ -6,6 +6,8 @@ import Faq from '../faq/faq.jsx'
 import Sell from '../sell/sell.jsx'
 import Contact from '../contact/contact.jsx'
 import './menu.styl'
+import menu_icon from '../../../dist/media/menu-icon.png'
+import menu_icon_close from '../../../dist/media/menu-icon-close.png'
 
 class MainMenu extends Component {
   constructor () {
@@ -78,7 +80,7 @@ class MainMenu extends Component {
     return (
       <div id='menu'>
         <div className='menu-fold' onClick={() => this.menu()}>
-          <img src={'../../../dist/media/' + (this.state.isFoldingMenu ? 'menu-icon-close.png' : 'menu-icon.png')} alt='Menu' />
+          <img src={this.state.isFoldingMenu ? menu_icon_close : menu_icon} alt='Menu' />
         </div>
         <div className={'all-menu-items ' + (this.state.isFoldingMenu ? null : 'menu-unfold')}>
           <div className='menu-item' onClick={() => { this.setState({ isSellModalVisible: true }) }}>

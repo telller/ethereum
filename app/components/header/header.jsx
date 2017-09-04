@@ -3,6 +3,7 @@ import MainMenu from '../menu/menu.jsx'
 import Search from '../search/search.jsx'
 import './header.styl'
 import { Row, Col } from 'antd'
+import logo from '../../../dist/media/logo.png'
 
 class Header extends React.Component {
   constructor (props) {
@@ -17,7 +18,7 @@ class Header extends React.Component {
         <Row>
           <div className='title-logo'>
             <Col span={2} className='header-logo'>
-              <img src='./dist/media/logo.png' />
+              <img src={logo} />
             </Col>
             <Col span={6} >
               <h1 className='title'>Ethereum names</h1>
