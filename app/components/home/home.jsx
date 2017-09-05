@@ -5,7 +5,7 @@ import GraphTable from '../graph-table/table.jsx'
 class Home extends Component {
   render () {
     return (
-      <div id='graph'>
+      <div>
         <Header />
         <GraphTable />
       </div>

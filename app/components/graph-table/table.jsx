@@ -100,7 +100,7 @@ class GraphTable extends Component {
 
     return (
       <Row id='graphTable'>
-        <Col className='body'>
+        <Col className='table'>
           {this.state.isBuyModalVisible && (
             <Buy onOk={this.buy} onCancel={() => this.setState({isBuyModalVisible: false})} data={this.state.selected} />
           )}

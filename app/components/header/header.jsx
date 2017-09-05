@@ -14,7 +14,7 @@ class Header extends React.Component {
   }
   render () {
     return (
-      <div id='header'>
+      <header id='header'>
         <Row>
           <div className='title-logo'>
             <Col span={2} className='header-logo'>
@@ -31,7 +31,7 @@ class Header extends React.Component {
             <Search />
           </div>
         </Row>
-      </div>
+      </header>
     )
   }
 }
