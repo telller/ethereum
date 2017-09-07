@@ -28,6 +28,7 @@ class GraphTable extends Component {
       selected: null
     }
     this.buy = this.buy.bind(this)
+    this.receiver_email = 'andrey.grimm.13@gmail.com'
   }
 
   changeSizePage (e) {
@@ -39,8 +40,28 @@ class GraphTable extends Component {
   buy (values) {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + values.name + '&entry.1387721178=' + values.email + '&entry.1522767390=' + values.comment + '&entry.1493658382=' + values.domain + '&entry.1168806703=' + values.price + '&submit=Submit', true)
+
+    const sendDataGoogle = 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq' +
+    '&entry.6737599=' + values.name +
+    '&entry.1387721178=' + values.email +
+    '&entry.1522767390=' + values.comment +
+    '&entry.1493658382=' + values.domain +
+    '&entry.1168806703=' + values.price +
+    '&submit=Submit'
+
+    xhr.open('GET', sendDataGoogle, true)
     xhr.send()
+
+    const sendDataEmail = 'type=buy' +
+      '&receiver_email=' + encodeURIComponent(this.receiver_email) +
+      '&sender_name=' + encodeURIComponent(values.name) +
+      '&sender_email=' + encodeURIComponent(values.email) +
+      '&comment=' + encodeURIComponent(values.comment)
+
+    xhr.open('POST', '/wp-content/themes/ethereum_theme/ethereum-app/sendEmail.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.send(sendDataEmail)
+
     Modal.success({
       title: 'Success',
       content: 'Our team will follow-up within next 24 hours',

@@ -25,7 +25,7 @@ class Contact extends Component {
         title='Contact Us'
         onCancel={this.props.onCancel}
         footer={
-          <div onClick={this.onOk}><Icon type='messege' /> | Send</div>
+          <div onClick={this.onOk}><Icon type='message' /> | Send</div>
         }
         >
         <div id='contact'>

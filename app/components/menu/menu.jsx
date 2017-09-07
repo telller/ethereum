@@ -20,19 +20,34 @@ class MainMenu extends Component {
     }
     this.contact = this.contact.bind(this)
     this.sell = this.sell.bind(this)
+    this.receiver_email = 'andrey.grimm.13@gmail.com'
   }
   sell (values) {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-    const data = 'https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA/formResponse?ifq' +
+
+    const sendDataGoogle = 'https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA/formResponse?ifq' +
       '&entry.1842149868=' + encodeURIComponent(values.name) +
       '&entry.1596816766=' + encodeURIComponent(values.email) +
       '&entry.873897670=' + encodeURIComponent(values.comment) +
       '&entry.1585848839=' + encodeURIComponent(values.domain) +
       '&entry.255403866=' + encodeURIComponent(values.price) +
       '&submit=Submit'
-    xhr.open('GET', data, true)
+    xhr.open('GET', sendDataGoogle, true)
     xhr.send()
+
+    const sendDataEmail = 'type=sell' +
+      '&receiver_email=' + encodeURIComponent(this.receiver_email) +
+      '&sender_name=' + encodeURIComponent(values.name) +
+      '&sender_email=' + encodeURIComponent(values.email) +
+      '&comment=' + encodeURIComponent(values.comment) +
+      '&domain_name=' + encodeURIComponent(values.domain) +
+      '&domain_price=' + encodeURIComponent(values.price)
+
+    xhr.open('POST', '/wp-content/themes/ethereum_theme/ethereum-app/sendEmail.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.send(sendDataEmail)
+
     Modal.success({
       title: 'Success',
       content: 'Our team will follow-up within next 24 hours',
@@ -53,13 +68,26 @@ class MainMenu extends Component {
   contact (values) {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-    const data = 'https://docs.google.com/forms/d/1TfXOZAqgFs34oDK1EeEI9XKE1cjIy9vReIoEhxvXVA4/formResponse?ifq' +
+
+    const sendDataGoogle = 'https://docs.google.com/forms/d/1TfXOZAqgFs34oDK1EeEI9XKE1cjIy9vReIoEhxvXVA4/formResponse?ifq' +
       '&entry.1632333745=' + encodeURIComponent(values.name) +
       '&entry.58046248=' + encodeURIComponent(values.email) +
       '&entry.927148489=' + encodeURIComponent(values.comment) +
       '&submit=Submit'
-    xhr.open('GET', data, true)
+
+    xhr.open('GET', sendDataGoogle, true)
     xhr.send()
+
+    const sendDataEmail = 'type=contact' +
+      '&receiver_email=' + encodeURIComponent(this.receiver_email) +
+      '&sender_name=' + encodeURIComponent(values.name) +
+      '&sender_email=' + encodeURIComponent(values.email) +
+      '&comment=' + encodeURIComponent(values.comment)
+
+    xhr.open('POST', '/wp-content/themes/ethereum_theme/ethereum-app/sendEmail.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.send(sendDataEmail)
+
     Modal.success({
       title: 'Success',
       content: 'Our team will follow-up within next 24 hours',
@@ -96,7 +124,9 @@ class MainMenu extends Component {
         {
           this.state.isSellModalVisible && (
             <Sell onOk={this.sell} onCancel={() => this.setState({isSellModalVisible: false})} />
-          ) ||
+          )
+        }
+        {
           this.state.isContactModalVisible && (
             <Contact onOk={this.contact} onCancel={() => this.setState({isContactModalVisible: false})} />
           )
