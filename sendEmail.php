@@ -1,9 +1,11 @@
 <?php
+  include('./STMPmail.php');
+
   $method = $_SERVER['REQUEST_METHOD'];
   $site_name = 'Ethereum';
+  $receiver_email = 'andrey.grimm.13@gmail.com';  
   
   $type = trim($_POST["type"]);
-  $receiver_email = trim($_POST["receiver_email"]);
   $sender_name = trim($_POST["sender_name"]);
   $sender_email = trim($_POST["sender_email"]);
   $comment = trim($_POST["comment"]);
@@ -61,5 +63,5 @@
     'From: ' . adopt($site_name) . ' <' . $_POST["sender_email"] . '>' . PHP_EOL .
     'Reply-To: '.$receiver_email.'' . PHP_EOL;
 
-  echo mail($receiver_email, adopt($theme_message), $message, $headers );
+  echo smtpmail($receiver_email, adopt($theme_message), $message, $headers );
 ?>

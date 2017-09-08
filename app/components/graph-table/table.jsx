@@ -28,7 +28,6 @@ class GraphTable extends Component {
       selected: null
     }
     this.buy = this.buy.bind(this)
-    this.receiver_email = 'andrey.grimm.13@gmail.com'
   }
 
   changeSizePage (e) {
@@ -52,11 +51,12 @@ class GraphTable extends Component {
     xhr.open('GET', sendDataGoogle, true)
     xhr.send()
 
-    const sendDataEmail = 'type=buy' +
-      '&receiver_email=' + encodeURIComponent(this.receiver_email) +
+    const sendDataEmail = 'type=sell' +
       '&sender_name=' + encodeURIComponent(values.name) +
       '&sender_email=' + encodeURIComponent(values.email) +
-      '&comment=' + encodeURIComponent(values.comment)
+      '&comment=' + encodeURIComponent(values.comment) +
+      '&domain_name=' + encodeURIComponent(values.domain) +
+      '&domain_price=' + encodeURIComponent(values.price)
 
     xhr.open('POST', '/wp-content/themes/ethereum_theme/ethereum-app/sendEmail.php', true)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')

@@ -20,7 +20,6 @@ class MainMenu extends Component {
     }
     this.contact = this.contact.bind(this)
     this.sell = this.sell.bind(this)
-    this.receiver_email = 'andrey.grimm.13@gmail.com'
   }
   sell (values) {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
@@ -37,7 +36,6 @@ class MainMenu extends Component {
     xhr.send()
 
     const sendDataEmail = 'type=sell' +
-      '&receiver_email=' + encodeURIComponent(this.receiver_email) +
       '&sender_name=' + encodeURIComponent(values.name) +
       '&sender_email=' + encodeURIComponent(values.email) +
       '&comment=' + encodeURIComponent(values.comment) +
@@ -79,7 +77,6 @@ class MainMenu extends Component {
     xhr.send()
 
     const sendDataEmail = 'type=contact' +
-      '&receiver_email=' + encodeURIComponent(this.receiver_email) +
       '&sender_name=' + encodeURIComponent(values.name) +
       '&sender_email=' + encodeURIComponent(values.email) +
       '&comment=' + encodeURIComponent(values.comment)
