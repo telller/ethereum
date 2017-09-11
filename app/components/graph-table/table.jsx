@@ -1,10 +1,14 @@
-import { Row, Col, Icon, Table, Radio, Modal } from 'antd'
+import { Row, Col, Icon, Table, Radio, Modal, Tag } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Buy from '../buy/buy.jsx'
 import './table.styl'
-
+const categories = {
+  0: 'test',
+  1: 'music',
+  2: 'shop'
+}
 class GraphTable extends Component {
   constructor () {
     super()
@@ -39,29 +43,8 @@ class GraphTable extends Component {
   buy (values) {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-
-    const sendDataGoogle = 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq' +
-    '&entry.6737599=' + values.name +
-    '&entry.1387721178=' + values.email +
-    '&entry.1522767390=' + values.comment +
-    '&entry.1493658382=' + values.domain +
-    '&entry.1168806703=' + values.price +
-    '&submit=Submit'
-
-    xhr.open('GET', sendDataGoogle, true)
+    xhr.open('GET', 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq&entry.6737599=' + values.name + '&entry.1387721178=' + values.email + '&entry.1522767390=' + values.comment + '&entry.1493658382=' + values.domain + '&entry.1168806703=' + values.price + '&submit=Submit', true)
     xhr.send()
-
-    const sendDataEmail = 'type=sell' +
-      '&sender_name=' + encodeURIComponent(values.name) +
-      '&sender_email=' + encodeURIComponent(values.email) +
-      '&comment=' + encodeURIComponent(values.comment) +
-      '&domain_name=' + encodeURIComponent(values.domain) +
-      '&domain_price=' + encodeURIComponent(values.price)
-
-    xhr.open('POST', '/wp-content/themes/ethereum_theme/ethereum-app/sendEmail.php', true)
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-    xhr.send(sendDataEmail)
-
     Modal.success({
       title: 'Success',
       content: 'Our team will follow-up within next 24 hours',
@@ -100,6 +83,12 @@ class GraphTable extends Component {
           return <span className={classColor}>{text}</span>
         },
         width: '20%'
+      },
+      {
+        title: 'Categories',
+        dataIndex: 'categories',
+        render: item => item.map(i => <Tag>{categories[i]}</Tag>),
+        width: '15%'
       },
       {
         title: 'Buy',
@@ -154,9 +143,9 @@ GraphTable.propTypes = {
 
 const mapStateToProps = state => ({
   data: state.data.filter(item => item.name.search(state.findDomain) !== -1),
+  contactInfo: state.contactInfo,
   findDomain: state.findDomain,
-  dataSend: state.sendBuy,
-  contactInfo: state.contactInfo
+  dataSend: state.sendBuy
 })
 
 const component = connect(mapStateToProps, ({}))(GraphTable)

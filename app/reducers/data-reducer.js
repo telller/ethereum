@@ -1,5 +1,5 @@
 let initialDataStore = [
-  {name: 'marilena', price: 1, address: '0x95e126955433Cc7fd8f5b900F1c6D10042B07657'},
+  {name: 'marilena', price: 1, address: '0x95e126955433Cc7fd8f5b900F1c6D10042B07657', categories: [0, 1]},
   {name: 'accountreceivable', price: 1, address: '0x2D3aa485af3D35a6D04d186189C30dDd3F5261F5'},
   {name: 'mannheim', price: 0, address: '0x2D3aa485af3D35a6D04d186189C30dDd3F5261F5', isMakeOffer: true},
   {name: 'etherwarrior', price: 1, address: '0x2D3aa485af3D35a6D04d186189C30dDd3F5261F5'},
@@ -78,7 +78,7 @@ let initialDataStore = [
 ]
 
 initialDataStore = initialDataStore.map((item, key) => (
-  {key, name: item.name.toLowerCase(), price: item.price, isMakeOffer: item.isMakeOffer}
+  { key, name: item.name.toLowerCase(), price: item.price, isMakeOffer: item.isMakeOffer, categories: item.categories || [] }
 )).sort((a, b) => b.price - a.price)
 
 const dataReducer = (state = initialDataStore, action) => {
