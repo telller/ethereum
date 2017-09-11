@@ -5,9 +5,22 @@ import PropTypes from 'prop-types'
 import Buy from '../buy/buy.jsx'
 import './table.styl'
 const categories = {
-  0: 'test',
-  1: 'music',
-  2: 'shop'
+  1: 'Adult',
+  2: 'Blockchain',
+  3: 'Business',
+  4: 'Common/Well Known',
+  5: 'Entertainment',
+  6: 'Financial',
+  7: 'Fund Raising',
+  8: 'Geography',
+  9: 'Health',
+  10: 'Money',
+  11: 'Name',
+  12: 'Politics',
+  13: 'Shopping',
+  14: 'Social',
+  15: 'Sports and Games',
+  16: 'Technology'
 }
 class GraphTable extends Component {
   constructor () {
@@ -88,7 +101,7 @@ class GraphTable extends Component {
         title: 'Categories',
         dataIndex: 'categories',
         render: item => item.map(i => <Tag>{categories[i]}</Tag>),
-        width: '15%'
+        width: '30%'
       },
       {
         title: 'Buy',
