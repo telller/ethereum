@@ -1,5 +1,5 @@
-node_modules
-dist/bundle.css
-dist/bundle.js
+ethereum-app/node_modules
+ethereum-app/dist/bundle.css
+ethereum-app/dist/bundle.js
 .idea
 .git
