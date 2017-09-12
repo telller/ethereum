@@ -42,7 +42,7 @@ class MainMenu extends Component {
       '&domain_name=' + encodeURIComponent(values.domain) +
       '&domain_price=' + encodeURIComponent(values.price)
 
-    xhr.open('POST', '/wp-content/themes/ethereum_theme/ethereum-app/sendEmail.php', true)
+    xhr.open('POST', '/wp-content/themes/ethereum_theme/sendEmail.php', true)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     xhr.send(sendDataEmail)
 
@@ -81,7 +81,7 @@ class MainMenu extends Component {
       '&sender_email=' + encodeURIComponent(values.email) +
       '&comment=' + encodeURIComponent(values.comment)
 
-    xhr.open('POST', '/wp-content/themes/ethereum_theme/ethereum-app/sendEmail.php', true)
+    xhr.open('POST', '/wp-content/themes/ethereum_theme/sendEmail.php', true)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
     xhr.send(sendDataEmail)
 
