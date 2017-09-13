@@ -15,6 +15,11 @@ const alias = {
 }
 module.exports = {
   entry: './app/main.js',
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   output: {
     filename: './dist/bundle.js'
   },
