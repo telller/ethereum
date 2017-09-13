@@ -1,14 +1,14 @@
 import { Row, Col, Icon, Table, Radio, Modal } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Tags from '../Tags/Tags.jsx'
 import PropTypes from 'prop-types'
 import Buy from '../buy/buy.jsx'
+import WooCommerce from '../WooCommerce/WooCommerce.js'
 import './table.styl'
 
 class GraphTable extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       pagination: {
         pageSize: 20,
@@ -71,8 +71,12 @@ class GraphTable extends Component {
     this.setState({ isBuyModalVisible: false })
   }
 
+  componentDidMount () {
+    this.props.onLoadDomains()
+  }
+
   render () {
-    const checkFind = this.props.data.filter(item => item.name.search(this.props.findDomain) !== -1).length > 0
+    const checkFind = this.props.data.filter(item => ~item.name.search(this.props.findDomain)).length > 0
     const columns = [
       {
         title: '.eht Name',
@@ -85,7 +89,7 @@ class GraphTable extends Component {
         dataIndex: 'price',
         sorter: (a, b) => a.price - b.price,
         render: (text, selected) => {
-          if (selected.isMakeOffer) {
+          if (!Number(selected.price)) {
             return <a onClick={() => { this.setState({ isBuyModalVisible: true, selected }) }}>Make offer</a>
           }
           let classColor = 'defaultCell '
@@ -102,12 +106,12 @@ class GraphTable extends Component {
         },
         width: '20%'
       },
-      {
-        title: 'Categories',
-        dataIndex: 'categories',
-        render: tagIds => <Tags tagIds={tagIds} limit={2} />,
-        width: '30%'
-      },
+      // {
+      //   title: 'Categories',
+      //   dataIndex: 'categories',
+      //   render: tagIds => <Tags tagIds={tagIds} limit={2} />,
+      //   width: '30%'
+      // },
       {
         title: 'Buy',
         dataIndex: 'buy',
@@ -156,16 +160,36 @@ class GraphTable extends Component {
 
 GraphTable.propTypes = {
   findDomain: PropTypes.string,
-  data: PropTypes.array
+  data: PropTypes.array,
+  onLoadDomains: PropTypes.func
 }
 
 const mapStateToProps = state => ({
-  data: state.data.filter(item => item.name.search(state.findDomain) !== -1),
+  data: state.data.filter(item => ~item.name.search(state.findDomain)),
   contactInfo: state.contactInfo,
   findDomain: state.findDomain,
   dataSend: state.sendBuy
 })
 
-const component = connect(mapStateToProps, ({}))(GraphTable)
+const mapDispatchToProps = dispatch => ({
+  onLoadDomains: () => {
+    const addDomains = () => {
+      return dispatch => {
+        WooCommerce.getAsync('products?per_page=100').then(item => {
+          dispatch({
+            type: 'SET_LIST_DOMAINS',
+            payload: JSON.parse(item.toJSON().body)
+          })
+        })
+      }
+    }
+    dispatch(addDomains())
+  }
+})
+
+const component = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GraphTable)
 
 export default component

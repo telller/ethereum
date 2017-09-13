@@ -9,7 +9,7 @@ class Buy extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isMakeOffer: props.data.isMakeOffer
+      isMakeOffer: !Number(props.data.price)
     }
     this.onOk = this.onOk.bind(this)
   }
