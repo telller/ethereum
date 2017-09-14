@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Modal, Button } from 'antd'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import { Icon, Modal } from 'antd'
 import Faq from '../faq/faq.jsx'
 import Sell from '../sell/sell.jsx'
 import Contact from '../contact/contact.jsx'
@@ -128,32 +126,14 @@ class MainMenu extends Component {
             <Contact onOk={this.contact} onCancel={() => this.setState({isContactModalVisible: false})} />
           )
         }
-        <Modal
-          title='FAQ'
-          width={600}
-          onCancel={() => this.faq()}
-          visible={this.state.isFAQModalVisible}
-          footer={[
-            <Button key='Ok' type='primary' size='large' onClick={() => this.faq()}>Ok</Button>
-          ]}
-        >
-          <Faq />
-        </Modal>
+        {
+          this.state.isFAQModalVisible && (
+            <Faq onCancel={() => this.faq()} />
+          )
+        }
       </div>
     )
   }
 }
 
-MainMenu.propTypes = {
-  dataSell: PropTypes.object,
-  contactInfo: PropTypes.object
-}
-
-const mapStateToProps = state => ({
-  dataSell: state.sendSell,
-  contactInfo: state.contactInfo
-})
-
-const component = connect(mapStateToProps, () => ({}))(MainMenu)
-
-export default component
+export default MainMenu
