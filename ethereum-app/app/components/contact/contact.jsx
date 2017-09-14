@@ -66,12 +66,13 @@ Contact.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  contactInfo: state.contactInfo,
-  dataSend: state.sendContact
+
 })
 // TODO: Check if we need below
 const mapDispatchToProps = dispatch => ({
   send: (payload, type) => { dispatch({ type, payload }) }
 })
 
-export default Form.create()(connect(mapStateToProps, mapDispatchToProps)(Contact))
+const component = connect(mapStateToProps, mapDispatchToProps)(Contact)
+
+export default Form.create()(component)
