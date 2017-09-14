@@ -106,12 +106,17 @@ class GraphTable extends Component {
         },
         width: '20%'
       },
-      // {
-      //   title: 'Categories',
-      //   dataIndex: 'categories',
-      //   render: tagIds => <Tags tagIds={tagIds} limit={2} />,
-      //   width: '30%'
-      // },
+      {
+        title: 'Categories',
+        dataIndex: 'categories',
+        render: (categories, record, cellKey) =>
+          <div key={cellKey} className='name-categories'>
+            {
+              categories.map((item, index) => <span key={index}>{item}</span>)
+            }
+          </div>,
+        width: '5%'
+      },
       {
         title: 'Buy',
         dataIndex: 'buy',
