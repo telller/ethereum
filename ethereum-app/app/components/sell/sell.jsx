@@ -125,8 +125,7 @@ Sell.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  dataSend: state.sendSell,
-  contactInfo: state.contactInfo
+
 })
 
 const mapDispatchToProps = dispatch => ({
