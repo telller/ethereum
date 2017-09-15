@@ -7,6 +7,7 @@ class Domain {
     this.categories = obj.categories.map(item => item.name.toLowerCase())
     this.description = obj.description
     this.link = obj.permalink
+    this.img = obj.images[0].src
     this.status = obj.status
   }
 }

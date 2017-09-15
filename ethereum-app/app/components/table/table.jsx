@@ -1,7 +1,8 @@
-import { Row, Col, Icon, Table, Radio, Modal } from 'antd'
+import { Icon, Table, Radio, Modal } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router'
 import Buy from '../buy/buy.jsx'
 import WooCommerce from '../WooCommerce/WooCommerce.js'
 import Page from '../Page/Page.jsx'
@@ -68,6 +69,10 @@ class GraphTable extends Component {
     this.props.onLoadDomains()
   }
 
+  onSelectDomain (domain) {
+    this.props.onSelectDomain(domain)
+  }
+
   render () {
     const checkFind = this.props.data.filter(item => ~item.name.search(this.props.findDomain)).length > 0
     const columns = [
@@ -75,6 +80,10 @@ class GraphTable extends Component {
         title: '.eht Name',
         dataIndex: 'name',
         sorter: (a, b) => a.name < b.name ? -1 : a.name > b.name,
+        render: (text, record) =>
+          <div onClick={() => this.onSelectDomain(record)}>
+            <Link to={'/domain/' + text} >{text}</Link>
+          </div>,
         width: '30%'
       },
       {
@@ -157,14 +166,13 @@ class GraphTable extends Component {
 GraphTable.propTypes = {
   findDomain: PropTypes.string,
   data: PropTypes.array,
-  onLoadDomains: PropTypes.func
+  onLoadDomains: PropTypes.func,
+  onSelectDomain: PropTypes.func
 }
 
 const mapStateToProps = state => ({
   data: state.data.filter(item => ~item.name.search(state.findDomain)),
-  contactInfo: state.contactInfo,
-  findDomain: state.findDomain,
-  dataSend: state.sendBuy
+  findDomain: state.findDomain
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -180,6 +188,12 @@ const mapDispatchToProps = dispatch => ({
       }
     }
     dispatch(addDomains())
+  },
+  onSelectDomain: domain => {
+    dispatch({
+      type: 'ON_SELECT_DOMAIN',
+      payload: domain
+    })
   }
 })
 

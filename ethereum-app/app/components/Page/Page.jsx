@@ -21,7 +21,8 @@ class Page extends Component {
 
 Page.propTypes = {
   children: PropTypes.node.isRequired,
-  className: PropTypes.string
+  className: PropTypes.string,
+  id: PropTypes.string
 }
 
 export default Page
