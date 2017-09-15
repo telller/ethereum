@@ -1,14 +1,9 @@
 #graphTable
   z-index 1
-  margin-top 60px
-  .table
-    margin 0 auto
-    max-width 800px
   .tableDomains
     .ant-table
       border-radius 0
       table
-        background-color white
         border-collapse collapse
         border-radius 0
       tr
@@ -61,9 +56,10 @@
       .bgPrice10
         background-color #fbfbfc
     .ant-pagination
-      position relative
+      position absolute
       z-index 100
       margin 10px
+      bottom -38px
       li
         font bold 13px/20px 'Roboto', sans-serif
         margin 3px
@@ -122,7 +118,8 @@
   .table-footer
     z-index 20
     position relative
-    bottom 48px
+    width 100%
+    bottom 0
     background-color white
     padding-top 15px
     font-weight bold
@@ -154,8 +151,10 @@
       //         padding-left 5px
       //         text-align left
       .ant-pagination
-        text-align center
-        float none
+        left 0
+        right 0
+        margin 0 auto
+        text-align: center;
     .btn-page-size
       top 45px
       left 0
@@ -168,7 +167,7 @@
         box-shadow none
         border none
     .table-footer
-      height 80px
+      height 78px
     .not-found
       height 50px
 @media only screen and (min-width: 550px)
@@ -186,8 +185,9 @@
             top auto
             right 5px
       .ant-pagination
-        right 0
-        float left
+        left 10px
+        right auto
+        margin 0
     .btn-page-size
       top 15px
       right 10px
@@ -200,7 +200,7 @@
         box-shadow none
         border none
     .table-footer
-      height 50px
+      height 48px
 @media only screen and (min-width: 48em)
   #graphTable
     .formSearch
@@ -215,8 +215,7 @@
         &:last-child
           padding 0
           text-align center
-      .ant-pagination
-        float left
+        
     .btn-page-size
       top 15px
       right 10px
