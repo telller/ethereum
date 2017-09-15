@@ -6,7 +6,7 @@ const statConf = {
   hash: false,
   version: false,
   errors: true,
-  errorDetails: true,
+  errorDetails: false,
   warnings: true
 }
 const alias = {
