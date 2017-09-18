@@ -1,7 +1,5 @@
 <?php
-  $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-  if($url != $_SERVER['HTTP_HOST'] . '/' && !strripos($url, '?'))
-  	header("Location: /" );
+  header("HTTP/1.1 200 OK");
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -13,6 +11,9 @@
     <script async type="text/javascript">(function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;
     r.src=l.src=("https:"==a.location.protocol?"https://":"http://")+b;s.parentNode.insertBefore(r,s);
     })(document,"script","serve.albacross.com/track.js","89208293");</script>
+    <script type="text/javascript">
+      document.querySelector('title').innerText = 'Ensdomains - site for buying ENS domains | Ens deals'
+    </script>
     <script async type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
