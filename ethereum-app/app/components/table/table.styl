@@ -1,5 +1,9 @@
 #graphTable
   z-index 1
+  margin-top 60px
+  .table
+    margin 0 auto
+    max-width 800px
   .tableDomains
     .ant-table
       border-radius 0
@@ -64,8 +68,15 @@
         font bold 13px/20px 'Roboto', sans-serif
         margin 3px
         background none
+        height 20px
+        min-width 20px
+        border none
         a
+          border none
           color #777
+          &:after
+            height 20px
+            line-height 20px
       .ant-pagination-item-active
         border-radius 50%
         background-color #232a40
@@ -78,6 +89,8 @@
         padding-bottom 20px
         font-weight bold
         background-color #fafafa
+        height 20px
+        line-height 20px
         input
           background-color white
           border none

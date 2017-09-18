@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Header from '../header/header.jsx'
-import Page from '../Page/Page.jsx'
+import { Modal } from 'antd'
+import ReactHtmlParser from 'react-html-parser'
 import './SingleDomain.styl'
 
 class SingleDomain extends Component {
@@ -14,10 +14,10 @@ class SingleDomain extends Component {
   }
 
   componentWillMount () {
-    if (this.props.domain) {
+    if (this.props.data) {
       this.setState((state, props) => {
         return {
-          domain: props.domain
+          domain: props.data
         }
       })
     } else {
@@ -39,9 +39,15 @@ class SingleDomain extends Component {
 
   render () {
     return (
-      <div>
-        <Header />
-        <Page className='single-domain'>
+      <Modal
+        className='domain-info-modal'
+        width={400}
+        visible
+        title='Domain Info:'
+        onCancel={this.props.onCancel}
+        footer={false}
+      >
+        <div className='single-domain'>
           <img width='100px' src={this.state.domain.img} alt={'Ethereum domain ' + this.state.domain.name} />
           <h2>{this.state.domain.name}</h2>
           <p>{this.state.domain.price} ETH</p>
@@ -53,20 +59,21 @@ class SingleDomain extends Component {
               )
             }
           </ul>
-          {this.state.domain.description}
-        </Page>
-      </div>
+          {ReactHtmlParser(this.state.domain.description)}
+        </div>
+      </Modal>
     )
   }
 }
 
 SingleDomain.propTypes = {
-  domain: PropTypes.object
+  data: PropTypes.object,
+  onCancel: PropTypes.func
 }
 
 const mapStateToProps = state => {
   return {
-    domain: state.selectDoamin
+
   }
 }
 

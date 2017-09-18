@@ -1,11 +1,12 @@
-import { Icon, Table, Radio, Modal } from 'antd'
+import { Row, Col, Icon, Table, Radio, Modal } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import Buy from '../buy/buy.jsx'
+import SingleDomain from '../SingleDomain/SingleDomain.jsx'
 import WooCommerce from '../WooCommerce/WooCommerce.js'
-import Page from '../Page/Page.jsx'
+import Domain from '../Domain.jsx'
 import './table.styl'
 
 class GraphTable extends Component {
@@ -20,6 +21,7 @@ class GraphTable extends Component {
         }
       },
       isBuyModalVisible: false,
+      isDomainInfoModalVisible: false,
       selected: null
     }
     this.buy = this.buy.bind(this)
@@ -65,12 +67,40 @@ class GraphTable extends Component {
     this.setState({ isBuyModalVisible: false })
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.props.onLoadDomains()
+
+    if (this.props.domain !== 'home' && this.props.data) {
+      let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
+      let xhr = new XHR()
+
+      const sendNameDomain = 'name=' + this.props.domain
+
+      xhr.open('POST', '/wp-content/themes/ethereum_theme/getDomainID.php', true)
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      xhr.send(sendNameDomain)
+
+      xhr.onload = () => {
+        xhr.responseText && WooCommerce.getAsync('products/' + xhr.responseText).then(item => {
+          this.setState({
+            selected: new Domain(JSON.parse(item.toJSON().body)),
+            isDomainInfoModalVisible: true
+          })
+        })
+      }
+    }
   }
 
   onSelectDomain (domain) {
-    this.props.onSelectDomain(domain)
+    this.setState({
+      selected: domain,
+      isDomainInfoModalVisible: true
+    })
+  }
+
+  closeModalDomainInfo () {
+    browserHistory.push('/')
+    this.setState({isDomainInfoModalVisible: false})
   }
 
   render () {
@@ -80,9 +110,9 @@ class GraphTable extends Component {
         title: '.eht Name',
         dataIndex: 'name',
         sorter: (a, b) => a.name < b.name ? -1 : a.name > b.name,
-        render: (text, record) =>
-          <div onClick={() => this.onSelectDomain(record)}>
-            <Link to={'/domain/' + text} >{text}</Link>
+        render: (name, domain) =>
+          <div onClick={() => this.onSelectDomain(domain)}>
+            <Link to={'/' + name} >{name}</Link>
           </div>,
         width: '30%'
       },
@@ -138,27 +168,38 @@ class GraphTable extends Component {
     ]
 
     return (
-      <Page id='graphTable'>
-        {this.state.isBuyModalVisible && (
-          <Buy onOk={this.buy} onCancel={() => this.setState({isBuyModalVisible: false})} data={this.state.selected} />
-        )}
-        <Table
-          size='small'
-          className='tableDomains'
-          columns={columns}
-          rowKey='name'
-          dataSource={this.props.data}
-          pagination={this.state.pagination}
-        />
-        <div className={'table-footer ' + (checkFind ? '' : 'not-found')}>
-          <p className={checkFind ? 'table-footer-search' : null}>Not found!</p>
-          <Radio.Group className={checkFind ? 'btn-page-size' : 'btn-page-size-none'} defaultValue={this.state.pagination.pageSize} onChange={e => this.changeSizePage(e)}>
-            <Radio.Button value={20}>20</Radio.Button>
-            <Radio.Button value={50}>50</Radio.Button>
-            <Radio.Button value={100}>100</Radio.Button>
-          </Radio.Group>
-        </div>
-      </Page>
+      <Row id='graphTable'>
+        <Col className='table'>
+          <Table
+            size='small'
+            className='tableDomains'
+            columns={columns}
+            rowKey='name'
+            dataSource={this.props.data}
+            pagination={this.state.pagination}
+          />
+          <div className={'table-footer ' + (checkFind ? '' : 'not-found')}>
+            <p className={checkFind ? 'table-footer-search' : null}>Not found!</p>
+            <Radio.Group className={checkFind ? 'btn-page-size' : 'btn-page-size-none'} defaultValue={this.state.pagination.pageSize} onChange={e => this.changeSizePage(e)}>
+              <Radio.Button value={20}>20</Radio.Button>
+              <Radio.Button value={50}>50</Radio.Button>
+              <Radio.Button value={100}>100</Radio.Button>
+            </Radio.Group>
+          </div>
+          {
+            this.state.isBuyModalVisible && (
+              <Buy onOk={this.buy} onCancel={() => this.setState({isBuyModalVisible: false})} data={this.state.selected} />
+            )
+          }
+          {
+            this.state.isDomainInfoModalVisible && (
+              <SingleDomain
+                onCancel={() => this.closeModalDomainInfo()}
+                data={this.state.selected} />
+            )
+          }
+        </Col>
+      </Row>
     )
   }
 }
@@ -167,7 +208,7 @@ GraphTable.propTypes = {
   findDomain: PropTypes.string,
   data: PropTypes.array,
   onLoadDomains: PropTypes.func,
-  onSelectDomain: PropTypes.func
+  domain: PropTypes.string
 }
 
 const mapStateToProps = state => ({
@@ -188,12 +229,6 @@ const mapDispatchToProps = dispatch => ({
       }
     }
     dispatch(addDomains())
-  },
-  onSelectDomain: domain => {
-    dispatch({
-      type: 'ON_SELECT_DOMAIN',
-      payload: domain
-    })
   }
 })
 
