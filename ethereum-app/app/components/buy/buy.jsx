@@ -55,8 +55,6 @@ class Buy extends Component {
                   rules: [{ required: true, message: 'Please input your name!' }]
                 })(<Input placeholder='Name' prefix={<Icon type='user' />} />)}
               </Form.Item>
-            </Form>
-            <Form>
               <Form.Item>
                 {this.props.form.getFieldDecorator('email', {
                   rules: [
@@ -65,8 +63,6 @@ class Buy extends Component {
                   ]
                 })(<Input placeholder='E-mail' type='email' prefix={<Icon type='mail' />} />)}
               </Form.Item>
-            </Form>
-            <Form>
               <Form.Item>
                 {this.props.form.getFieldDecorator('comment')(
                   <Input.TextArea placeholder='Comment' autosize={{ minRows: 4, maxRows: 6 }} />
