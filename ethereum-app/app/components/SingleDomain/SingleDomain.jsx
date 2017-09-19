@@ -4,11 +4,11 @@ import { Modal } from 'antd'
 import ReactHtmlParser from 'react-html-parser'
 import ShareIcons from '../ShareIcons/ShareIcons.jsx'
 import './SingleDomain.styl'
+import imgDomain from '../../../dist/media/Ethereum.png'
 
 class SingleDomain extends Component {
   constructor (props) {
     super(props)
-    this.imgDomain = 'https://ensdomains.market/wp-content/uploads/2017/09/Ethereum.png'
   }
 
   render () {
@@ -22,7 +22,7 @@ class SingleDomain extends Component {
         footer={false}
       >
         <div className='single-domain'>
-          <img className='domain-logo' src={this.imgDomain} alt='Ethereum domain' />
+          <img className='domain-logo' src={imgDomain} alt='Ethereum domain' />
           <h2 className='domain-name'>{this.props.data.name}</h2>
           <ShareIcons className='domain-share-icons' url={location.href} />
           {
