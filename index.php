@@ -8,27 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ensdomains - site for buying ENS domains | Ens deals</title>
     <?php wp_head() ?>
-    <script async type="text/javascript">(function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;
+    <script type="text/javascript">(function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;
     r.src=l.src=("https:"==a.location.protocol?"https://":"http://")+b;s.parentNode.insertBefore(r,s);
     })(document,"script","serve.albacross.com/track.js","89208293");</script>
     <script type="text/javascript">
-      document.querySelector('title').innerText = 'Ensdomains - site for buying ENS domains | Ens deals'
+      document.title = 'Ensdomains - site for buying ENS domains | Ens deals'
     </script>
+    <link rel="shortcut icon" href="/wp-content/themes/ethereum_theme/ethereum-app/dist/media/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="/wp-content/themes/ethereum_theme/ethereum-app/dist/bundle.css" rel="stylesheet"/>
     <script async type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
     ga('create', 'UA-105192551-1', 'auto');
     ga('send', 'pageview');
-
     </script>
-    <script async type="text/javascript">(function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;
-    r.src=l.src=("https:"==a.location.protocol?"https://":"http://")+b;s.parentNode.insertBefore(r,s);
-    })(document,"script","serve.albacross.com/track.js","89208293");</script>
-    <link href="/wp-content/themes/ethereum_theme/ethereum-app/dist/bundle.css" rel="stylesheet"/>
-    <link rel="shortcut icon" href="/wp-content/themes/ethereum_theme/ethereum-app/dist/media/favicon.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script type="text/javascript">
       window.onload = function() {
         var elements = document.getElementsByClassName('preloader__spinner');
@@ -74,6 +69,7 @@
     <div class="page-preloader"><span class="preloader__spinner"></span></div>
     <div id='root'></div>
     <script src="/wp-content/themes/ethereum_theme/ethereum-app/dist/bundle.js"></script>
+    <script src="https://use.fontawesome.com/14bc3e9e43.js"></script>
     <?php wp_footer(); ?>
   </body>
 </html>
