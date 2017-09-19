@@ -22,10 +22,6 @@ class ShareIcons extends React.Component {
     this.state.url = 'https://plus.google.com/share?' + 'text=' + encodeURIComponent(ptitle) + '&url=' + encodeURIComponent(purl) + '&counturl=' + encodeURIComponent(purl)
     window.open(this.state.url, '', 'toolbar=0,status=0,width=626,height=436')
   }
-  email (purl, ptitle) {
-    this.state.url = 'mailto:?' + 'subject=' + 'I wanted you to see this site;' + '&body=' + encodeURIComponent(purl) + 'text=' + encodeURIComponent(ptitle)
-    window.open(this.state.url, '', 'toolbar=0,status=0,width=626,height=436')
-  }
   render () {
     return (
       <div className={'share-icons ' + (this.props.className ? this.props.className : '')}>
