@@ -7,7 +7,7 @@
   "author": "",
   "scripts": {
     "start": "webpack-dev-server --history-api-fallback --hot --inline --module-bind 'css=style!css'",
-    "build": "webpack --progress"
+    "build": "webpack -p --progress"
   },
   "devDependencies": {
     "antd": "^2.12.0",

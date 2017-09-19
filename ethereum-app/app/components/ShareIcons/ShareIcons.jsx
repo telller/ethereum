@@ -44,11 +44,6 @@ class ShareIcons extends React.Component {
               : 'icon-default icon-google-plus'}>
           <i className='fa fa-google-plus' aria-hidden='true' />
         </Button>
-        <Button onClick={() => this.email(this.props.url, this.props.title)} className={this.state.showIcons
-              ? 'icon-default icon-envelope icon-visible'
-              : 'icon-default icon-envelope'}>
-          <i className='fa fa-envelope' aria-hidden='true' />
-        </Button>
       </div>
     )
   }
