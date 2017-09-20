@@ -34,7 +34,7 @@ class SingleDomain extends Component {
               <b>Categories:</b>
               {
                 this.props.data.categories.map(
-                  (item, index) => <Tag key={index} color="blue">{item}</Tag>
+                  (item, index) => <Tag key={index} color='blue'>{item}</Tag>
                 )
               }
             </div>)

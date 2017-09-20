@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { Link, browserHistory } from 'react-router'
 import Buy from '../buy/buy.jsx'
 import SingleDomain from '../SingleDomain/SingleDomain.jsx'
+import Categories from '../Categories/Categories.jsx'
 import WooCommerce from '../WooCommerce/WooCommerce.js'
 import Domain from '../Domain.jsx'
 import './table.styl'
@@ -22,7 +23,8 @@ class GraphTable extends Component {
       },
       isBuyModalVisible: false,
       isDomainInfoModalVisible: false,
-      selected: null
+      selected: null,
+      limitCategories: 3
     }
     this.buy = this.buy.bind(this)
   }
@@ -103,6 +105,21 @@ class GraphTable extends Component {
     this.setState({isDomainInfoModalVisible: false})
   }
 
+  componentDidMount () {
+    const widthCategories = document.querySelector('.ant-table-thead > tr > th:nth-child(3)').clientWidth
+    let limitCategories = 3
+    if (widthCategories > 310) {
+      limitCategories = 3
+    } else if (widthCategories > 260) {
+      limitCategories = 2
+    } else if (widthCategories > 200) {
+      limitCategories = 1
+    } else limitCategories = 0
+    this.setState({
+      limitCategories: limitCategories
+    })
+  }
+
   render () {
     const checkFind = this.props.data.filter(item => ~item.name.search(this.props.findDomain)).length > 0
     const columns = [
@@ -114,7 +131,7 @@ class GraphTable extends Component {
           <div onClick={() => this.onSelectDomain(domain)}>
             <Link to={'/' + name} >{name}</Link>
           </div>,
-        width: '30%'
+        width: '35%'
       },
       {
         title: 'Price (ETH)',
@@ -136,23 +153,19 @@ class GraphTable extends Component {
           }
           return <span className={classColor}>{text}</span>
         },
-        width: '20%'
+        width: '15%'
       },
       {
         title: 'Categories',
         dataIndex: 'categories',
         render: (categories, record, cellKey) =>
-          <div key={cellKey} className='name-categories'>
-            {
-              categories.map((item, index) => <span key={index}>{item}</span>)
-            }
-          </div>,
-        width: '5%'
+          <Categories key={cellKey} data={categories} limit={this.state.limitCategories} />,
+        width: '40%'
       },
       {
         title: 'Buy',
         dataIndex: 'buy',
-        width: '8%',
+        width: '10%',
         onCellClick: selected => {
           this.setState({
             isBuyModalVisible: true,
