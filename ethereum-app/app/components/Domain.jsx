@@ -5,7 +5,6 @@ class Domain {
     this.price = obj.price
     this.wallet = obj.attributes[0] && obj.attributes[0].options[0].toLowerCase()
     this.categories = obj.categories.map(item => item.name.toLowerCase())
-    this.description = obj.description
     this.status = obj.status
   }
 }

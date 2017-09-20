@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Modal } from 'antd'
+import { Modal, Tag } from 'antd'
 import ReactHtmlParser from 'react-html-parser'
 import ShareIcons from '../ShareIcons/ShareIcons.jsx'
 import './SingleDomain.styl'
@@ -15,7 +15,7 @@ class SingleDomain extends Component {
     return (
       <Modal
         className='domain-info-modal'
-        width={600}
+        width={500}
         visible
         title='Domain Info:'
         onCancel={this.props.onCancel}
@@ -24,7 +24,6 @@ class SingleDomain extends Component {
         <div className='single-domain'>
           <img className='domain-logo' src={imgDomain} alt='Ethereum domain' />
           <h2 className='domain-name'>{this.props.data.name}</h2>
-          <ShareIcons className='domain-share-icons' url={location.href} />
           {
             !!Number(this.props.data.price) && <div><b>Price:</b> {this.props.data.price} ETH</div>
           }
@@ -33,21 +32,14 @@ class SingleDomain extends Component {
             !!this.props.data.categories.length && (
             <div className='domain-categories'>
               <b>Categories:</b>
-              <ul className='domain-list-categories'>
-                {
-                  this.props.data.categories.map(
-                    (item, index) => <li key={index}>{item}</li>
-                  )
-                }
-              </ul>
+              {
+                this.props.data.categories.map(
+                  (item, index) => <Tag key={index} color="blue">{item}</Tag>
+                )
+              }
             </div>)
           }
-          <div className='domain-description'>
-            <b>Description:</b>
-            <div className='domain-text-description'>
-              {ReactHtmlParser(this.props.data.description)}
-            </div>
-          </div>
+          <ShareIcons className='domain-share-icons' url={location.href} />
         </div>
       </Modal>
     )
