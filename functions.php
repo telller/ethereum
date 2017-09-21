@@ -43,4 +43,17 @@
   add_filter('pre_site_transient_update_core','remove_core_updates');
   add_filter('pre_site_transient_update_plugins','remove_core_updates');
   add_filter('pre_site_transient_update_themes','remove_core_updates');
+  //Removes links
+add_filter( 'woocommerce_product_is_visible','product_invisible');
+function product_invisible(){
+    return false;
+}
+
+//Remove single page
+add_filter( 'woocommerce_register_post_type_product','hide_product_page',12,1);
+function hide_product_page($args){
+    $args["publicly_queryable"]=false;
+    $args["public"]=false;
+    return $args;
+}
 ?>
