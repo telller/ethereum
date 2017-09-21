@@ -13,6 +13,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path='/:domain' component={Home} />
+      <Route path='/domains/:domain' component={Home} />
       <Route path='*' component={Home} />
     </Router>
   </Provider>,

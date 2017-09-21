@@ -130,7 +130,7 @@ class GraphTable extends Component {
         sorter: (a, b) => a.name < b.name ? -1 : a.name > b.name,
         render: (name, domain) =>
           <div onClick={() => this.onSelectDomain(domain)}>
-            <Link to={'/' + name} >{name}</Link>
+            <Link to={'/domains/' + name} >{name}</Link>
           </div>,
         width: '35%'
       },

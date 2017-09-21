@@ -39,7 +39,7 @@ class SingleDomain extends Component {
               }
             </div>)
           }
-          <ShareIcons className='domain-share-icons' url={location.href} />
+          <ShareIcons className='domain-share-icons' url={this.props.data.link} />
         </div>
       </Modal>
     )
