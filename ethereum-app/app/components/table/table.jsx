@@ -1,4 +1,4 @@
-import { Row, Col, Icon, Table, Radio, Modal } from 'antd'
+import { Row, Col, Icon, Table, Radio, Modal, Spin } from 'antd'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -122,6 +122,7 @@ class GraphTable extends Component {
 
   render () {
     const checkFind = this.props.data.filter(item => ~item.name.search(this.props.findDomain)).length > 0
+    const hasData = this.props.data.length === 0 && !this.props.findDomain
     const columns = [
       {
         title: '.eht Name',
@@ -179,7 +180,6 @@ class GraphTable extends Component {
         )
       }
     ]
-
     return (
       <Row id='graphTable'>
         <Col className='table'>
@@ -191,7 +191,10 @@ class GraphTable extends Component {
             dataSource={this.props.data}
             pagination={this.state.pagination}
           />
-          <div className={'table-footer ' + (checkFind ? '' : 'not-found')}>
+          <div className={'table-spinner ' + (hasData ? '' : 'hidden-display')}>
+            <Spin size='large' />
+          </div>
+          <div className={'table-footer ' + (hasData ? 'hidden-display' : (checkFind ? '' : 'not-found'))}>
             <p className={checkFind ? 'table-footer-search' : null}>Not found!</p>
             <Radio.Group className={checkFind ? 'btn-page-size' : 'btn-page-size-none'} defaultValue={this.state.pagination.pageSize} onChange={e => this.changeSizePage(e)}>
               <Radio.Button value={20}>20</Radio.Button>
