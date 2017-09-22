@@ -1,6 +1,3 @@
-<?php
-  header("HTTP/1.1 200 OK");
-?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
   <head>
@@ -11,9 +8,6 @@
     <script type="text/javascript">(function(a,l,b,c,r,s){_nQc=c,r=a.createElement(l),s=a.getElementsByTagName(l)[0];r.async=1;
     r.src=l.src=("https:"==a.location.protocol?"https://":"http://")+b;s.parentNode.insertBefore(r,s);
     })(document,"script","serve.albacross.com/track.js","89208293");</script>
-    <script type="text/javascript">
-      document.title = 'Ensdomains - site for buying ENS domains | Ens deals'
-    </script>
     <link rel="shortcut icon" href="/wp-content/themes/ethereum_theme/ethereum-app/dist/media/favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="/wp-content/themes/ethereum_theme/ethereum-app/dist/bundle.css" rel="stylesheet"/>
