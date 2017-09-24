@@ -26,7 +26,8 @@ module.exports = {
     "indent": [2,2],
     "linebreak-style": [
       "error",
-      "windows"
+      "windows",
+      "unix"
     ],
     "quotes": [
       "error",

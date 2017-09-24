@@ -1,0 +1,803 @@
+#faq-body {
+  position: relative;
+  z-index: 1;
+}
+#faq-body .body .info {
+  padding: 0 10px;
+  background-color: #fff;
+  color: #555;
+}
+#faq-body .body .info .info-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+#faq-body .body .info ol {
+  list-style: decimal inside;
+}
+#faq-body .body .info ol li {
+  padding: 10px 0;
+}
+#sell {
+  font-size: 18px;
+  color: #444;
+}
+#sell .form {
+  margin: 0 25px;
+  padding: 25px 0;
+}
+#sell .form .ant-input-affix-wrapper {
+  margin-bottom: 10px;
+}
+#sell .form .ant-input-affix-wrapper > input {
+  font-size: 16px;
+  height: auto;
+  padding: 5px 10px 5px 30px;
+}
+#sell .form .ant-input-affix-wrapper .ant-input-prefix {
+  font-weight: bold;
+}
+#sell .form .sell-domain > div input {
+  margin-bottom: 10px;
+  font-size: 16px;
+  height: auto;
+  padding: 5px 10px;
+}
+#sell .form .sell-domain > div .ant-input-number {
+  width: auto;
+  height: 36px;
+}
+#sell .form .sell-domain > div:first-child {
+  padding-right: 10px;
+}
+#sell .form .btn-add {
+  text-align: center;
+}
+#sell .form .btn-add button {
+  width: 35px;
+  height: 35px;
+}
+#sell .form .btn-add button .anticon {
+  font-weight: bold;
+  font-size: 18px;
+}
+#sell .form textarea {
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+#contact {
+  font-size: 18px;
+  color: #444;
+}
+#contact .form {
+  margin: 0 25px;
+  padding: 25px 0;
+}
+#contact .form .ant-input-affix-wrapper {
+  margin-bottom: 10px;
+}
+#contact .form .ant-input-affix-wrapper > input {
+  font-size: 16px;
+  height: auto;
+  padding: 5px 10px 5px 30px;
+}
+#contact .form .ant-input-affix-wrapper .ant-input-prefix {
+  font-weight: bold;
+}
+#contact .form textarea {
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+#menu {
+  z-index: -5;
+}
+#menu a {
+  display: inline-block;
+  text-decoration: none;
+}
+#menu .menu-item {
+  cursor: pointer;
+}
+#menu .menu-item .dot {
+  background-color: #405064;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  margin: 0 3px 3px 7px;
+}
+#menu .menu-item .text {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #405064;
+  font-family: 'Roboto', sans-serif;
+}
+#menu .menu-item .text .anticon {
+  padding-right: 5px;
+}
+@media only screen and (min-width: 0) {
+  #menu {
+    box-shadow: inset 2px 2px 20px 0px rgba(83,92,127,0.5), 0px 2px 20px 0px rgba(83,92,127,0.8);
+  }
+  #menu .menu-fold {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+  }
+  #menu .menu-fold img {
+    cursor: pointer;
+    height: 20px;
+  }
+  #menu .menu-unfold {
+    display: none;
+  }
+  #menu .all-menu-items {
+    padding: 5px 0;
+  }
+  #menu .all-menu-items .menu-item {
+    font-size: 14px;
+    padding: 3px;
+    text-align: center;
+    display: block;
+    height: 100%;
+  }
+  #menu .all-menu-items .menu-item .dot {
+    display: none;
+  }
+}
+@media only screen and (min-width: 48em) {
+  #menu {
+    box-shadow: none;
+    float: right;
+  }
+  #menu .menu-fold {
+    display: none;
+  }
+  #menu .all-menu-items {
+    padding-right: 10px;
+  }
+  #menu .all-menu-items .menu-item {
+    font-size: 16px;
+    display: inline-block;
+  }
+  #menu .all-menu-items .menu-item .dot {
+    display: inline-block;
+  }
+  #menu .menu-unfold {
+    display: block;
+  }
+}
+#search {
+  display: inline-block;
+  margin: 16px 15px;
+}
+#search .ant-input-affix-wrapper {
+  width: 110%;
+}
+#search .ant-input-prefix {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ccc;
+  left: 13px;
+}
+#search .ant-input:not(:first-child) {
+  padding-left: 35px;
+}
+#search input {
+  color: #505050;
+  font-size: 16px;
+  border-radius: 20px;
+}
+#search input:focus,
+#search input:hover {
+  border-color: #d9d9d9;
+  outline: none;
+  box-shadow: none;
+}
+@media only screen and (min-width: 48em) {
+  #search .ant-input-affix-wrapper {
+    width: 250px;
+  }
+}
+@media only screen and (min-width: 750px) {
+  #search .ant-input-affix-wrapper {
+    width: 110%;
+  }
+}
+#header {
+  top: 0;
+  height: 60px;
+  position: fixed;
+  background-color: #8a92b2;
+  width: 100%;
+  height: 60px;
+  z-index: 5;
+  box-shadow: 0px 2px 20px 0px rgba(83,92,127,0.8);
+}
+#header .search-domains {
+  position: absolute;
+  text-align: center;
+}
+#header .search-domains input {
+  width: 100%;
+}
+#header .title-logo {
+  height: 60px;
+}
+#header .title-logo .header-logo {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  background-color: #535c7f;
+}
+#header .title-logo .header-logo img {
+  width: 35px;
+}
+#header .title-logo .title {
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+@media only screen and (min-width: 0) {
+  #header .search-domains {
+    top: 0px;
+    right: 35px;
+    left: 160px;
+  }
+  #header .main-menu {
+    background-color: #ececec;
+    height: 100%;
+  }
+  #header .title-logo {
+    width: 100%;
+    background-color: #535c7f;
+  }
+  #header .title-logo .header-logo {
+    padding-left: 15px;
+    padding-top: 10px;
+  }
+  #header .title-logo .title {
+    color: #fff;
+    width: 200px;
+    padding-top: 18px;
+  }
+}
+@media only screen and (min-width: 550px) {
+  #header {
+    background-color: #535c7f;
+  }
+  #header .main-menu {
+    margin-top: 60px;
+  }
+  #header .search-domains {
+    left: 220px;
+  }
+  #header .title-logo {
+    position: fixed;
+    width: auto;
+    top: 0;
+  }
+  #header .title-logo .title {
+    color: #fff;
+    width: 200px;
+    padding-top: 18px;
+  }
+}
+@media only screen and (min-width: 48em) {
+  #header .search-domains {
+    right: 350px;
+    left: 250px;
+  }
+  #header .main-menu {
+    padding-top: 11px;
+    padding-right: 0;
+    background-color: #ececec;
+    margin-top: 0;
+    height: 60px;
+  }
+  #header .title-logo {
+    background-color: transparent;
+  }
+  #header .title-logo .title {
+    background-color: transparent;
+    width: 200px;
+    color: #405064;
+    padding-left: 15px;
+    padding-top: 18px;
+  }
+}
+#buy {
+  font-size: 18px;
+  color: #444;
+}
+#buy .table-domains {
+  width: 100%;
+  border-collapse: collapse;
+}
+#buy .table-domains tbody > tr {
+  border: thin solid #ccc;
+}
+#buy .table-domains tbody > tr td {
+  padding: 10px 0;
+}
+#buy .table-domains tbody > tr td:first-child {
+  padding-left: 15px;
+}
+#buy .table-domains tbody > tr td:last-child {
+  margin-right: 15px;
+}
+#buy .table-domains tbody > tr .name-title {
+  width: 110px;
+  color: #999;
+}
+#buy .table-domains tbody > tr .price {
+  float: right;
+  position: relative;
+  padding-right: 20px;
+}
+#buy .table-domains tbody > tr .price .eth {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  color: #999;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#buy .contact-form {
+  margin: 25px 20px 0 20px;
+  padding-bottom: 25px;
+}
+#buy .contact-form .ant-form-item-control-wrapper {
+  margin-bottom: 10px;
+}
+#buy .contact-form .ant-form-item-control-wrapper input {
+  font-size: 16px;
+  height: auto;
+  padding: 5px 10px;
+}
+#buy .contact-form .ant-form-item-control-wrapper .ant-input-number {
+  width: 100%;
+  height: 36px;
+}
+#buy .contact-form .ant-input-affix-wrapper {
+  margin-bottom: 10px;
+}
+#buy .contact-form .ant-input-affix-wrapper input {
+  font-size: 16px;
+  height: auto;
+  padding: 5px 10px 5px 30px;
+}
+#buy .contact-form .ant-input-affix-wrapper .ant-input-prefix {
+  font-weight: bold;
+}
+#buy .contact-form textarea {
+  font-size: 16px;
+  padding: 5px;
+}
+.share-icons {
+  position: relative;
+}
+.share-icons .icon-default {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 8px 18px -3px rgba(0,0,0,0.35);
+}
+.share-icons .icon-default .fa {
+  color: #fff;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  left: 0;
+  right: 0;
+}
+.share-icons .icon-share {
+  z-index: 100;
+}
+.share-icons .icon-share.light-shadow {
+  box-shadow: 1px 2px 4px 0 rgba(0,0,0,0.1);
+}
+.share-icons .ant-btn.icon-facebook {
+  background-color: #3b5998;
+  z-index: 100;
+}
+.share-icons .ant-btn.icon-facebook:active,
+.share-icons .ant-btn.icon-facebook:focus,
+.share-icons .ant-btn.icon-facebook:active:focus {
+  background-color: #3b5998;
+}
+.share-icons .ant-btn.icon-twitter {
+  background-color: #00aced;
+  z-index: 100;
+}
+.share-icons .ant-btn.icon-twitter:active:focus {
+  background-color: #00aced;
+}
+.share-icons .ant-btn.icon-google-plus {
+  background-color: #dd4b39;
+  z-index: 100;
+}
+.share-icons .ant-btn.icon-google-plus:active:focus {
+  background-color: #dd4b39;
+}
+.single-domain {
+  padding: 30px;
+  font-size: 14px;
+  color: #555;
+}
+.single-domain > div {
+  padding-top: 10px;
+}
+.single-domain .domain-logo {
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+}
+.single-domain .domain-name {
+  text-align: center;
+  color: #4876a9;
+  font-size: 20px;
+}
+.single-domain .domain-share-icons {
+  padding-top: 10px;
+  text-align: center;
+}
+.single-domain .domain-wallet {
+  word-break: break-all;
+}
+.single-domain .domain-categories b {
+  margin-right: 8px;
+}
+.single-domain .domain-categories .ant-tag {
+  margin-bottom: 8px;
+}
+.categories .ant-tag {
+  margin: 5px;
+}
+#graphTable {
+  z-index: 1;
+  margin-top: 60px;
+}
+#graphTable .table {
+  background-color: #fff;
+  margin: 0 auto;
+  max-width: 800px;
+}
+#graphTable .table-spinner {
+  height: 690px;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+#graphTable .tableDomains .ant-table {
+  border-radius: 0;
+}
+#graphTable .tableDomains .ant-table table {
+  border-collapse: collapse;
+  border-radius: 0;
+}
+#graphTable .tableDomains .ant-table tr {
+  height: 30px;
+}
+#graphTable .tableDomains .ant-table thead > tr > th {
+  position: relative;
+  color: #444;
+  background-color: #ededed;
+  border: 1px solid #e4e4e4;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+}
+#graphTable .tableDomains .ant-table thead > tr > th:last-child {
+  border-right: none;
+}
+#graphTable .tableDomains .ant-table thead > tr > th:first-child {
+  border-left: none;
+}
+#graphTable .tableDomains .ant-table .ant-table-column-sorter {
+  position: absolute;
+  margin-top: 5px;
+  right: 5px;
+}
+#graphTable .tableDomains .ant-table .ant-table-column-sorter .off i {
+  color: #ccc;
+}
+#graphTable .tableDomains .ant-table .ant-table-column-sorter .on i {
+  color: #232a40;
+}
+#graphTable .tableDomains tbody tr > td {
+  font-size: 13px;
+  border-bottom: none;
+  text-align: center;
+  padding: 0;
+  border-right: 1px solid #e4e4e4;
+  background-color: #fff;
+  color: #555;
+}
+#graphTable .tableDomains tbody tr > td .buy {
+  cursor: pointer;
+}
+#graphTable .tableDomains tbody tr > td:last-child {
+  border-right: none;
+}
+#graphTable .tableDomains tbody tr > td .defaultCell {
+  display: block;
+  padding: 6px 8px;
+}
+#graphTable .tableDomains tbody tr > td .bgPrice5000 {
+  background-color: #d7dae5;
+}
+#graphTable .tableDomains tbody tr > td .bgPrice1000 {
+  background-color: #e3e5ed;
+}
+#graphTable .tableDomains tbody tr > td .bgPrice100 {
+  background-color: #edeff4;
+}
+#graphTable .tableDomains tbody tr > td .bgPrice10 {
+  background-color: #fbfbfc;
+}
+#graphTable .tableDomains .ant-pagination {
+  position: absolute;
+  z-index: 100;
+  margin: 10px;
+  bottom: -38px;
+}
+#graphTable .tableDomains .ant-pagination li {
+  font: bold 13px/20px 'Roboto', sans-serif;
+  margin: 3px;
+  background: none;
+  height: 20px;
+  min-width: 20px;
+  border: none;
+}
+#graphTable .tableDomains .ant-pagination li a {
+  border: none;
+  color: #777;
+}
+#graphTable .tableDomains .ant-pagination li a:after {
+  height: 20px;
+  line-height: 20px;
+}
+#graphTable .tableDomains .ant-pagination .ant-pagination-item-active {
+  border-radius: 50%;
+  background-color: #232a40;
+}
+#graphTable .tableDomains .ant-pagination .ant-pagination-item-active a {
+  color: #fff;
+}
+#graphTable .tableDomains .ant-pagination .ant-pagination-options-quick-jumper {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding-left: 8px;
+  padding-bottom: 20px;
+  font-weight: bold;
+  background-color: #fafafa;
+  height: 20px;
+  line-height: 20px;
+}
+#graphTable .tableDomains .ant-pagination .ant-pagination-options-quick-jumper input {
+  background-color: #fff;
+  border: none;
+  border-left: 1px solid #ccc;
+  border-radius: 0 20px 20px 0;
+  width: 35px;
+  margin: 0 0 0 5px;
+  height: 18px;
+}
+#graphTable .tableDomains .ant-pagination .ant-pagination-options-quick-jumper input:focus {
+  outline: none;
+  box-shadow: none;
+}
+#graphTable .btn-page-size {
+  position: absolute;
+}
+#graphTable .btn-page-size label {
+  background: none;
+  height: 100%;
+  font: bold 13px/20px 'Roboto', sans-serif;
+  color: #777;
+  border: none;
+}
+#graphTable .btn-page-size .ant-radio-button-wrapper-checked {
+  color: #fff;
+  border-radius: 20px;
+  background-color: #232a40;
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+#graphTable .btn-page-size .ant-radio-button-wrapper:not(:first-child)::before {
+  background: none;
+}
+#graphTable .btn-page-size-none {
+  display: none;
+}
+#graphTable .ant-table-placeholder {
+  display: none;
+}
+#graphTable .table-footer {
+  z-index: 20;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  background-color: #fff;
+  padding-top: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #777;
+}
+#graphTable .table-footer .table-footer-search {
+  display: none;
+}
+#graphTable .not-found {
+  position: static;
+}
+@media only screen and (min-width: 0) {
+  #graphTable .formSearch {
+    height: 130px;
+    padding-top: 25px;
+  }
+  #graphTable .formSearch .ant-form-item-control-wrapper {
+    display: block;
+  }
+  #graphTable .formSearch input {
+    width: 100%;
+  }
+  #graphTable .tableDomains .ant-pagination {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+  }
+  #graphTable .btn-page-size {
+    top: 45px;
+    left: 0;
+    right: 0;
+  }
+  #graphTable .btn-page-size .ant-radio-button-wrapper-checked {
+    color: #fff;
+    border-radius: 20px;
+    background-color: #232a40;
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  #graphTable .table-footer {
+    height: 78px;
+  }
+  #graphTable .not-found {
+    height: 50px;
+  }
+}
+@media only screen and (min-width: 550px) {
+  #graphTable .formSearch {
+    height: 100px;
+    padding-top: 10px;
+  }
+  #graphTable .formSearch .ant-form-item-control-wrapper {
+    display: block;
+  }
+  #graphTable .formSearch input {
+    width: 100%;
+  }
+  #graphTable .tableDomains .ant-table table thead > tr > th:nth-child(3) .ant-table-column-sorter {
+    top: auto;
+    right: 5px;
+  }
+  #graphTable .tableDomains .ant-pagination {
+    left: 10px;
+    right: auto;
+    margin: 0;
+  }
+  #graphTable .btn-page-size {
+    top: 15px;
+    right: 10px;
+    left: auto;
+  }
+  #graphTable .btn-page-size .ant-radio-button-wrapper-checked {
+    color: #fff;
+    border-radius: 20px;
+    background-color: #232a40;
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  #graphTable .table-footer {
+    height: 48px;
+  }
+}
+@media only screen and (min-width: 48em) {
+  #graphTable .formSearch {
+    height: 100px;
+    padding-top: 35px;
+  }
+  #graphTable .formSearch .ant-form-item-control-wrapper {
+    display: inline-block;
+  }
+  #graphTable .formSearch input {
+    width: 500px;
+  }
+  #graphTable .tableDomains .ant-table table tbody tr > td:last-child {
+    padding: 0;
+    text-align: center;
+  }
+  #graphTable .btn-page-size {
+    top: 15px;
+    right: 10px;
+    left: auto;
+  }
+  #graphTable .btn-page-size .ant-radio-button-wrapper-checked {
+    color: #fff;
+    border-radius: 20px;
+    background-color: #232a40;
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+}
+body {
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #8a92b2;
+}
+body a:focus {
+  text-decoration: none;
+}
+body #root {
+  height: 100%;
+  overflow-y: auto;
+}
+.hidden-opacity {
+  opacity: 0;
+}
+.hidden-display {
+  display: none !important;
+}
+h1 {
+  margin: 0;
+}
+.ant-modal-mask {
+  background-color: rgba(83,92,127,0.8) !important;
+}
+.ant-modal-header {
+  padding: 15px;
+}
+.ant-modal-header .ant-modal-title {
+  text-transform: uppercase;
+  font-size: 18px;
+  color: #444;
+}
+.sell-modal .ant-modal-body,
+.buy-modal .ant-modal-body,
+.contact-modal .ant-modal-body,
+.domain-info-modal .ant-modal-body {
+  padding: 0;
+  background-color: #ededed;
+}
+.sell-modal .ant-modal-footer,
+.buy-modal .ant-modal-footer,
+.contact-modal .ant-modal-footer,
+.domain-info-modal .ant-modal-footer {
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  text-align: center;
+  color: #fff;
+  background-color: #535c7f;
+  text-transform: uppercase;
+}
+
+/*# sourceMappingURL=bundle.css.map*/
