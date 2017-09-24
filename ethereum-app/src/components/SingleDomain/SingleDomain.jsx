@@ -4,7 +4,7 @@ import { Modal, Tag } from 'antd'
 import ReactHtmlParser from 'react-html-parser'
 import ShareIcons from '../ShareIcons/ShareIcons.jsx'
 import './SingleDomain.styl'
-import imgDomain from '../../../dist/media/Ethereum.png'
+import imgDomain from 'media/Ethereum.png'
 
 class SingleDomain extends Component {
   constructor (props) {
@@ -12,6 +12,7 @@ class SingleDomain extends Component {
   }
 
   render () {
+    console.log(imgDomain);
     return (
       <Modal
         className='domain-info-modal'
