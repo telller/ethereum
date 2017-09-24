@@ -1,4 +1,5 @@
 ethereum-app/node_modules
+ethereum-app/dist/opt
 ethereum-app/dist/bundle.css
 ethereum-app/dist/bundle.js
 .idea
