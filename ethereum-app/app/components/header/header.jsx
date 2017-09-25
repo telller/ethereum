@@ -21,7 +21,7 @@ class Header extends React.Component {
               <img src={logo} />
             </Col>
             <Col span={6} >
-              <h1 className='title'>Ensdomains</h1>
+              <h1 className='title'>ENS domains</h1>
             </Col>
           </div>
           <Col className='main-menu'>
