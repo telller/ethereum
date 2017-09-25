@@ -25,19 +25,13 @@ class ShareIcons extends React.Component {
   render () {
     return (
       <div className={'share-icons ' + (this.props.className ? this.props.className : '')}>
-        <Button onClick={() => this.facebook(this.props.url, this.props.title)} className={this.state.showIcons
-              ? 'icon-default icon-facebook icon-visible'
-              : 'icon-default icon-facebook'}>
+        <Button onClick={() => this.facebook(this.props.url, this.props.title)} className={'icon-default icon-facebook ' + (this.state.showIcons ? 'icon-visible' : '')}>
           <i className='fa fa-facebook' aria-hidden='true' />
         </Button>
-        <Button onClick={() => this.twitter(this.props.url, this.props.title)} className={this.state.showIcons
-              ? 'icon-default icon-twitter icon-visible'
-              : 'icon-default icon-twitter'}>
+        <Button onClick={() => this.twitter(this.props.url, this.props.title)} className={'icon-default icon-twitter ' + (this.state.showIcons ? 'icon-visible' : '')}>
           <i className='fa fa-twitter' aria-hidden='true' />
         </Button>
-        <Button onClick={() => this.googleplus(this.props.url, this.props.title)} className={this.state.showIcons
-              ? 'icon-default icon-google-plus icon-visible'
-              : 'icon-default icon-google-plus'}>
+        <Button onClick={() => this.googleplus(this.props.url, this.props.title)} className={'icon-default icon-google-plus ' + (this.state.showIcons ? 'icon-visible' : '')}>
           <i className='fa fa-google-plus' aria-hidden='true' />
         </Button>
       </div>
@@ -46,7 +40,8 @@ class ShareIcons extends React.Component {
 }
 
 ShareIcons.defaultProps = {
-  title: 'Ensdomains - site for buying ENS domains'
+  url: location.origin,
+  title: 'Buy or Sell ENS .eth Domains. Blockchain Domains Market.'
 }
 
 ShareIcons.propTypes = {

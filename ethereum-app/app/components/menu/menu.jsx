@@ -3,6 +3,7 @@ import { Icon, Modal } from 'antd'
 import Faq from '../faq/faq.jsx'
 import Sell from '../sell/sell.jsx'
 import Contact from '../contact/contact.jsx'
+import ShareIcons from '../ShareIcons/ShareIcons.jsx'
 import './menu.styl'
 import menu_icon from '../../../dist/media/menu-icon.png'
 import menu_icon_close from '../../../dist/media/menu-icon-close.png'
@@ -14,6 +15,7 @@ class MainMenu extends Component {
       isContactModalVisible: false,
       isSellModalVisible: false,
       isFAQModalVisible: false,
+      isShareVisible: true,
       isFoldingMenu: false
     }
     this.contact = this.contact.bind(this)
@@ -99,13 +101,21 @@ class MainMenu extends Component {
     })
   }
 
+  handleShareVisible () {
+    this.setState(
+      (prevState, props) => {
+        return { isShareVisible: !prevState.isShareVisible }
+      }
+    )
+  }
+
   render () {
     return (
       <div id='menu'>
         <div className='menu-fold' onClick={() => this.menu()}>
-          <img src={this.state.isFoldingMenu ? menu_icon_close : menu_icon} alt='Menu' />
+          <img src={this.state.isFoldingMenu ? menu_icon_close : menu_icon} alt='Menu icon' />
         </div>
-        <div className={'all-menu-items ' + (this.state.isFoldingMenu ? null : 'menu-unfold')}>
+        <div className={'all-menu-items ' + (this.state.isFoldingMenu ? '' : 'menu-unfold ')}>
           <div className='menu-item' onClick={() => { this.setState({ isSellModalVisible: true }) }}>
             <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
           </div>
@@ -113,8 +123,12 @@ class MainMenu extends Component {
             <div className='text'><Icon type='mail' />Contact Us<span className='dot' /></div>
           </div>
           <div className='menu-item' onClick={() => this.faq()}>
-            <div className='text'><Icon type='question-circle-o' />faq</div>
+            <div className='text'><Icon type='question-circle-o' />faq<span className='dot' /></div>
           </div>
+          <div className={'menu-item ' + (this.state.isFoldingMenu ? 'hidden-display' : '')}>
+            <div className='text'><Icon type='share-alt' className='menu-share' onClick={() => this.handleShareVisible()} /></div>
+          </div>
+          <ShareIcons className={'menu-share-icons ' + (this.state.isShareVisible && !this.state.isFoldingMenu ? 'hidden-display' : '')} />
         </div>
         {
           this.state.isSellModalVisible && (
