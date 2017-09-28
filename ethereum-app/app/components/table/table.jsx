@@ -24,18 +24,29 @@ class GraphTable extends Component {
       isBuyModalVisible: false,
       isDomainInfoModalVisible: false,
       selected: null,
-      limitCategories: 3
+      limitCategories: 3,
+      listCategories: [],
+      switchSorted: {
+        order: 'descend',
+        columnKey: 'price'
+      }
     }
-    this.buy = this.buy.bind(this)
   }
 
-  changeSizePage (e) {
+  static propTypes = {
+    findDomain: PropTypes.string,
+    data: PropTypes.array,
+    onLoadDomains: PropTypes.func,
+    domain: PropTypes.string
+  }
+
+  changeSizePage = e => {
     this.setState({
       pagination: {pageSize: e.target.value}
     })
   }
 
-  buy (values) {
+  buy = values => {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
 
@@ -69,8 +80,20 @@ class GraphTable extends Component {
     this.setState({ isBuyModalVisible: false })
   }
 
-  componentWillMount () {
+  componentWillMount = () => {
     this.props.onLoadDomains()
+
+    WooCommerce.getAsync('products/categories?per_page=100').then(categories => {
+      const filter = JSON.parse(categories.toJSON().body).map(item => {
+        let tmp = {}
+        tmp.text = item.name
+        tmp.value = item.name
+        return tmp
+      })
+      this.setState({
+        listCategories: filter
+      })
+    })
 
     if (this.props.domain !== 'home' && this.props.data) {
       let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
@@ -93,19 +116,19 @@ class GraphTable extends Component {
     }
   }
 
-  onSelectDomain (domain) {
+  onSelectDomain = domain => {
     this.setState({
       selected: domain,
       isDomainInfoModalVisible: true
     })
   }
 
-  closeModalDomainInfo () {
+  closeModalDomainInfo = () => {
     browserHistory.push('/')
     this.setState({isDomainInfoModalVisible: false})
   }
 
-  componentDidMount () {
+  componentDidMount = () => {
     const widthCategories = document.querySelector('.ant-table-thead > tr > th:nth-child(3)').clientWidth
     let limitCategories = 3
     if (widthCategories > 310) {
@@ -114,9 +137,15 @@ class GraphTable extends Component {
       limitCategories = 2
     } else if (widthCategories > 200) {
       limitCategories = 1
-    } else limitCategories = 0
+    } else limitCategories = 1
     this.setState({
       limitCategories: limitCategories
+    })
+  }
+
+  handleChangeTable = (pagination, filters, sorter) => {
+    this.setState({
+      switchSorted: sorter
     })
   }
 
@@ -128,6 +157,7 @@ class GraphTable extends Component {
         title: '.eht Name',
         dataIndex: 'name',
         sorter: (a, b) => a.name < b.name ? -1 : a.name > b.name,
+        sortOrder: this.state.switchSorted.columnKey === 'name' && this.state.switchSorted.order,
         render: (name, domain) =>
           <div onClick={() => this.onSelectDomain(domain)}>
             <Link to={'/domains/' + name} >{name}</Link>
@@ -138,6 +168,7 @@ class GraphTable extends Component {
         title: 'Price (ETH)',
         dataIndex: 'price',
         sorter: (a, b) => a.price - b.price,
+        sortOrder: this.state.switchSorted.columnKey === 'price' && this.state.switchSorted.order,
         render: (text, selected) => {
           if (!Number(selected.price)) {
             return <a onClick={() => { this.setState({ isBuyModalVisible: true, selected }) }}>Make offer</a>
@@ -161,6 +192,8 @@ class GraphTable extends Component {
         dataIndex: 'categories',
         render: (categories, record, cellKey) =>
           <Categories key={cellKey} data={categories} limit={this.state.limitCategories} />,
+        filters: this.state.listCategories,
+        onFilter: (value, record) => record.categories.includes(value),
         width: '40%'
       },
       {
@@ -190,6 +223,7 @@ class GraphTable extends Component {
             rowKey='name'
             dataSource={this.props.data}
             pagination={this.state.pagination}
+            onChange={this.handleChangeTable}
           />
           <div className={'table-spinner ' + (hasData ? '' : 'hidden-display')}>
             <Spin size='large' />
@@ -204,27 +238,25 @@ class GraphTable extends Component {
           </div>
           {
             this.state.isBuyModalVisible && (
-              <Buy onOk={this.buy} onCancel={() => this.setState({isBuyModalVisible: false})} data={this.state.selected} />
+              <Buy
+                onOk={this.buy}
+                onCancel={() => this.setState({isBuyModalVisible: false})}
+                data={this.state.selected}
+              />
             )
           }
           {
             this.state.isDomainInfoModalVisible && (
               <SingleDomain
                 onCancel={() => this.closeModalDomainInfo()}
-                data={this.state.selected} />
+                data={this.state.selected}
+              />
             )
           }
         </Col>
       </Row>
     )
   }
-}
-
-GraphTable.propTypes = {
-  findDomain: PropTypes.string,
-  data: PropTypes.array,
-  onLoadDomains: PropTypes.func,
-  domain: PropTypes.string
 }
 
 const mapStateToProps = state => ({
