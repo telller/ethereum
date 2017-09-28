@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import './faq.styl'
 
 class Faq extends Component {
+  static propTypes = {
+    onCancel: PropTypes.func
+  }
   render () {
     return (
       <Modal
@@ -36,10 +39,6 @@ class Faq extends Component {
       </Modal>
     )
   }
-}
-
-Faq.propTypes = {
-  onCancel: PropTypes.func
 }
 
 export default Faq

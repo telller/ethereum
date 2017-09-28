@@ -1,15 +1,15 @@
 import { Input, Icon, Form, Modal } from 'antd'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import './contact.styl'
 
 class Contact extends Component {
-  constructor () {
-    super()
-    this.onOk = this.onOk.bind(this)
+  static propTypes = {
+    form: React.PropTypes.object,
+    onCancel: PropTypes.func,
+    onOk: PropTypes.func
   }
-  onOk () {
+  onOk = () => {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onOk(values)
@@ -27,7 +27,7 @@ class Contact extends Component {
         footer={
           <div onClick={this.onOk}><Icon type='message' /> | Send</div>
         }
-        >
+      >
         <div id='contact'>
           <div className='form'>
             <Form>
@@ -49,7 +49,7 @@ class Contact extends Component {
               <Form.Item>
                 {this.props.form.getFieldDecorator('comment')(
                   <Input.TextArea placeholder='Comment' autosize={{ minRows: 4, maxRows: 6 }} />
-                  )}
+                )}
               </Form.Item>
             </Form>
           </div>
@@ -59,20 +59,4 @@ class Contact extends Component {
   }
 }
 
-Contact.propTypes = {
-  form: React.PropTypes.object,
-  onCancel: PropTypes.func,
-  onOk: PropTypes.func
-}
-
-const mapStateToProps = state => ({
-
-})
-// TODO: Check if we need below
-const mapDispatchToProps = dispatch => ({
-  send: (payload, type) => { dispatch({ type, payload }) }
-})
-
-const component = connect(mapStateToProps, mapDispatchToProps)(Contact)
-
-export default Form.create()(component)
+export default Form.create()(Contact)

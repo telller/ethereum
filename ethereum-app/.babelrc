@@ -6,6 +6,7 @@
     "env"
   ],
   "plugins": [
+    ["import", { "libraryName": "antd", "style": "css" }],
     "transform-runtime"
   ],
   "env": {

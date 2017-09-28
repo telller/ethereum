@@ -5,27 +5,20 @@ import PropTypes from 'prop-types'
 import './sell.styl'
 
 class Sell extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      // countSellDomain: 1
-    }
-    this.onOk = this.onOk.bind(this)
+  static propTypes = {
+    onOk: PropTypes.func,
+    visible: PropTypes.bool,
+    onCancel: PropTypes.func,
+    form: PropTypes.object
   }
-
-  onOk () {
+  onOk = () => {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onOk(values)
       }
     })
   }
-
-  // clickSellAdd () {
-  //   this.setState({countSellDomain: this.state.countSellDomain + 1})
-  // }
-
-  componentWillReceiveProps () {
+  componentWillReceiveProps = () => {
     if (this.props.visible) {
       return
     }
@@ -37,12 +30,7 @@ class Sell extends Component {
       nameDomain: ''
     })
   }
-
   render () {
-    // let arr = new Array(this.state.countSellDomain)
-    // for (let i = 0; i < arr.length; i++) {
-    //   arr[i] = 0
-    // }
     return (
       <Modal
         title='Sell Names:'
@@ -73,8 +61,6 @@ class Sell extends Component {
                 })(<Input placeholder='E-mail' prefix={<Icon type='mail' />} />)
               }
             </Form.Item>
-            {/* {
-              arr.map((item, index) => ( */}
             <Row className='sell-domain'>
               <Col span={18}>
                 <Form.Item>
@@ -98,11 +84,6 @@ class Sell extends Component {
                 </Form.Item>
               </Col>
             </Row>
-            {/* ))
-            // }
-            <Row className='btn-add'>
-              <Button shape='circle' icon='plus' onClick={() => this.clickSellAdd()} />
-            </Row> */}
             <Form.Item>
               {
                 this.props.form.getFieldDecorator('comment')(
@@ -117,21 +98,4 @@ class Sell extends Component {
   }
 }
 
-Sell.propTypes = {
-  onOk: PropTypes.func,
-  visible: PropTypes.bool,
-  onCancel: PropTypes.func,
-  form: PropTypes.object
-}
-
-const mapStateToProps = state => ({
-
-})
-
-const mapDispatchToProps = dispatch => ({
-  send: (payload, type) => { dispatch({type, payload}) }
-})
-
-const component = connect(mapStateToProps, mapDispatchToProps)(Sell)
-
-export default Form.create()(component)
+export default Form.create()(Sell)

@@ -3,15 +3,9 @@ import MainMenu from '../menu/menu.jsx'
 import Search from '../search/search.jsx'
 import './header.styl'
 import { Row, Col } from 'antd'
-import logo from '../../../dist/media/logo.png'
+import logo from 'media/logo.png'
 
 class Header extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-
-    }
-  }
   render () {
     return (
       <header id='header'>

@@ -1,6 +1,5 @@
 import { Form, Icon, Input, InputNumber, Modal } from 'antd'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import './buy.styl'
 
@@ -10,9 +9,14 @@ class Buy extends Component {
     this.state = {
       isMakeOffer: !Number(props.data.price)
     }
-    this.onOk = this.onOk.bind(this)
   }
-  onOk () {
+  static propTypes = {
+    form: React.PropTypes.object,
+    onCancel: PropTypes.func,
+    data: PropTypes.object,
+    onOk: PropTypes.func
+  }
+  onOk = () => {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         values.price = values.price || this.props.data.price
@@ -75,16 +79,5 @@ class Buy extends Component {
     )
   }
 }
-Buy.propTypes = {
-  form: React.PropTypes.object,
-  onCancel: PropTypes.func,
-  data: PropTypes.object,
-  onOk: PropTypes.func
-}
-const mapStateToProps = state => ({
 
-})
-const mapDispatchToProps = dispatch => ({
-  send: (payload, type) => { dispatch({ type, payload }) }
-})
-export default Form.create()(connect(mapStateToProps, mapDispatchToProps)(Buy))
+export default Form.create()(Buy)

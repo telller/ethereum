@@ -6,6 +6,9 @@ import GraphTable from '../table/table.jsx'
 import enUS from 'antd/lib/locale-provider/en_US'
 
 class Home extends Component {
+  static propTypes = {
+    params: PropTypes.object
+  }
   render () {
     return (
       <div>
@@ -14,10 +17,6 @@ class Home extends Component {
       </div>
     )
   }
-}
-
-Home.propTypes = {
-  params: PropTypes.object
 }
 
 export default Home

@@ -5,10 +5,12 @@ import { connect } from 'react-redux'
 import './search.styl'
 
 class Search extends Component {
-  searchName (e) {
+  static propTypes = {
+    onFind: PropTypes.func
+  }
+  searchName = e => {
     this.props.onFind(e.target.value)
   }
-
   render () {
     return (
       <div id='search'>
@@ -18,23 +20,15 @@ class Search extends Component {
   }
 }
 
-Search.propTypes = {
-  data: PropTypes.array,
-  findDomain: PropTypes.string,
-  onFind: PropTypes.func
-}
-
 const mapStateToProps = state => {
   return {
-    data: state.data,
-    findDomain: state.findDomain
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   onFind: name => {
     const payload = name.toLowerCase()
-    dispatch({ 
+    dispatch({
       type: 'ON_FIND',
       payload
     })
