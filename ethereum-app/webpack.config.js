@@ -23,7 +23,6 @@ module.exports = {
   output: {
     filename: './dist/bundle.js'
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -33,7 +32,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['es2015', 'react']
+              presets: ['es2017', 'stage-2', 'react']
             }
           }
         ]

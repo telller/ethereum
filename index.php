@@ -10,6 +10,7 @@
     })(document,"script","serve.albacross.com/track.js","89208293");</script>
     <link rel="shortcut icon" href="/wp-content/themes/ethereum_theme/ethereum-app/dist/media/favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/wp-content/themes/ethereum_theme/ethereum-app/dist/bundle.css" rel="stylesheet"/>
     <script async type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -63,7 +64,6 @@
     <div class="page-preloader"><span class="preloader__spinner"></span></div>
     <div id='root'></div>
     <script src="/wp-content/themes/ethereum_theme/ethereum-app/dist/bundle.js"></script>
-    <script src="https://use.fontawesome.com/14bc3e9e43.js"></script>
     <?php wp_footer(); ?>
   </body>
 </html>
