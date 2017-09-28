@@ -19,7 +19,7 @@ class Categories extends Component {
         {
           this.props.data.length > 0 && this.props.data.map((item, index) => {
             if (index < this.props.limit) {
-              return <Tag key={index} color='blue'>{item}</Tag>
+              return <Tag key={index} color='rgba(170, 221, 221, 0.5)'>{item}</Tag>
             }
           })
         }
