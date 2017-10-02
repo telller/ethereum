@@ -1,8 +1,10 @@
 import React from 'react'
+import { Row, Col } from 'antd'
 import MainMenu from '../menu/menu.jsx'
 import Search from '../search/search.jsx'
+import ShareIcons from '../ShareIcons/ShareIcons.jsx'
 import './header.styl'
-import { Row, Col } from 'antd'
+import '../ShareIcons/HeaderShareIcons.styl'
 import logo from 'media/logo.png'
 
 class Header extends React.Component {
@@ -19,7 +21,8 @@ class Header extends React.Component {
             </Col>
           </div>
           <Col className='main-menu'>
-            <MainMenu />
+            <MainMenu className='header-menu' />
+            <ShareIcons className='header-share-icons header-share' />
           </Col>
           <div className='search-domains'>
             <Search />

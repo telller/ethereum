@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Icon, Modal } from 'antd'
 import Faq from '../faq/faq.jsx'
 import Sell from '../sell/sell.jsx'
@@ -15,9 +16,15 @@ class MainMenu extends Component {
       isContactModalVisible: false,
       isSellModalVisible: false,
       isFAQModalVisible: false,
-      isShareVisible: true,
       isFoldingMenu: false
     }
+  }
+  static propTypes = {
+    className: PropTypes.string,
+    sharing: PropTypes.bool
+  }
+  static defaultProps = {
+    sharing: false
   }
   sell = values => {
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
@@ -99,35 +106,24 @@ class MainMenu extends Component {
     })
   }
 
-  handleShareVisible = () => {
-    this.setState(
-      prevState => {
-        return { isShareVisible: !prevState.isShareVisible }
-      }
-    )
-  }
-
   render () {
     return (
-      <div id='menu'>
+      <div id='menu' className={this.props.className}>
         <div className='menu-fold' onClick={this.menu}>
           <img src={this.state.isFoldingMenu ? menu_icon_close : menu_icon} alt='Menu icon' />
         </div>
         <div className={'all-menu-items ' + (this.state.isFoldingMenu ? '' : 'menu-unfold ')}>
           <div className='menu-item' onClick={() => { this.setState({ isSellModalVisible: true }) }}>
-            <div className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></div>
+            <span className='text'><Icon type='shopping-cart' />Sell Names<span className='dot' /></span>
           </div>
           <div className='menu-item' onClick={() => { this.setState({ isContactModalVisible: true }) }}>
-            <div className='text'><Icon type='mail' />Contact Us<span className='dot' /></div>
+            <span className='text'><Icon type='mail' />Contact Us<span className='dot' /></span>
           </div>
           <div className='menu-item' onClick={this.faq}>
-            <div className='text'><Icon type='question-circle-o' />faq<span className='dot' /></div>
+            <span className='text'><Icon type='question-circle-o' />faq</span>
           </div>
-          <div className={'menu-item ' + (this.state.isFoldingMenu ? 'hidden-display' : '')}>
-            <div className='text'><Icon type='share-alt' className='menu-share' onClick={() => this.handleShareVisible()} /></div>
-          </div>
-          <ShareIcons className={'menu-share-icons ' + (this.state.isShareVisible && !this.state.isFoldingMenu ? 'hidden-display' : '')} />
         </div>
+        <ShareIcons className={'header-share-icons ' + (this.state.isFoldingMenu ? '' : 'hidden-display')} />
         {
           this.state.isSellModalVisible && (
             <Sell onOk={this.sell} onCancel={() => this.setState({isSellModalVisible: false})} />
