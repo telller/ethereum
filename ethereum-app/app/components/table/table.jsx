@@ -11,8 +11,8 @@ import Domain from '../Domain.jsx'
 import './table.styl'
 
 class GraphTable extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       pagination: {
         pageSize: 20,
@@ -44,9 +44,7 @@ class GraphTable extends Component {
   }
 
   changeSizePage = e => {
-    this.setState({
-      pagination: {pageSize: e.target.value}
-    })
+    this.setState({ pagination: {pageSize: e.target.value} })
   }
 
   buy = values => {
@@ -119,11 +117,8 @@ class GraphTable extends Component {
     }
   }
 
-  onSelectDomain = domain => {
-    this.setState({
-      selected: domain,
-      isDomainInfoModalVisible: true
-    })
+  onSelectDomain = selected => {
+    this.setState({ selected, isDomainInfoModalVisible: true })
   }
 
   closeModalDomainInfo = () => {
@@ -141,31 +136,21 @@ class GraphTable extends Component {
     } else if (widthCategories > 200) {
       limitCategories = 1
     } else limitCategories = 1
-    this.setState({
-      limitCategories: limitCategories
-    })
+    this.setState({ limitCategories })
   }
 
   selectCategory = name => {
-    this.setState(prevState => {
-      let data = {...prevState.switchFilter}
-      data.categories.push(name)
-      return {
-        switchFilter: data
-      }
-    })
+    let switchFilter = {...this.state.switchFilter}
+    switchFilter.categories.push(name)
+    this.setState({ switchFilter })
   }
 
-  handleChangeTable = (pagination, filters, sorter) => {
-    console.log(filters)
-    this.setState({
-      switchSorted: sorter,
-      switchFilter: filters
-    })
+  handleChangeTable = (pagination, switchFilter, switchSorted) => {
+    this.setState({ switchSorted, switchFilter })
   }
 
   render () {
-    const checkFind = this.props.data.filter(item => ~item.name.search(this.props.findDomain)).length > 0
+    const checkFind = this.props.data.find(item => ~item.name.indexOf(this.props.findDomain))
     const hasData = this.props.data.length === 0 && !this.props.findDomain
     const columns = [
       {
@@ -173,10 +158,11 @@ class GraphTable extends Component {
         dataIndex: 'name',
         sorter: (a, b) => a.name < b.name ? -1 : a.name > b.name,
         sortOrder: this.state.switchSorted.columnKey === 'name' && this.state.switchSorted.order,
-        render: (name, domain) =>
+        render: (name, domain) => (
           <div onClick={() => this.onSelectDomain(domain)}>
             <Link to={'/domains/' + name} >{name}</Link>
-          </div>,
+          </div>
+        ),
         width: '35%'
       },
       {
@@ -276,7 +262,7 @@ class GraphTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.data.filter(item => ~item.name.search(state.findDomain)),
+  data: state.data.filter(item => ~item.name.indexOf(state.findDomain)),
   findDomain: state.findDomain
 })
 
@@ -296,9 +282,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-const component = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GraphTable)
-
-export default component
+export default connect(mapStateToProps, mapDispatchToProps)(GraphTable)
