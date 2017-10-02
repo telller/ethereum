@@ -6,7 +6,8 @@ import './Categories.styl'
 class Categories extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
-    limit: PropTypes.number
+    limit: PropTypes.number,
+    select: PropTypes.func
   }
   static defaultProps = {
     limit: 3
@@ -17,7 +18,7 @@ class Categories extends Component {
         {
           this.props.data.length > 0 && this.props.data.map((item, index) => {
             if (index < this.props.limit) {
-              return <Tag key={index} color='rgba(170, 221, 221, 0.5)'>{item}</Tag>
+              return <Tag key={index} onClick={() => this.props.select(item)} color='rgba(170, 221, 221, 0.5)'>{item}</Tag>
             }
           })
         }

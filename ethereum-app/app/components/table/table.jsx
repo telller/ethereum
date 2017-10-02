@@ -29,6 +29,9 @@ class GraphTable extends Component {
       switchSorted: {
         order: 'descend',
         columnKey: 'price'
+      },
+      switchFilter: {
+        categories: []
       }
     }
   }
@@ -143,9 +146,21 @@ class GraphTable extends Component {
     })
   }
 
+  selectCategory = name => {
+    this.setState(prevState => {
+      let data = {...prevState.switchFilter}
+      data.categories.push(name)
+      return {
+        switchFilter: data
+      }
+    })
+  }
+
   handleChangeTable = (pagination, filters, sorter) => {
+    console.log(filters)
     this.setState({
-      switchSorted: sorter
+      switchSorted: sorter,
+      switchFilter: filters
     })
   }
 
@@ -191,8 +206,9 @@ class GraphTable extends Component {
         title: 'Categories',
         dataIndex: 'categories',
         render: (categories, record, cellKey) =>
-          <Categories key={cellKey} data={categories} limit={this.state.limitCategories} />,
+          <Categories key={cellKey} data={categories} limit={this.state.limitCategories} select={this.selectCategory} />,
         filters: this.state.listCategories,
+        filteredValue: this.state.switchFilter.categories || null,
         onFilter: (value, record) => record.categories.includes(value),
         width: '40%'
       },
