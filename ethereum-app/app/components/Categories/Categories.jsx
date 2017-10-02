@@ -25,11 +25,11 @@ class Categories extends Component {
         {
           this.props.data.length > this.props.limit &&
           <Popover content={
-            <div>
+            <div className='more-categories'>
               {
                 this.props.data.map((item, index) => {
                   if (index >= this.props.limit) {
-                    return <p key={index}>{item}</p>
+                    return <p key={index} onClick={() => this.props.select(item)}>{item}</p>
                   }
                 })
               }
