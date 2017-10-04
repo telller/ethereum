@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link, browserHistory } from 'react-router'
+import GoogleForm from 'google-form-send'
 import Buy from '../buy/buy.jsx'
 import SingleDomain from '../SingleDomain/SingleDomain.jsx'
 import Categories from '../Categories/Categories.jsx'
@@ -232,7 +233,9 @@ class GraphTable extends Component {
           </div>
           <div className={'table-footer ' + (hasData ? 'hidden-display' : (checkFind ? '' : 'not-found'))}>
             <p className={checkFind ? 'table-footer-search' : null}>Not found!</p>
-            <Radio.Group className={checkFind ? 'btn-page-size' : 'btn-page-size-none'} defaultValue={this.state.pagination.pageSize} onChange={e => this.changeSizePage(e)}>
+            <Radio.Group className={checkFind ? 'btn-page-size' : 'btn-page-size-none'}
+              defaultValue={this.state.pagination.pageSize}
+              onChange={e => this.changeSizePage(e)}>
               <Radio.Button value={20}>20</Radio.Button>
               <Radio.Button value={50}>50</Radio.Button>
               <Radio.Button value={100}>100</Radio.Button>
