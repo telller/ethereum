@@ -48,19 +48,19 @@ class GraphTable extends Component {
   }
 
   buy = values => {
+    let form = new GoogleForm('https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ')
+    const formData = {
+      'entry.6737599': values.name,
+      'entry.1387721178': values.email,
+      'entry.1522767390': values.comment,
+      'entry.1493658382': values.domain,
+      'entry.1168806703': values.price
+    }
+    form.setAllFields(formData)
+    form.send(true)
+
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-
-    const sendDataGoogle = 'https://docs.google.com/forms/d/e/1FAIpQLSekDHkNfYUfFS0gKSBNbXKu3Exj5UPkYEgTGj_yOa7EjaV4AQ/formResponse?ifq' +
-    '&entry.6737599=' + values.name +
-    '&entry.1387721178=' + values.email +
-    '&entry.1522767390=' + values.comment +
-    '&entry.1493658382=' + values.domain +
-    '&entry.1168806703=' + values.price +
-    '&submit=Submit'
-
-    xhr.open('GET', sendDataGoogle, true)
-    xhr.send()
 
     const sendDataEmail = 'type=buy' +
       '&sender_name=' + encodeURIComponent(values.name) +

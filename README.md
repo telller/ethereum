@@ -1,13 +1,21 @@
-# Ethereum
-
-### Development
+# ENS DOMAINS
+![screenshot](./screenshot.png)
+## Development
+Install modules
+```sh
+$ cd ethereum-app
+$ npm install
 ```
-npm install
-npm start
-Open http://localhost:3000
+Start webpack-dev-server (http://localhost:3000/)
+```sh
+$ npm start
 ```
-### Build
+Start webpack watch
+```sh
+$ npm run watch
+```
+## Build
 Building  bundle.js and bundle.css to directory dist.
-```
-npm run build
+```sh
+$ npm run build
 ```

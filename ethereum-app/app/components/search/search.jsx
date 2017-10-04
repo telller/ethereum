@@ -8,13 +8,11 @@ class Search extends Component {
   static propTypes = {
     onFind: PropTypes.func
   }
-  searchName = e => {
-    this.props.onFind(e.target.value)
-  }
   render () {
     return (
       <div id='search'>
-        <Input prefix={<Icon type='search' />} placeholder='Search' onChange={e => this.searchName(e)} />
+        <Input prefix={<Icon type='search' />} placeholder='Search'
+          onChange={e => this.props.onFind(e.target.value)} />
       </div>
     )
   }

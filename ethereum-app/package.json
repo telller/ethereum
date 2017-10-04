@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "antd": "2.12.0",
+    "google-form-send": "^2.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "5.0.6",

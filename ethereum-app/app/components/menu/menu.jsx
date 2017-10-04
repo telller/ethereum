@@ -5,6 +5,7 @@ import Faq from '../faq/faq.jsx'
 import Sell from '../sell/sell.jsx'
 import Contact from '../contact/contact.jsx'
 import ShareIcons from '../ShareIcons/ShareIcons.jsx'
+import GoogleForm from 'google-form-send'
 import './menu.styl'
 import menu_icon from 'media/menu-icon.png'
 import menu_icon_close from 'media/menu-icon-close.png'
@@ -20,25 +21,22 @@ class MainMenu extends Component {
     }
   }
   static propTypes = {
-    className: PropTypes.string,
-    sharing: PropTypes.bool
-  }
-  static defaultProps = {
-    sharing: false
+    className: PropTypes.string
   }
   sell = values => {
+    let form = new GoogleForm('https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA')
+    const formData = {
+      'entry.1842149868': values.name,
+      'entry.1596816766': values.email,
+      'entry.873897670': values.comment,
+      'entry.1585848839': values.domain,
+      'entry.255403866': values.price
+    }
+    form.setAllFields(formData)
+    form.send(true)
+
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-
-    const sendDataGoogle = 'https://docs.google.com/forms/d/e/1FAIpQLSfWrpCsrjJfQFBYrl2KNqQlCcNNaS7WpnD5scQb6FnJWt7mLA/formResponse?ifq' +
-      '&entry.1842149868=' + encodeURIComponent(values.name) +
-      '&entry.1596816766=' + encodeURIComponent(values.email) +
-      '&entry.873897670=' + encodeURIComponent(values.comment) +
-      '&entry.1585848839=' + encodeURIComponent(values.domain) +
-      '&entry.255403866=' + encodeURIComponent(values.price) +
-      '&submit=Submit'
-    xhr.open('GET', sendDataGoogle, true)
-    xhr.send()
 
     const sendDataEmail = 'type=sell' +
       '&sender_name=' + encodeURIComponent(values.name) +
@@ -69,17 +67,17 @@ class MainMenu extends Component {
   }
 
   contact = values => {
+    let form = new GoogleForm('https://docs.google.com/forms/d/1TfXOZAqgFs34oDK1EeEI9XKE1cjIy9vReIoEhxvXVA4')
+    const formData = {
+      'entry.1632333745': values.name,
+      'entry.58046248': values.email,
+      'entry.927148489': values.comment
+    }
+    form.setAllFields(formData)
+    form.send(true)
+
     let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
     let xhr = new XHR()
-
-    const sendDataGoogle = 'https://docs.google.com/forms/d/1TfXOZAqgFs34oDK1EeEI9XKE1cjIy9vReIoEhxvXVA4/formResponse?ifq' +
-      '&entry.1632333745=' + encodeURIComponent(values.name) +
-      '&entry.58046248=' + encodeURIComponent(values.email) +
-      '&entry.927148489=' + encodeURIComponent(values.comment) +
-      '&submit=Submit'
-
-    xhr.open('GET', sendDataGoogle, true)
-    xhr.send()
 
     const sendDataEmail = 'type=contact' +
       '&sender_name=' + encodeURIComponent(values.name) +
