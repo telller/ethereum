@@ -7,14 +7,13 @@ import GoogleForm from 'google-form-send'
 import Buy from '../buy/buy.jsx'
 import SingleDomain from '../SingleDomain/SingleDomain.jsx'
 import Categories from '../Categories/Categories.jsx'
-import WooCommerce from '../WooCommerce/WooCommerce.js'
-import Domain from '../Domain.jsx'
 import './table.styl'
 
 class GraphTable extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
+      data: props.data,
       pagination: {
         pageSize: 20,
         showQuickJumper: true,
@@ -23,25 +22,22 @@ class GraphTable extends Component {
         }
       },
       isBuyModalVisible: false,
-      isDomainInfoModalVisible: false,
-      selected: null,
+      isDomainInfoModalVisible: !!props.domain,
+      selected: props.domain || null,
       limitCategories: 3,
-      listCategories: [],
       switchSorted: {
         order: 'descend',
         columnKey: 'price'
-      },
-      switchFilter: {
-        categories: []
       }
     }
   }
 
   static propTypes = {
-    findDomain: PropTypes.string,
-    data: PropTypes.array,
-    onLoadDomains: PropTypes.func,
-    domain: PropTypes.string
+    domain: PropTypes.object,
+    data: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    filter: PropTypes.object.isRequired,
+    send: PropTypes.func.isRequired,
   }
 
   changeSizePage = e => {
@@ -82,42 +78,6 @@ class GraphTable extends Component {
     this.setState({ isBuyModalVisible: false })
   }
 
-  componentWillMount = () => {
-    this.props.onLoadDomains()
-
-    WooCommerce.getAsync('products/categories?per_page=100').then(categories => {
-      const filter = JSON.parse(categories.toJSON().body).map(item => {
-        let tmp = {}
-        tmp.text = item.name
-        tmp.value = item.name
-        return tmp
-      })
-      this.setState({
-        listCategories: filter
-      })
-    })
-
-    if (this.props.domain !== 'home' && this.props.data) {
-      let XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest
-      let xhr = new XHR()
-
-      const sendNameDomain = 'name=' + this.props.domain
-
-      xhr.open('POST', '/wp-content/themes/ethereum_theme/getDomainID.php', true)
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-      xhr.send(sendNameDomain)
-
-      xhr.onload = () => {
-        xhr.responseText && WooCommerce.getAsync('products/' + xhr.responseText).then(item => {
-          this.setState({
-            selected: new Domain(JSON.parse(item.toJSON().body)),
-            isDomainInfoModalVisible: true
-          })
-        })
-      }
-    }
-  }
-
   onSelectDomain = selected => {
     this.setState({ selected, isDomainInfoModalVisible: true })
   }
@@ -125,6 +85,19 @@ class GraphTable extends Component {
   closeModalDomainInfo = () => {
     browserHistory.push('/')
     this.setState({isDomainInfoModalVisible: false})
+  }
+
+  handleChangeTable = (pagination, switchFilter, switchSorted) => {
+    this.setState({ switchSorted, switchFilter })
+  }
+
+  componentWillReceiveProps = nextProps => {
+    const data = nextProps.data.filter(
+      domain => nextProps.filter.categories.every(
+        item => domain.categories.map(elem => elem.toLowerCase()).includes(item)
+      )
+    )
+    this.setState({ data })
   }
 
   componentDidMount = () => {
@@ -140,19 +113,9 @@ class GraphTable extends Component {
     this.setState({ limitCategories })
   }
 
-  selectCategory = name => {
-    let switchFilter = {...this.state.switchFilter}
-    switchFilter.categories.push(name)
-    this.setState({ switchFilter })
-  }
-
-  handleChangeTable = (pagination, switchFilter, switchSorted) => {
-    this.setState({ switchSorted, switchFilter })
-  }
-
   render () {
-    const checkFind = this.props.data.find(item => ~item.name.indexOf(this.props.findDomain))
-    const hasData = this.props.data.length === 0 && !this.props.findDomain
+    const checkFind = this.state.data.find(item => ~item.name.indexOf(this.props.filter.domain))
+    const hasData = this.props.data.length === 0 && !this.props.filter.domain
     const columns = [
       {
         title: '.eht Name',
@@ -194,9 +157,6 @@ class GraphTable extends Component {
         dataIndex: 'categories',
         render: (categories, record, cellKey) =>
           <Categories key={cellKey} data={categories} limit={this.state.limitCategories} select={this.selectCategory} />,
-        filters: this.state.listCategories,
-        filteredValue: this.state.switchFilter.categories || null,
-        onFilter: (value, record) => record.categories.includes(value),
         width: '40%'
       },
       {
@@ -224,7 +184,7 @@ class GraphTable extends Component {
             className='tableDomains'
             columns={columns}
             rowKey='name'
-            dataSource={this.props.data}
+            dataSource={this.state.data}
             pagination={this.state.pagination}
             onChange={this.handleChangeTable}
           />
@@ -265,23 +225,14 @@ class GraphTable extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.data.filter(item => ~item.name.indexOf(state.findDomain)),
-  findDomain: state.findDomain
+  data: state.data,
+  categories: state.categories,
+  filter: state.filter
 })
 
 const mapDispatchToProps = dispatch => ({
-  onLoadDomains: () => {
-    const addDomains = () => {
-      return dispatch => {
-        WooCommerce.getAsync('products?per_page=100').then(item => {
-          dispatch({
-            type: 'SET_LIST_DOMAINS',
-            payload: JSON.parse(item.toJSON().body)
-          })
-        })
-      }
-    }
-    dispatch(addDomains())
+  send: (type, payload) => {
+    dispatch({ type, payload })
   }
 })
 

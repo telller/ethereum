@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Tag, Popover } from 'antd'
 import './Categories.styl'
@@ -7,10 +8,20 @@ class Categories extends Component {
   static propTypes = {
     data: PropTypes.array.isRequired,
     limit: PropTypes.number,
-    select: PropTypes.func
+    categories: PropTypes.array.isRequired,
+    filter: PropTypes.object.isRequired,
+    send: PropTypes.func.isRequired
   }
   static defaultProps = {
     limit: 3
+  }
+  handleSelect = value => {
+    const select = value.toLowerCase()
+    if (this.props.filter.categories.includes(select)) {
+      this.props.send('DEL_SELECT_CATEGORIES', select)
+    } else {
+      this.props.send('ADD_SELECT_CATEGORIES', select)
+    }
   }
   render () {
     return (
@@ -18,7 +29,7 @@ class Categories extends Component {
         {
           this.props.data.length > 0 && this.props.data.map((item, index) => {
             if (index < this.props.limit) {
-              return <Tag key={index} onClick={() => this.props.select(item)} color='rgba(170, 221, 221, 0.5)'>{item}</Tag>
+              return <Tag key={index} onClick={() => this.handleSelect(item)} color='rgba(237, 237, 237, 0.6)'>{item}</Tag>
             }
           })
         }
@@ -29,7 +40,7 @@ class Categories extends Component {
               {
                 this.props.data.map((item, index) => {
                   if (index >= this.props.limit) {
-                    return <p key={index} onClick={() => this.props.select(item)}>{item}</p>
+                    return <p key={index} onClick={() => this.handleSelect(item)}>{item}</p>
                   }
                 })
               }
@@ -43,4 +54,15 @@ class Categories extends Component {
   }
 }
 
-export default Categories
+const mapStateToProps = state => ({
+  categories: state.categories,
+  filter: state.filter
+})
+
+const mapDispatchToProps = dispatch => ({
+  send: (type, payload) => {
+    dispatch({ type, payload })
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)

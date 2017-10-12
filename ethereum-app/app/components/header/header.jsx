@@ -1,10 +1,11 @@
 import React from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, LocaleProvider } from 'antd'
 import MainMenu from '../menu/menu.jsx'
 import Search from '../search/search.jsx'
 import ShareIcons from '../ShareIcons/ShareIcons.jsx'
 import './header.styl'
 import '../ShareIcons/HeaderShareIcons.styl'
+import enUS from 'antd/lib/locale-provider/en_US'
 import logo from 'media/logo.png'
 
 class Header extends React.Component {
@@ -25,7 +26,9 @@ class Header extends React.Component {
             <ShareIcons className='header-share-icons header-share' />
           </Col>
           <div className='search-domains'>
-            <Search />
+            <LocaleProvider locale={enUS}>
+              <Search />
+            </LocaleProvider>
           </div>
         </Row>
       </header>
