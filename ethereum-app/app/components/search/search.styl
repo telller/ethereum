@@ -1,28 +1,55 @@
 #search
+  position relative
   display inline-block
   margin 16px 15px
-  .ant-input
-    &-prefix
-      font-size 16px
-      font-weight bold
-      color #ccc
-      left 13px
-    &:not(:first-child)
-      padding-left 35px
-  input
-    color #505050
+  .anticon-search
+    position absolute
     font-size 16px
-    border-radius 20px
-    &:focus, &:hover
-      border-color #d9d9d9
-      outline none
-      box-shadow none
-@media only screen and (min-width: 48em)
+    font-weight bold
+    color #ccc
+    z-index 10
+    left 10px
+    top 50%
+    margin-top -8px
+  .ant-select
+    width 100%
+    &-selection
+      color #505050
+      font-size 14px
+      border-radius 20px
+      &__placeholder
+        left 30px
+      &__rendered
+        padding-left 30px
+      &__choice
+        color black
+        background-color: rgba(237, 237, 237, 0.6)
+        font-size 12px
+        line-height 20px
+      &:focus
+      &:hover
+      &:active
+        border-color #d9d9d9
+        outline none
+        box-shadow none
+@media only screen and (min-width 0) and (max-width 549px)
   #search
-    .ant-input-affix-wrapper
-      width 250px
-
-@media only screen and (min-width: 750px)
+    width 120px
+    .ant-select
+      &-selection__rendered
+        ul > li:nth-child(n+2)
+          display none
+@media only screen and (min-width 550px) and (max-width 47.9em)
   #search
-    .ant-input-affix-wrapper
-      width 300px
+    width 280px
+    .ant-select
+      &-selection__rendered
+        ul > li:nth-child(n+3)
+          display none
+@media only screen and (min-width 48em)
+  #search
+    width 350px
+    .ant-select
+      &-selection__rendered
+        ul > li:nth-child(n+4)
+          display none
