@@ -1,6 +1,7 @@
 #search
   position relative
   display inline-block
+  height 28px
   margin 16px 15px
   .anticon-search
     position absolute
@@ -17,6 +18,8 @@
       color #505050
       font-size 14px
       border-radius 20px
+      height 28px
+      overflow hidden
       &__placeholder
         left 30px
       &__rendered
@@ -35,21 +38,9 @@
 @media only screen and (min-width 0) and (max-width 549px)
   #search
     width 120px
-    .ant-select
-      &-selection__rendered
-        ul > li:nth-child(n+2)
-          display none
 @media only screen and (min-width 550px) and (max-width 47.9em)
   #search
     width 280px
-    .ant-select
-      &-selection__rendered
-        ul > li:nth-child(n+3)
-          display none
 @media only screen and (min-width 48em)
   #search
-    width 350px
-    .ant-select
-      &-selection__rendered
-        ul > li:nth-child(n+4)
-          display none
+    width 350px      
