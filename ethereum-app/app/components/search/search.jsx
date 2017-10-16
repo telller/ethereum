@@ -8,35 +8,65 @@ class Search extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      select: props.filter.categories
+      select: props.filter.categories,
+      domains: props.domains,
+      categories: props.categories,
+      find: ''
     }
   }
   static propTypes = {
     domains: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    send: PropTypes.func.isRequired,
-    filter: PropTypes.object.isRequired
+    filter: PropTypes.object.isRequired,
+    send: PropTypes.func.isRequired
   }
   handleChange = select => {
-    this.setState({ select }, this.props.send('SET_SELECT_CATEGORIES', select))
+    const categories = select.filter(
+      item => this.props.categories.map(
+        category => category.value
+      ).includes(item)
+    )
+    const domain = select.find(
+      item => this.props.domains.map(
+        domain => domain.name
+      ).includes(item)
+    )
+    this.setState(
+      { select },
+      () => {
+        this.props.send('SET_SELECT_CATEGORIES', categories)
+        this.props.send('SET_SELECT_DOMAINS', domain || '')
+      }
+    )
   }
-  handleSearch = value => {
-    console.log('search:', value)
+  handleSearch = find => {
+    if (!this.props.filter.domain) {
+      const domains = this.filterDomainByCategories(this.props).filter(domain => ~domain.name.indexOf(find.toLowerCase()))
+      const categories = this.props.categories.filter(category => ~category.value.indexOf(find.toLowerCase()))
+      this.setState({ domains, categories })
+    }
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.setState({
-      select: nextProps.filter.categories
-    })
+  filterDomainByCategories = props => {
+    return props.domains.filter(
+      domain => props.filter.categories.every(
+        item => domain.categories.map(elem => elem.toLowerCase()).includes(item)
+      )
+    )
+  }
+
+  componentWillReceiveProps = nextProps => {
+    const domains = this.filterDomainByCategories(nextProps).filter(domain => ~domain.name.indexOf(nextProps.filter.domain))
+    const select = nextProps.filter.categories.slice()
+    nextProps.filter.domain && select.push(nextProps.filter.domain)
+    this.setState({ select, domains, categories: nextProps.filter.domain ? [] : nextProps.categories })
   }
 
   render () {
-    const { domains, categories } = this.props
-    const { select } = this.state
+    const { select, domains, categories } = this.state
     return (
       <div id='search'>
-        {/* <Input prefix={<Icon type='search' />} placeholder='Search'
-          onChange={e => this.props.onFind(e.target.value)} /> */}
+        <Icon type='search' />
         <Select
           mode='multiple'
           value={select}

@@ -20,6 +20,11 @@ const filterReduser = (state = initialDataStore, action) => {
       ...state,
       categories: state.categories.filter(item => item !== action.payload)
     }
+  case 'SET_SELECT_DOMAINS':
+    return {
+      ...state,
+      domain: action.payload
+    }
   }
   return state
 }

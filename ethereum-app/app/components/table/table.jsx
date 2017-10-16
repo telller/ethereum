@@ -36,8 +36,7 @@ class GraphTable extends Component {
     domain: PropTypes.object,
     data: PropTypes.array.isRequired,
     categories: PropTypes.array.isRequired,
-    filter: PropTypes.object.isRequired,
-    send: PropTypes.func.isRequired,
+    filter: PropTypes.object.isRequired
   }
 
   changeSizePage = e => {
@@ -96,7 +95,7 @@ class GraphTable extends Component {
       domain => nextProps.filter.categories.every(
         item => domain.categories.map(elem => elem.toLowerCase()).includes(item)
       )
-    )
+    ).filter(domain => ~domain.name.indexOf(nextProps.filter.domain))
     this.setState({ data })
   }
 
@@ -114,7 +113,7 @@ class GraphTable extends Component {
   }
 
   render () {
-    const checkFind = this.state.data.find(item => ~item.name.indexOf(this.props.filter.domain))
+    const checkFind = !!this.state.data.length
     const hasData = this.props.data.length === 0 && !this.props.filter.domain
     const columns = [
       {
@@ -231,9 +230,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  send: (type, payload) => {
-    dispatch({ type, payload })
-  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GraphTable)
