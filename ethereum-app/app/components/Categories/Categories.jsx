@@ -46,7 +46,7 @@ class Categories extends Component {
               }
             </div>
           }>
-            <Tag>more...</Tag>
+            <Tag color='rgba(237, 237, 237, 0.6)'>more...</Tag>
           </Popover>
         }
       </div>

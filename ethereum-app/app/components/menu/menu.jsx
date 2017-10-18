@@ -41,7 +41,7 @@ class MainMenu extends Component {
     const sendDataEmail = 'type=sell' +
       '&sender_name=' + encodeURIComponent(values.name) +
       '&sender_email=' + encodeURIComponent(values.email) +
-      '&comment=' + encodeURIComponent(values.comment) +
+      '&comment=' + encodeURIComponent(values.comment || ' ') +
       '&domain_name=' + encodeURIComponent(values.domain) +
       '&domain_price=' + encodeURIComponent(values.price)
 
@@ -82,7 +82,7 @@ class MainMenu extends Component {
     const sendDataEmail = 'type=contact' +
       '&sender_name=' + encodeURIComponent(values.name) +
       '&sender_email=' + encodeURIComponent(values.email) +
-      '&comment=' + encodeURIComponent(values.comment)
+      '&comment=' + encodeURIComponent(values.comment || ' ')
 
     xhr.open('POST', '/wp-content/themes/ethereum_theme/sendEmail.php', true)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')

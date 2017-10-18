@@ -61,7 +61,7 @@ class GraphTable extends Component {
     const sendDataEmail = 'type=buy' +
       '&sender_name=' + encodeURIComponent(values.name) +
       '&sender_email=' + encodeURIComponent(values.email) +
-      '&comment=' + encodeURIComponent(values.comment) +
+      '&comment=' + encodeURIComponent(values.comment || ' ') +
       '&domain_name=' + encodeURIComponent(values.domain) +
       '&domain_price=' + encodeURIComponent(values.price)
 

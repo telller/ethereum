@@ -11,7 +11,7 @@ class Buy extends Component {
     }
   }
   static propTypes = {
-    form: React.PropTypes.object,
+    form: PropTypes.object,
     onCancel: PropTypes.func,
     data: PropTypes.object,
     onOk: PropTypes.func
