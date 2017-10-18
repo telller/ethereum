@@ -1,7 +1,10 @@
 <?php
-  $site_name = 'Ethereum';
-  $receiver_email = 'andrey.grimm.13@gmail.com';  
-  
+  $site_name = 'ENS Domains';
+  $mail_from = 'andrey.grimm.13@gmail.com';
+  $mail_from_password = 'grimm@1011101';
+
+  $receiver_email = ' siruslan@gmail.com';  
+
   $type = trim($_POST["type"]);
   $sender_name = trim($_POST["sender_name"]);
   $sender_email = trim($_POST["sender_email"]);
@@ -44,7 +47,7 @@
 
   $mail = new PHPMailer;
   $mail->isSMTP();
-  $mail->setLanguage('ru', './includes/PHPMailer/language/');
+  // $mail->setLanguage('ru', './includes/PHPMailer/language/');
 
   $mail->SMTPDebug = 2;
   $mail->Debugoutput = 'html';
@@ -54,10 +57,10 @@
   $mail->SMTPSecure = 'ssl';
   $mail->SMTPAuth = true;
 
-  $mail->Username = 'andrey.grimm.13@gmail.com';
-  $mail->Password = 'grimm@1011101';
+  $mail->Username = $mail_from;
+  $mail->Password = $mail_from_password;
 
-  $mail->setFrom($receiver_email, $site_name);
+  $mail->setFrom($mail_from, $site_name);
   $mail->addAddress($receiver_email);
 
   $mail->isHTML(true);
